@@ -50,5 +50,5 @@
 * As a player，I want there are different levels of difficulty so that I can level up make the game fun and difficult 
 ## Multi-player 
 
-*   As a player，I want to have different players so that Make the player have a sense of substitution, more fit the real life.
+*   As a player，I want to have different characters.
 
