@@ -18,6 +18,10 @@
 * As a player, I want to drop an item which I don’t want.
 * As a player, I want to know the name and the usage of each inventory item I found.
 
+## Enemies
+* As a player, I want the enemy to have different kinds of inventory, so that the game is not changeless.
+* As a player, I want to see the hp of enemy, so that I can decide which inventory should I use.
+
 [Basic Features...]
 
 
@@ -36,5 +40,8 @@
 ## Exchange Inventory Item
 
 * As a player, I want to exchange my inventory items with another player so that I can use the items that I previously don’t have.
+
+## Character Image
+* As a player, I want to have different types for each body part (eg. head, body, leg), so that I can design unique character image.
 
 [Additional Features...]
