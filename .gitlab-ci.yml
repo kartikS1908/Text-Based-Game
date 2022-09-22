@@ -1,0 +1,20 @@
+stages:
+  - build
+  - test
+
+
+Build:
+  tags:
+    - comp2100
+  stage: build
+  script:
+    - ./gradlew assemble
+
+
+Test:
+  stage: test
+  script:
+      - ./gradlew test
+  tags:
+    - comp2100
+
