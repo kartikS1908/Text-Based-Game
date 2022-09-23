@@ -2,19 +2,27 @@ stages:
   - build
   - test
 
-
 Build:
   tags:
     - comp2100
   stage: build
   script:
+    - echo "Build the Project"
     - ./gradlew assemble
 
 
 Test:
   stage: test
   script:
-      - ./gradlew test
+    -  echo "Test the Project"
+    - ./gradlew test
   tags:
     - comp2100
+  artifacts:
+    when: always
+    reports:
+      junit: build/test-results/test/**/TEST-*.xml
+
+
+
 
