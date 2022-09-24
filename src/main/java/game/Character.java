@@ -1,5 +1,7 @@
 package game;
 
+import game.Bag.Weapon;
+
 public class Character {
     int HP,stamina, charID, treasureCurr;
     String name;

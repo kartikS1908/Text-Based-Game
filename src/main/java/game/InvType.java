@@ -6,7 +6,7 @@ public enum InvType {
 
     /**
      * @return the name and usage
-     */
+//     */
     public String getName() {
         return switch (this) {
             case smallHealth -> "Small Healing Potion: Add 5 HP";

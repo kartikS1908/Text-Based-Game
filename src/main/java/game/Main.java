@@ -1,5 +1,9 @@
 package game;
 
-public class Main {
+import game.Bag.Bag;
 
+public class Main {
+    public static void main(String[] args) {
+        Bag.main(args);
+    }
 }
