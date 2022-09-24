@@ -1,9 +1,10 @@
 package game;
 
 public class Character {
-    int HP,stamina, charID, treasureCurr;
+    int HP, stamina, charID, treasureCurr;
     String name;
     Weapon weapon;
+    Room currentRoom;
 
     public void setName(String name) {
         this.name = name;
@@ -53,4 +54,7 @@ public class Character {
         return treasureCurr;
     }
 
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
 }

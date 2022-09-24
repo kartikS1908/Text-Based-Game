@@ -1,5 +1,7 @@
 package game;
 
+import constants.InvType;
+
 public class Inventory {
     private InvType invName;
     private int amount;

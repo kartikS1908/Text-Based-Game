@@ -1,4 +1,4 @@
-package game;
+package constants;
 
 public enum InvType {
     smallHealth, bigHealth, smallStamina, bigStamina;
