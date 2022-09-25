@@ -1,13 +1,16 @@
 package game;
 
 public enum InvType {
+    // Four types of Inventory
     smallHealth, bigHealth, smallStamina, bigStamina;
 
 
     /**
+     * Get the description of each Inventory Type (name and usage)
+     *
      * @return the name and usage
      */
-    public String getName() {
+    public String getDescription() {
         return switch (this) {
             case smallHealth -> "Small Healing Potion: Add 5 HP";
             case bigHealth -> "Big Healing Potion: Add 10 HP";

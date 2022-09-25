@@ -20,10 +20,20 @@ public class Inventory {
         }
     }
 
+    /**
+     * Get the amount of HP or Stamina
+     *
+     * @return the amount of HP or Stamina that should be increased
+     */
     public int getAmount() {
         return amount;
     }
 
+    /**
+     * Get the name of the Inventory
+     *
+     * @return the name of Inventory
+     */
     public InvType getItemName() {
         return invName;
     }
