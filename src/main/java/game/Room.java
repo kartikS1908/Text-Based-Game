@@ -2,21 +2,26 @@ package game;
 
 public class Room {
     private String name, description;
-    private int north, south, west, east;
+    private Weapon weapon;
+    private Inventory inventory;
+    private Enemy enemy;
 
-    public Room(String name, String description, int n, int s, int w, int e){
+
+    public Room(String name, String description, Weapon weapon, Inventory inventory, Enemy enemy){
         this.name = name;
         this.description = description;
-        this.north = n;
-        this.south = s;
-        this.west = w;
-        this.east = e;
+        this.weapon = weapon;
+        this.inventory = inventory;
     }
 
     public String getName() {
         return name;
     }
 
+    /**
+     * Set the name of a room
+     * @param name name of the room
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -29,35 +34,16 @@ public class Room {
         this.description = description;
     }
 
-    public int getNorth() {
-        return north;
+    public Weapon getWeapon() {
+        return weapon;
     }
 
-    public void setNorth(int north) {
-        this.north = north;
+    public Inventory getInventory() {
+        return inventory;
     }
-
-    public int getSouth() {
-        return south;
-    }
-
-    public void setSouth(int south) {
-        this.south = south;
-    }
-
-    public int getWest() {
-        return west;
-    }
-
-    public void setWest(int west) {
-        this.west = west;
-    }
-
-    public int getEast() {
-        return east;
-    }
-
-    public void setEast(int east) {
-        this.east = east;
+    @Override
+    public String toString() {
+        String name = this.getName();
+        return "R" + name.charAt(name.length() - 1);
     }
 }

@@ -2,42 +2,104 @@ package game;
 
 import constants.Difficulty;
 import constants.Direction;
+import constants.InvType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class Map {
     private Difficulty difficulty;
     private int numOfRooms;
     private Room currentRoom;
-    private ArrayList<Room> map;
+    private Object[][] map;
+    private int currentX = 0;
+    private int currentY = 0;
+
 
     public Map(Difficulty difficulty){
        if(difficulty == Difficulty.EASY) {
            this.numOfRooms = 4;
-           this.map = getEasyMap();
+           this.map = createMap(4, 6);
        }else if(difficulty == Difficulty.MEDIUM) {
            this.numOfRooms = 6;
-           this.map = getEasyMap();
+           this.map = createMap(6, 6);
        }else if(difficulty == Difficulty.HARD) {
            this.numOfRooms = 8;
-           this.map = getEasyMap();
+           this.map = createMap(8, 6);
        }
-       this.currentRoom = getEasyMap().get(0);
     }
 
-    public ArrayList<Room> getEasyMap(){
-        ArrayList<Room> rooms = new ArrayList<Room>();
-
-        rooms.add(new Room("Room1", "Room 1", Direction.NOEXIT, 2, Direction.NOEXIT, 1));
-        rooms.add(new Room("Room2", "Room 2", Direction.NOEXIT, Direction.NOEXIT, 0, Direction.NOEXIT));
-        rooms.add(new Room("Room3", "Room 3", 0, Direction.NOEXIT, Direction.NOEXIT, 4));
-        rooms.add(new Room("Room4", "Room 4", Direction.NOEXIT, Direction.NOEXIT,2,  Direction.NOEXIT));
-
-        return rooms;
-    }
-
-    public ArrayList<Room> getMap() {
+    private Object[][] createMap(int numOfRooms, int sizeOfGrid){
+        Object[][] map = new Object[sizeOfGrid][sizeOfGrid];
+        fillMap(map);
+        map[0][0] = "**";
+        for(Object[] row : map){
+            System.out.println(Arrays.toString(row));
+        }
         return map;
+    }
+
+    private void fillMap(Object[][] map){
+//      First fill the map by '*'
+        for(int i = 0; i < map.length; i++){
+            Arrays.fill(map[i], "--");
+        }
+//      Start putting the rooms into the grid randomly
+        Random random = new Random();
+
+        for(int i = 0; i < numOfRooms; i++){
+            int randomX = random.nextInt(map.length);
+            int randomY = random.nextInt(map[0].length);
+//          If the current spot is a room, randomise the indices
+            while(map[randomX][randomY] instanceof Room){
+               randomX = random.nextInt(map.length);
+               randomY = random.nextInt(map[0].length);
+            }
+
+            int hasWeapon = random.nextInt(2);
+            int invTypeLen = InvType.values().length;
+            int invType = random.nextInt(invTypeLen);
+
+            Weapon weapon = hasWeapon != 0 ? new Weapon() : null;
+            Inventory inventory = weapon == null ? new Inventory(InvType.values()[invType % invTypeLen]) : null;
+            Enemy enemy = new Enemy();
+            map[randomX][randomY] = new Room("Room"+(i+1), "Room " + (i + 1), weapon, inventory, enemy);
+
+        }
+    }
+
+    private void goNorth(){
+        int x = this.getCurrentX();
+        if ((x-1) < 0){
+            System.out.println("Sorry, no exit");
+        }else{
+            setCurrentX(x-1);
+        }
+    }
+    private void goSouth(){
+        int x = this.getCurrentX();
+        if ((x+1) > this.getMap().length){
+            System.out.println("Sorry, no exit");
+        }else{
+            setCurrentX(x+1);
+        }
+    }
+    private void goWest(){
+        int y = this.getCurrentY();
+        if ((y-1) < 0){
+            System.out.println("Sorry, no exit");
+        }else{
+            setCurrentY(y-1);
+        }
+    }
+    private void goEast(){
+        int y = this.getCurrentY();
+        if ((y+1) > this.getMap()[0].length){
+            System.out.println("Sorry, no exit");
+        }else{
+            setCurrentY(y+1);
+        }
     }
 
     public String ProcessCommand(String command){
@@ -52,47 +114,9 @@ public class Map {
         return msg;
     }
 
-    private void goNorth(){
-        moveTo(Direction.NORTH);
-    }
 
-    private void goSouth(){
-        moveTo(Direction.SOUTH);
-    }
 
-    private void goWest(){
-        moveTo(Direction.WEST);
-    }
 
-    private void goEast(){
-        moveTo(Direction.EAST);
-    }
-
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
-
-    public void setCurrentRoom(Room currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
-    private int moveTo(Direction direction){
-        int exit;
-        Room room = this.getCurrentRoom();
-
-        switch (direction){
-            case NORTH -> exit = room.getNorth();
-            case SOUTH -> exit = room.getSouth();
-            case WEST -> exit = room.getWest();
-            case EAST -> exit = room.getEast();
-            default -> exit = Direction.NOEXIT;
-        }
-
-        if(exit != Direction.NOEXIT){
-            setCurrentRoom(map.get(exit));
-        }
-        return exit;
-    }
 
 //    void updateOutput(int roomNumber){
 //        String s;
@@ -104,4 +128,25 @@ public class Map {
 //        }
 //        System.out.println(s);
 //    }
+
+
+    public int getCurrentX() {
+        return currentX;
+    }
+
+    public void setCurrentX(int currentX) {
+        this.currentX = currentX;
+    }
+
+    public int getCurrentY() {
+        return currentY;
+    }
+
+    public void setCurrentY(int currentY) {
+        this.currentY = currentY;
+    }
+
+    public Object[][] getMap(){
+        return this.map;
+    }
 }

@@ -4,7 +4,6 @@ public class Character {
     int HP, stamina, charID, treasureCurr;
     String name;
     Weapon weapon;
-    Room currentRoom;
 
     public void setName(String name) {
         this.name = name;
@@ -52,9 +51,5 @@ public class Character {
 
     public int getTreasureCurr() {
         return treasureCurr;
-    }
-
-    public Room getCurrentRoom() {
-        return currentRoom;
     }
 }
