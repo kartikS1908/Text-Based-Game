@@ -10,13 +10,13 @@ public class CMUtility {
             c = str.charAt(0);
             if (c != '1' && c != '2' &&
                     c != '3' && c != '4' && c != '5') {
-                System.out.print("选择错误，请重新输入：");
+                System.out.print("Choose wrong!");
             } else break;
         }
         return c;
 
     }
-    String str = readKeyBoard(1, false);//只读取字符串的第一位，多出来的都提示错误。
+    String str = readKeyBoard(1, false);
 
     public static char readChar() {
         String str = readKeyBoard(1, false);
@@ -41,7 +41,7 @@ public class CMUtility {
                 n = Integer.parseInt(str);
                 break;
             } catch (NumberFormatException e) {
-                System.out.print("数字输入错误，请重新输入：");
+                System.out.print("Choose wrong!");
             }
         }
         return n;
@@ -55,7 +55,7 @@ public class CMUtility {
             if (c == 'Y' || c == 'N') {
                 break;
             } else {
-                System.out.print("选择错误，请重新输入：");
+                System.out.print("Choose wrong!");
             }
         }
         return c;
@@ -72,7 +72,7 @@ public class CMUtility {
                 n = Integer.parseInt(str);
                 break;
             } catch (NumberFormatException e) {
-                System.out.print("数字输入错误，请重新输入：");
+                System.out.print("Choose wrong!");
             }
         }
         return n;
@@ -88,7 +88,7 @@ public class CMUtility {
             }
 
             if (line.length() < 1 || line.length() > limit) {
-                System.out.print("输入长度（不大于" + limit + "）错误，请重新输入：");
+                System.out.print("The input length is not greater than" + limit + "Choose wrong!");
                 continue;
             }
             break;
