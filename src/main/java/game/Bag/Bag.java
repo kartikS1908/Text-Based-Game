@@ -69,8 +69,30 @@ public class Bag {
 
     }
     private void deleteWeapon(){
-        System.out.println(" delete item");
+        System.out.println(" -------Delete item--------");
+        int number;
+        for(;;) {
+            System.out.println("--------Please choose item number-------");
+            number = CMUtility.readInt();
+            if(number == -1){
+                return;
+            }
+            Weapon weapon =Bag_List.getWeapons(number-1);
+            if(weapon==null){
+                System.out.println("Can't fond!");
+            }else {
+                break;
+            }
 
+        }
+        System.out.println("Y/N");
+        char isDelete =CMUtility.readConfirmSelection();
+        if(isDelete=='Y'){
+            Bag_List.deleteWeapon(number-1);
+            System.out.println("-------successfully---------\n" );
+        }else {
+            System.out.println("------Fail--------");
+        }
     }
     private void getAllWeapon(){
         System.out.println("-----------List of item------------");
