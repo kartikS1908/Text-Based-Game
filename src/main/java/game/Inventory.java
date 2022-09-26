@@ -42,6 +42,21 @@ public class Inventory {
         };
     }
 
+    /**
+     * Use Inventory to add Character HP (h1/h2) or Stamina(s1/s2)
+     *
+     * @param c Current character
+     * @param inv The inventory that is used by character
+     */
+    public void useInv(Character c, Inventory inv) {
+        if (inv.invName == "h1" || inv.invName == "h2") {
+            c.HP += inv.amount;
+        }
+        else {
+            c.stamina += inv.amount;
+        }
+    }
+
 
 
 
