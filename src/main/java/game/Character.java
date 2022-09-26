@@ -3,9 +3,29 @@ package game;
 import game.Bag.Weapon;
 
 public class Character {
-    int HP,stamina, charID, treasureCurr;
     String name;
     Weapon weapon;
+    private boolean isAlive;
+    private int maxHP;
+    private int attack;
+    private int defense;
+    private String introduction;
+    int HP,stamina, charID, treasureCurr;
+    public Character(String name, String gender) {
+
+        this.name = name;
+        this.weapon = weapon;
+        System.out.println("【System:】:The role was created successfully. Your name is " + name + "，Gender：" + gender);
+        maxHP = 100;
+        HP = maxHP;
+        isAlive = true;
+        attack = 10;
+        defense = 10;
+        System.out.println(
+                "MaxHP：" + maxHP + "， current HP：" + HP + "，is alive：" + isAlive + "，Attack：" + attack + "，Defense：" + defense + "，Bag：Nothing!");
+        introduction = "Individual resume：You name is " + name + "，You are" + gender ;
+        System.out.println(introduction + "\n");
+    }
 
     public void setName(String name) {
         this.name = name;
