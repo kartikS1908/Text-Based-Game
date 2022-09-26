@@ -1,5 +1,7 @@
 package game;
 
+import game.Bag.Weapon;
+
 public class Enemy {
     int enemyId,HP;
     String name;
