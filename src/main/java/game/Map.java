@@ -3,10 +3,18 @@ package game;
 import constants.Difficulty;
 import constants.Direction;
 import constants.InvType;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
+
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+
+
 
 public class Map {
     private Difficulty difficulty;
@@ -15,23 +23,18 @@ public class Map {
     private Object[][] map;
     private int currentX = 0;
     private int currentY = 0;
+    private JSONObject settings;
 
 
-    public Map(Difficulty difficulty){
-       if(difficulty == Difficulty.EASY) {
-           this.numOfRooms = 4;
-           this.map = createMap(4, 6);
-       }else if(difficulty == Difficulty.MEDIUM) {
-           this.numOfRooms = 6;
-           this.map = createMap(6, 6);
-       }else if(difficulty == Difficulty.HARD) {
-           this.numOfRooms = 8;
-           this.map = createMap(8, 6);
-       }
+    public Map(Difficulty difficulty, JSONObject settings){
+        this.settings = settings;
+        this.numOfRooms = Integer.parseInt(settings.get("numRooms").toString());
+        int xSize = Integer.parseInt(settings.get("X-size").toString()), ySize = Integer.parseInt(settings.get("Y-size").toString());
+        this.map = createMap(this.numOfRooms, xSize, ySize);
     }
 
-    private Object[][] createMap(int numOfRooms, int sizeOfGrid){
-        Object[][] map = new Object[sizeOfGrid][sizeOfGrid];
+    private Object[][] createMap(int numOfRooms, int xSizeOfGrid, int ySizeOfGrid){
+        Object[][] map = new Object[xSizeOfGrid][ySizeOfGrid];
         fillMap(map);
         map[0][0] = "**";
         for(Object[] row : map){
@@ -49,12 +52,34 @@ public class Map {
         Random random = new Random();
 
         for(int i = 0; i < numOfRooms; i++){
+//          Find the position of a room
             int randomX = random.nextInt(map.length);
             int randomY = random.nextInt(map[0].length);
 //          If the current spot is a room, randomise the indices
             while(map[randomX][randomY] instanceof Room){
                randomX = random.nextInt(map.length);
                randomY = random.nextInt(map[0].length);
+            }
+
+            JSONArray array = (JSONArray) this.settings.get("room"+ (i + 1));
+            Room room = new Room();
+            for(Object obj : array){
+                String str = (String) obj;
+
+                switch (str.charAt(0)){
+                    case 'r' -> room.setName(str.substring(9));
+                    case 'e' -> {
+                        if(str.substring(6).equals("nil")) {
+                            room.setEnemy(null);
+                        } else {
+                            JSONArray enemyArr = (JSONArray) this.settings.get(str.substring(6));
+                            JSONArray weaponArr = (JSONArray) this.settings.get(enemyArr.get(1));
+//                            Weapon weapon = new Weapon()
+                            System.out.println("Enemy Name is " + enemyArr.get(0) + ", They say " + enemyArr.get(2) + ", They posses the " + (String) weaponArr.get(0) + ", It does " + weaponArr.get(1) + " damage.");
+
+                        }
+                    }
+                }
             }
 
             int hasWeapon = random.nextInt(2);

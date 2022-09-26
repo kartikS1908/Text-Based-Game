@@ -1,6 +1,7 @@
 package game;
 
 
+import constants.Difficulty;
 import org.json.simple.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -26,18 +27,22 @@ public class Main {
     public static Game initialScreen(String name) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("********************\nHi! " + name + "!");
-        System.out.print("1. Start New Game \n2. Load Game \n3. Read Rules \nEnter your option:");
+        System.out.print("1. Start New Game \n2. Load Game \n3. Read Rules \nEnter your option: ");
         int choice = scanner.nextInt();
         System.out.println("********************");
         Game game = null;
         if (choice == 1) {
-            System.out.print("******************** \nChoose Level of Difficulty\n1. Simple \n2. Medium\n" +
-                    "3. Difficult \nEnter your option:");
+            System.out.print("******************** \nChoose Level of Difficulty\n1. Easy \n2. Medium\n" +
+                    "3. Hard \nEnter your option: ");
             int level = scanner.nextInt();
 
-            if(level==1)  readConfigs(1);
-            else if(level==2)  readConfigs(2);
-            else if(level==3)  readConfigs(3);
+            if(level==1)  {
+                readConfigs(1);
+            }else if(level==2) {
+                readConfigs(2);
+            }else if(level==3)  {
+                readConfigs(3);
+            };
 
             System.out.println("********************");
             Character c = new Character();
@@ -82,45 +87,41 @@ public class Main {
     {
         JSONParser parser = new JSONParser();
         try {
-
             Object obj =  parser.parse(new FileReader("./src/Configs/Engine.json"));
             JSONObject jsonObjectTop = (JSONObject) obj;
             JSONObject jsonObjectLevel = (JSONObject)jsonObjectTop.get("GAME");
             JSONObject jsonObject;
-            if(difficulty==1) {
+
+            if (difficulty==1) {
                 jsonObject = (JSONObject) jsonObjectLevel.get("EASY");
                 System.out.println("EASY LEVEL:");
-            }
-            else if(difficulty==2)
-            {
+                Map map = new Map(Difficulty.EASY, jsonObject);
+            } else if(difficulty==2) {
                 jsonObject = (JSONObject) jsonObjectLevel.get("MEDIUM");
                 System.out.println("MEDIUM LEVEL:");
-            }
-
-            else if(difficulty==3)
-            {
+            } else if(difficulty==3) {
                 jsonObject = (JSONObject) jsonObjectLevel.get("HARD");
                 System.out.println("HARD LEVEL:");
-            }
-
-            else {
+            } else {
                 System.out.println("INVALID DIFFICULTY LEVEL");
-                return;}
+                return;
+            }
 
             System.out.println("Grid Dimensions are " + jsonObject.get("X-size") + " x " + jsonObject.get("Y-size") );
             System.out.println("Number of rooms is " + jsonObject.get("numRooms"));
             System.out.println("You can choose any one of the following characters :");
+
             JSONArray charArr = (JSONArray) jsonObject.get("listCharIDs");
-            for (Object o : charArr)
-            {
+            for (Object o : charArr) {
                 String charID = (String) o;
                 JSONArray charInfo = (JSONArray) jsonObject.get(charID);
                 JSONArray weaponArr = (JSONArray) jsonObject.get(charInfo.get(1));
-                System.out.println("Character Name : " + charInfo.get(0) + ", Dialogue is : " + charInfo.get(2) + ", Default Weapon is " + weaponArr.get(0) + ", It does " + weaponArr.get(1) + " damage.");
+                System.out.println("Character Name: " + charInfo.get(0) + ", Dialogue is : " + charInfo.get(2) + ", Default Weapon is " + weaponArr.get(0) + ", It does " + weaponArr.get(1) + " damage.");
             }
+
             int numRooms = Integer.parseInt((String) jsonObject.get("numRooms"));
-            for(int i = 0; i<numRooms ; i++)
-            {
+
+            for(int i = 0; i < numRooms ; i++) {
                 JSONArray array = (JSONArray)jsonObject.get("room"+ (i + 1));
                 System.out.println("room"+ (i + 1) + " :");
                 for (Object o : array) {

@@ -14,6 +14,11 @@ public class Room {
         this.inventory = inventory;
     }
 
+
+    public Room(){
+
+    }
+
     public String getName() {
         return name;
     }
@@ -41,6 +46,15 @@ public class Room {
     public Inventory getInventory() {
         return inventory;
     }
+
+    public Enemy getEnemy() {
+        return enemy;
+    }
+
+    public void setEnemy(Enemy enemy) {
+        this.enemy = enemy;
+    }
+
     @Override
     public String toString() {
         String name = this.getName();
