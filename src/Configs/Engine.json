@@ -1,0 +1,443 @@
+{
+  "Comments for the designer ": {
+    "Tags": "Please do not change tags. For instance do not change strings like EASY,listEnemyIDs, X-size,Y-size etc",
+    "Rules for writing values": [
+      "Please do not add more difficulty levels.",
+      "while writing a new weapon,character or enemy do not forget to add new ID (of the form ch or w or e followed by an integerID) to respective list ",
+      "Ensure numRooms = the number of rooms specified ",
+      "TO add a room make a new roomX tag where X is an integer. Please ensure all X values are continuous integers and start from 1 for room1 ",
+      "each room must have 5 attributes namely roomName,treasure,inventory,weapon written as attribute-int,DO NOT CHANGE THE ATTRIBUTE NAME OR REMOVE THEM",
+      "If you want a room to not have one of these attributes specify it as attribute-nil"
+    ],
+    "Inventory Items ": "h1 is small healing potion, h2 is big healing potion,s1 is small stamina booster, s2 is large stamina booster",
+    "Responsibility ": "It is your responsibility to make sure that the game you design is indeed beatable. For instance the treasure available in each room does indeed sum up to 100"
+  },
+  "GAME": {
+    "EASY": {
+      "X-size": "6",
+      "Y-size": "6",
+      "numRooms": "4",
+      "listCharIDs": [
+        "ch1",
+        "ch2",
+        "ch3",
+        "ch4"
+      ],
+      "listWeaponIDs": [
+        "w1",
+        "w2",
+        "w3"
+      ],
+      "listEnemyIDs": [
+        "e1",
+        "e2",
+        "e3"
+      ],
+      "ch1": [
+        "Rafael",
+        "w1",
+        "I will kill you, you Monster!!!"
+      ],
+      "ch2": [
+        "Leonardo",
+        "w1",
+        "Prepare to face my wrath!!!"
+      ],
+      "ch3": [
+        "Donatello",
+        "w1",
+        "Ready to die??"
+      ],
+      "ch4": [
+        "Michelangelo",
+        "w1",
+        "Time to die!!!"
+      ],
+      "w1": [
+        "BladesOfFury",
+        20
+      ],
+      "w2": [
+        "BladesOfChaos",
+        30
+      ],
+      "w3": [
+        "LeviathanAxe",
+        40
+      ],
+      "e1": [
+        "Zeus",
+        "w3",
+        "Prepare to Die!!!!"
+      ],
+      "e2": [
+        "Poseidon",
+        "w2",
+        "You will not be spared!!!!"
+      ],
+      "e3": [
+        "Hades",
+        "w1",
+        "Welcome to your worst nightmare!!!"
+      ],
+      "h1": 30,
+      "h2": 40,
+      "s1": 5,
+      "s2": 10,
+      "room1": [
+        "roomName-Jotunheim",
+        "enemy-nil",
+        "treasure-10",
+        "weapon-nil",
+        "inventory-h1"
+      ],
+      "room2": [
+        "roomName-Midgard",
+        "enemy-e3",
+        "treasure-20",
+        "weapon-w2",
+        "inventory-s1"
+      ],
+      "room3": [
+        "roomName-Asgard",
+        "enemy-e2",
+        "treasure-30",
+        "weapon-w3",
+        "inventory-h2"
+      ],
+      "room4": [
+        "roomName-Helheim",
+        "enemy-e1",
+        "treasure-40",
+        "weapon-nil",
+        "inventory-h1"
+      ]
+    },
+    "MEDIUM": {
+      "X-size": "6",
+      "Y-size": "6",
+      "numRooms": "6",
+      "listCharIDs": [
+        "ch1",
+        "ch2",
+        "ch3",
+        "ch4",
+        "ch5"
+      ],
+      "listWeaponIDs": [
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5"
+      ],
+      "listEnemyIDs": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5"
+      ],
+      "ch1": [
+        "Rafael",
+        "w1",
+        "I will kill you, you Monster!!!"
+      ],
+      "ch2": [
+        "Leonardo",
+        "w1",
+        "Prepare to face my wrath!!!"
+      ],
+      "ch3": [
+        "Donatello",
+        "w1",
+        "Ready to die??"
+      ],
+      "ch4": [
+        "Michelangelo",
+        "w1",
+        "Time to die!!!"
+      ],
+      "ch5": [
+        "Kratos",
+        "w1",
+        "I am the god of war!!! You cannot defeat me!!!"
+      ],
+      "w1": [
+        "BladesOfFury",
+        10
+      ],
+      "w2": [
+        "BladesOfChaos",
+        15
+      ],
+      "w3": [
+        "LeviathanAxe",
+        20
+      ],
+      "w4": [
+        "StoneVision",
+        15
+      ],
+      "w5" : [
+        "RiptideSword",
+        20
+      ],
+      "e1": [
+        "Zeus",
+        "w3",
+        "Prepare to Die!!!!"
+      ],
+      "e2": [
+        "Poseidon",
+        "w2",
+        "You will not be spared!!!!"
+      ],
+      "e3": [
+        "Hades",
+        "w1",
+        "Welcome to your worst nightmare!!!"
+      ],
+      "e4": [
+        "Medusa",
+        "w4",
+        "Your death is set in stone!!!"
+      ],
+      "e5": [
+        "Hercules",
+        "w5",
+        "You're nothing compared to me!!!"
+      ],
+      "h1": 30,
+      "h2": 40,
+      "s1": 5,
+      "s2": 10,
+      "room1": [
+        "roomName-Jotunheim",
+        "enemy-nil",
+        "treasure-10",
+        "weapon-nil",
+        "inventory-s1"
+      ],
+      "room2": [
+        "roomName-Midgard",
+        "enemy-e3",
+        "treasure-10",
+        "weapon-w2",
+        "inventory-h1"
+      ],
+      "room3": [
+        "roomName-Asgard",
+        "enemy-e2",
+        "treasure-10",
+        "weapon-w3",
+        "inventory-h2"
+      ],
+      "room4": [
+        "roomName-Helheim",
+        "enemy-e1",
+        "treasure-20",
+        "weapon-nil",
+        "inventory-h1"
+      ],
+      "room5" : [
+        "roomName-Vanaheim",
+        "enemy-e4",
+        "treasure-20",
+        "weapon-w4",
+        "inventory-h2"
+      ],
+      "room6" : [
+        "roomName-Alfheim",
+        "enemy-e5",
+        "treasure-40",
+        "weapon-w2",
+        "inventory-s2"
+      ]
+    },
+    "HARD" : {
+      "X-size": "6",
+      "Y-size": "6",
+      "numRooms": "8",
+      "listCharIDs": [
+        "ch1",
+        "ch2",
+        "ch3",
+        "ch4",
+        "ch5",
+        "ch6"
+      ],
+      "listWeaponIDs": [
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6",
+        "w7"
+      ],
+      "listEnemyIDs": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5",
+        "e6",
+        "e7"
+      ],
+      "ch1": [
+        "Rafael",
+        "w1",
+        "I will kill you, you Monster!!!"
+      ],
+      "ch2": [
+        "Leonardo",
+        "w1",
+        "Prepare to face my wrath!!!"
+      ],
+      "ch3": [
+        "Donatello",
+        "w1",
+        "Ready to die??"
+      ],
+      "ch4": [
+        "Michelangelo",
+        "w1",
+        "Time to die!!!"
+      ],
+      "ch5": [
+        "Kratos",
+        "w1",
+        "I am the god of war!!! You cannot defeat me!!!"
+      ],
+      "ch6" : [
+        "Artemus",
+        "w1",
+        "I will finish you."
+      ],
+      "w1": [
+        "BladesOfFury",
+        10
+      ],
+      "w2": [
+        "BladesOfChaos",
+        15
+      ],
+      "w3": [
+        "LeviathanAxe",
+        20
+      ],
+      "w4": [
+        "StoneVision",
+        15
+      ],
+      "w5" : [
+        "RiptideSword",
+        20
+      ],
+      "w6" : [
+        "Mjolnir",
+        25
+      ],
+      "w7" : [
+        "SwordOfOlympus",
+        "25"
+      ],
+      "e1": [
+        "Zeus",
+        "w3",
+        "Prepare to Die!!!!"
+      ],
+      "e2": [
+        "Poseidon",
+        "w2",
+        "You will not be spared!!!!"
+      ],
+      "e3": [
+        "Hades",
+        "w1",
+        "Welcome to your worst nightmare!!!"
+      ],
+      "e4": [
+        "Medusa",
+        "w4",
+        "Your death is set in stone!!!"
+      ],
+      "e5": [
+        "Hercules",
+        "w5",
+        "You're nothing compared to me!!!"
+      ],
+      "e6": [
+        "Thor",
+        "w6",
+        "Kneel before me!!!"
+      ],
+      "e7": [
+        "Kronos",
+        "w7",
+        "I wil crush you!!!"
+      ],
+      "h1": 25,
+      "h2": 35,
+      "s1": 3,
+      "s2": 8,
+      "room1": [
+        "roomName-Jotunheim",
+        "enemy-nil",
+        "treasure-10",
+        "weapon-nil",
+        "inventory-s1"
+      ],
+      "room2": [
+        "roomName-Midgard",
+        "enemy-e3",
+        "treasure-10",
+        "weapon-w2",
+        "inventory-h1"
+      ],
+      "room3": [
+        "roomName-Asgard",
+        "enemy-e2",
+        "treasure-10",
+        "weapon-w3",
+        "inventory-h2"
+      ],
+      "room4": [
+        "roomName-Helheim",
+        "enemy-e1",
+        "treasure-20",
+        "weapon-nil",
+        "inventory-h1"
+      ],
+      "room5" : [
+        "roomName-Vanaheim",
+        "enemy-e4",
+        "treasure-20",
+        "weapon-w2",
+        "inventory-h2"
+      ],
+      "room6" : [
+        "roomName-Alfheim",
+        "enemy-e5",
+        "treasure-15",
+        "weapon-w5",
+        "inventory-s2"
+      ],
+      "room7" : [
+        "roomName-Muspelheim",
+        "enemy-e6",
+        "treasure-5",
+        "weapon-w4",
+        "inventory-s2"
+      ],
+      "room8" : [
+        "roomName-Niflheim",
+        "enemy-e7",
+        "treasure-20",
+        "weapon-nil",
+        "inventory-s2"
+      ]
+    }
+  }
+}
