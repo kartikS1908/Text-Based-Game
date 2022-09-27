@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome!");
         System.out.print("Enter Your Name:");
@@ -124,7 +125,8 @@ public class Main {
 
             int numRooms = Integer.parseInt((String) jsonObject.get("numRooms"));
 
-            for(int i = 0; i < numRooms ; i++) {
+            for(int i = 0; i<numRooms ; i++) {
+                int x = -1, y = -1;
                 JSONArray array = (JSONArray)jsonObject.get("room"+ (i + 1));
                 System.out.println("room"+ (i + 1) + " :");
                 for (Object o : array) {
@@ -166,7 +168,18 @@ public class Main {
                                 case "s2" -> System.out.println("You can find big stamina booster in this room. You can increase your stamina by " + jsonObject.get(str.substring(10)));
                             }
                         }}
+                    else {
+
+                        if (str.charAt(0) == 'X')
+                            x = Integer.parseInt(str.substring(2));
+                        else if (str.charAt(0) == 'Y')
+                            y = Integer.parseInt(str.substring(2));
+
+
+                    }
+
                 }
+                System.out.println("Co-ordinates of the room are (" + x + "," + y + ")");
             }
 
         } catch (IOException | org.json.simple.parser.ParseException e) {

@@ -31,6 +31,15 @@ public class Character {
         System.out.println(introduction + "\n");
     }
 
+    public Character(int charID,int stamina,String name,Weapon weapon)
+    {
+        this.charID = charID;
+        this.stamina = stamina;
+        this.name = name;
+        this.weapon = weapon;
+        this.HP = 100;
+        this.treasureCurr = 0;
+    }
     public void setName(String name) {
         this.name = name;
     }
