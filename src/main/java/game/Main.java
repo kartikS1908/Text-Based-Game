@@ -14,14 +14,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome!");
         System.out.print("Enter Your Name:");
         String name = scanner.nextLine();
         Game game = initialScreen(name);
 
-
+        Interface.main(args);
     }
 
     public static Game initialScreen(String name) {
@@ -44,8 +43,10 @@ public class Main {
                 readConfigs(3);
             };
 
+
+
             System.out.println("********************");
-            Character c = new Character();
+            Character c = new Character(name, "male", 0, 0);
             //Map m = new Map(level);
             game = new Game();
         } else if (choice == 2) {
@@ -99,9 +100,11 @@ public class Main {
             } else if(difficulty==2) {
                 jsonObject = (JSONObject) jsonObjectLevel.get("MEDIUM");
                 System.out.println("MEDIUM LEVEL:");
+                Map map = new Map(Difficulty.MEDIUM, jsonObject);
             } else if(difficulty==3) {
                 jsonObject = (JSONObject) jsonObjectLevel.get("HARD");
                 System.out.println("HARD LEVEL:");
+                Map map = new Map(Difficulty.HARD, jsonObject);
             } else {
                 System.out.println("INVALID DIFFICULTY LEVEL");
                 return;

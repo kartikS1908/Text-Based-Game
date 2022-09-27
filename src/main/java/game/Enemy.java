@@ -3,9 +3,16 @@ package game;
 import game.Bag.Weapon;
 
 public class Enemy {
-    int enemyId,HP;
+    int enemyId, HP;
     String name;
     Weapon weapon;
+
+    public Enemy(int enemyId, String name, Weapon weapon) {
+        this.enemyId = enemyId;
+        this.name = name;
+        this.weapon = weapon;
+        this.HP = 100;
+    }
 
     public void setHP(int HP) {
         this.HP = HP;

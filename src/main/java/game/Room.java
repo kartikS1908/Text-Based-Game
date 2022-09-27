@@ -1,19 +1,22 @@
 package game;
 
+import game.Bag.Weapon;
+
 public class Room {
     private String name, description;
     private Weapon weapon;
     private Inventory inventory;
     private Enemy enemy;
+    private int countOfTreasure;
 
 
-    public Room(String name, String description, Weapon weapon, Inventory inventory, Enemy enemy){
+    public Room(String name, String description, Weapon weapon, Inventory inventory, Enemy enemy, int countOfTreasure){
         this.name = name;
         this.description = description;
         this.weapon = weapon;
         this.inventory = inventory;
+        this.countOfTreasure = countOfTreasure;
     }
-
 
     public Room(){
 
@@ -39,13 +42,6 @@ public class Room {
         this.description = description;
     }
 
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
-    public Inventory getInventory() {
-        return inventory;
-    }
 
     public Enemy getEnemy() {
         return enemy;
@@ -53,6 +49,28 @@ public class Room {
 
     public void setEnemy(Enemy enemy) {
         this.enemy = enemy;
+    }
+
+    public int getCountOfTreasure() {
+        return countOfTreasure;
+    }
+
+    public void setCountOfTreasure(int countOfTreasure) {
+        this.countOfTreasure = countOfTreasure;
+    }
+    public Weapon getWeapon() {
+        return weapon;
+    }
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     @Override

@@ -1,35 +1,32 @@
 package game;
 
 import constants.Difficulty;
-import constants.Direction;
-import constants.InvType;
+
+import game.Bag.Weapon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-
-
 
 public class Map {
     private Difficulty difficulty;
     private int numOfRooms;
     private Room currentRoom;
     private Object[][] map;
-    private int currentX = 0;
-    private int currentY = 0;
+    private int XMax = 0;
+    private int YMax = 0;
     private JSONObject settings;
+
+    private Object currentSpot;
 
 
     public Map(Difficulty difficulty, JSONObject settings){
         this.settings = settings;
         this.numOfRooms = Integer.parseInt(settings.get("numRooms").toString());
         int xSize = Integer.parseInt(settings.get("X-size").toString()), ySize = Integer.parseInt(settings.get("Y-size").toString());
+        this.XMax = xSize;
+        this.YMax = ySize;
         this.map = createMap(this.numOfRooms, xSize, ySize);
     }
 
@@ -37,6 +34,7 @@ public class Map {
         Object[][] map = new Object[xSizeOfGrid][ySizeOfGrid];
         fillMap(map);
         map[0][0] = "**";
+        this.currentSpot = map[0][0];
         for(Object[] row : map){
             System.out.println(Arrays.toString(row));
         }
@@ -74,69 +72,100 @@ public class Map {
                         } else {
                             JSONArray enemyArr = (JSONArray) this.settings.get(str.substring(6));
                             JSONArray weaponArr = (JSONArray) this.settings.get(enemyArr.get(1));
-//                            Weapon weapon = new Weapon()
-                            System.out.println("Enemy Name is " + enemyArr.get(0) + ", They say " + enemyArr.get(2) + ", They posses the " + (String) weaponArr.get(0) + ", It does " + weaponArr.get(1) + " damage.");
+//                            id?                                                       *
+                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()), "");
+//                            HP                            *         *
+                            Enemy enemy = new Enemy(i+1, enemyArr.get(0).toString(), weapon);
 
+                            room.setEnemy(enemy);
+                        }
+                    }
+                    case 't' -> {
+                        if(!(str.substring(9).equals("nil"))){
+                               room.setCountOfTreasure(Integer.parseInt(str.substring(9).toString()));
+                        }
+                    }
+                    case 'w' -> {
+                        if(!(str.substring(7).equals("nil"))){
+                            JSONArray weaponArr = (JSONArray) this.settings.get(str.substring(7));
+                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()), "");
+                            room.setWeapon(weapon);
+                        }
+                    }
+                    case 'i' -> {
+                        if(!(str.substring(7).equals("nil"))) {
+                            String item = str.substring(10);
+                            int amount = Integer.parseInt(this.settings.get(item).toString());
+                            switch (item) {
+                                case "h1" -> room.setInventory(new Inventory("small healing potion", amount));
+                                case "s1" -> room.setInventory(new Inventory("small stamina booster", amount));
+                                case "h2" -> room.setInventory(new Inventory("big healing portion", amount));
+                                case "s2" -> room.setInventory(new Inventory("big stamina booster", amount));
+                            }
                         }
                     }
                 }
             }
 
-            int hasWeapon = random.nextInt(2);
-            int invTypeLen = InvType.values().length;
-            int invType = random.nextInt(invTypeLen);
-
-            Weapon weapon = hasWeapon != 0 ? new Weapon() : null;
-            Inventory inventory = weapon == null ? new Inventory(InvType.values()[invType % invTypeLen]) : null;
-            Enemy enemy = new Enemy();
-            map[randomX][randomY] = new Room("Room"+(i+1), "Room " + (i + 1), weapon, inventory, enemy);
-
+            map[randomX][randomY] = room;
         }
     }
 
-    private void goNorth(){
-        int x = this.getCurrentX();
-        if ((x-1) < 0){
-            System.out.println("Sorry, no exit");
-        }else{
-            setCurrentX(x-1);
-        }
-    }
-    private void goSouth(){
-        int x = this.getCurrentX();
-        if ((x+1) > this.getMap().length){
-            System.out.println("Sorry, no exit");
-        }else{
-            setCurrentX(x+1);
-        }
-    }
-    private void goWest(){
-        int y = this.getCurrentY();
-        if ((y-1) < 0){
-            System.out.println("Sorry, no exit");
-        }else{
-            setCurrentY(y-1);
-        }
-    }
-    private void goEast(){
-        int y = this.getCurrentY();
-        if ((y+1) > this.getMap()[0].length){
-            System.out.println("Sorry, no exit");
-        }else{
-            setCurrentY(y+1);
-        }
-    }
+//    private void goNorth(){
+//        int x = this.getCurrentX();
+//        if ((x-1) < 0){
+//            System.out.println("Sorry, no exit");
+//        }else{
+//            setCurrentX(x-1);
+//        }
+//    }
+//    private void goSouth(){
+//        int x = this.getCurrentX();
+//        if ((x+1) > this.getMap().length){
+//            System.out.println("Sorry, no exit");
+//        }else{
+//            setCurrentX(x+1);
+//        }
+//    }
+//    private void goWest(){
+//        int y = this.getCurrentY();
+//        if ((y-1) < 0){
+//            System.out.println("Sorry, no exit");
+//        }else{
+//            setCurrentY(y-1);
+//        }
+//    }
+//    private void goEast(){
+//        int y = this.getCurrentY();
+//        if ((y+1) > this.getMap()[0].length){
+//            System.out.println("Sorry, no exit");
+//        }else{
+//            setCurrentY(y+1);
+//        }
+//    }
+//
+//    public String ProcessCommand(String command){
+//        String msg = "";
+//        switch (command){
+//            case "north"-> goNorth();
+//            case "south"-> goSouth();
+//            case "west"-> goWest();
+//            case "east"-> goEast();
+//            default -> msg = command + "not available";
+//        }
+//        return msg;
+//    }
 
-    public String ProcessCommand(String command){
-        String msg = "";
-        switch (command){
-            case "north"-> goNorth();
-            case "south"-> goSouth();
-            case "west"-> goWest();
-            case "east"-> goEast();
-            default -> msg = command + "not available";
+    public Object getCurrentSpot(int x, int y){
+        if(x < 0 || x >= this.XMax || y < 0 || y >= this.YMax){
+            return "Sorry, no exit!";
         }
-        return msg;
+
+        if(this.map[x][y] instanceof Room){
+            return this.map[x][y];
+        }else{
+            return "Nothing here. Please move forward.";
+        }
     }
 
 
@@ -154,22 +183,6 @@ public class Map {
 //        System.out.println(s);
 //    }
 
-
-    public int getCurrentX() {
-        return currentX;
-    }
-
-    public void setCurrentX(int currentX) {
-        this.currentX = currentX;
-    }
-
-    public int getCurrentY() {
-        return currentY;
-    }
-
-    public void setCurrentY(int currentY) {
-        this.currentY = currentY;
-    }
 
     public Object[][] getMap(){
         return this.map;

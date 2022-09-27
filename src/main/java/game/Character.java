@@ -10,11 +10,15 @@ public class Character {
     private int attack;
     private int defense;
     private String introduction;
-    int HP,stamina, charID, treasureCurr;
-    public Character(String name, String gender) {
+    int HP, stamina, charID, treasureCurr;
+    private int currentX, currentY;
+    public Character(String name, String gender, int x, int y) {
 
         this.name = name;
         this.weapon = weapon;
+
+        this.currentX = x;
+        this.currentY = y;
         System.out.println("【System:】:The role was created successfully. Your name is " + name + "，Gender：" + gender);
         maxHP = 100;
         HP = maxHP;
@@ -74,5 +78,7 @@ public class Character {
     public int getTreasureCurr() {
         return treasureCurr;
     }
+
+
 
 }

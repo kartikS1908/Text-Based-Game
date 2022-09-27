@@ -1,6 +1,5 @@
 package game;
 
-import constants.InvType;
 
 public class Inventory {
     private String invName;

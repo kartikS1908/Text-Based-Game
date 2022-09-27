@@ -33,9 +33,9 @@ public class Interface {
         boolean isFlag =true;
         while (isFlag){
             System.out.println("--------Welcome--------");
-            System.out.println("1 open bag");
-            System.out.println("2 Entry map");
-            System.out.println("3 healing potion");
+            System.out.println("1 Open bag");
+            System.out.println("2 Enter map");
+            System.out.println("3 Use Healing potion");
             System.out.println("4 ");
             System.out.println("5 exit");
             char menu = CMUtility.readMenuSelection();
