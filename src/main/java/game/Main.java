@@ -40,7 +40,7 @@ public class Main {
             else if(level==3)  readConfigs(3);
 
             System.out.println("********************");
-            Character c = new Character();
+            //Character c = new Character(); assign parameters according to character select
             //Map m = new Map(level);
             game = new Game();
         } else if (choice == 2) {
@@ -121,6 +121,7 @@ public class Main {
             int numRooms = Integer.parseInt((String) jsonObject.get("numRooms"));
             for(int i = 0; i<numRooms ; i++)
             {
+                int x = -1, y = -1;
                 JSONArray array = (JSONArray)jsonObject.get("room"+ (i + 1));
                 System.out.println("room"+ (i + 1) + " :");
                 for (Object o : array) {
@@ -162,7 +163,18 @@ public class Main {
                                 case "s2" -> System.out.println("You can find big stamina booster in this room. You can increase your stamina by " + jsonObject.get(str.substring(10)));
                             }
                         }}
+                    else {
+
+                        if (str.charAt(0) == 'X')
+                            x = Integer.parseInt(str.substring(2));
+                        else if (str.charAt(0) == 'Y')
+                            y = Integer.parseInt(str.substring(2));
+
+
+                    }
+
                 }
+                System.out.println("Co-ordinates of the room are (" + x + "," + y + ")");
             }
 
         } catch (IOException | org.json.simple.parser.ParseException e) {

@@ -5,6 +5,15 @@ public class Character {
     String name;
     Weapon weapon;
 
+    public Character(int charID,int stamina,String name,Weapon weapon)
+    {
+        this.charID = charID;
+        this.stamina = stamina;
+        this.name = name;
+        this.weapon = weapon;
+        this.HP = 100;
+        this.treasureCurr = 0;
+    }
     public void setName(String name) {
         this.name = name;
     }
