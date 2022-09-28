@@ -89,28 +89,36 @@
         "enemy-nil",
         "treasure-10",
         "weapon-nil",
-        "inventory-h1"
+        "inventory-h1",
+        "X-0",
+        "Y-2"
       ],
       "room2": [
         "roomName-Midgard",
         "enemy-e3",
         "treasure-20",
         "weapon-w2",
-        "inventory-s1"
+        "inventory-s1",
+        "X-1",
+        "Y-3"
       ],
       "room3": [
         "roomName-Asgard",
         "enemy-e2",
         "treasure-30",
         "weapon-w3",
-        "inventory-h2"
+        "inventory-h2",
+        "X-2",
+        "Y-4"
       ],
       "room4": [
         "roomName-Helheim",
         "enemy-e1",
         "treasure-40",
         "weapon-nil",
-        "inventory-h1"
+        "inventory-h1",
+        "X-5",
+        "Y-5"
       ]
     },
     "MEDIUM": {
@@ -217,42 +225,54 @@
         "enemy-nil",
         "treasure-10",
         "weapon-nil",
-        "inventory-s1"
+        "inventory-s1",
+        "X-0",
+        "Y-2"
       ],
       "room2": [
         "roomName-Midgard",
         "enemy-e3",
         "treasure-10",
         "weapon-w2",
-        "inventory-h1"
+        "inventory-h1",
+        "X-0",
+        "Y-4"
       ],
       "room3": [
         "roomName-Asgard",
         "enemy-e2",
         "treasure-10",
         "weapon-w3",
-        "inventory-h2"
+        "inventory-h2",
+        "X-1",
+        "Y-5"
       ],
       "room4": [
         "roomName-Helheim",
         "enemy-e1",
         "treasure-20",
         "weapon-nil",
-        "inventory-h1"
+        "inventory-h1",
+        "X-2",
+        "Y-4"
       ],
       "room5" : [
         "roomName-Vanaheim",
         "enemy-e4",
         "treasure-20",
         "weapon-w4",
-        "inventory-h2"
+        "inventory-h2",
+        "X-3",
+        "Y-3"
       ],
       "room6" : [
         "roomName-Alfheim",
         "enemy-e5",
         "treasure-40",
         "weapon-w2",
-        "inventory-s2"
+        "inventory-s2",
+        "X-5",
+        "Y-4"
       ]
     },
     "HARD" : {
@@ -387,56 +407,72 @@
         "enemy-nil",
         "treasure-10",
         "weapon-nil",
-        "inventory-s1"
+        "inventory-s1",
+        "X-0",
+        "Y-2"
       ],
       "room2": [
         "roomName-Midgard",
         "enemy-e3",
         "treasure-10",
         "weapon-w2",
-        "inventory-h1"
+        "inventory-h1",
+        "X-0",
+        "Y-5"
       ],
       "room3": [
         "roomName-Asgard",
         "enemy-e2",
         "treasure-10",
         "weapon-w3",
-        "inventory-h2"
+        "inventory-h2",
+        "X-1",
+        "Y-5"
       ],
       "room4": [
         "roomName-Helheim",
         "enemy-e1",
         "treasure-20",
         "weapon-nil",
-        "inventory-h1"
+        "inventory-h1",
+        "X-1",
+        "Y-2"
       ],
       "room5" : [
         "roomName-Vanaheim",
         "enemy-e4",
         "treasure-20",
         "weapon-w2",
-        "inventory-h2"
+        "inventory-h2",
+        "X-3",
+        "Y-4"
       ],
       "room6" : [
         "roomName-Alfheim",
         "enemy-e5",
         "treasure-15",
         "weapon-w5",
-        "inventory-s2"
+        "inventory-s2",
+        "X-3",
+        "Y-5"
       ],
       "room7" : [
         "roomName-Muspelheim",
         "enemy-e6",
         "treasure-5",
         "weapon-w4",
-        "inventory-s2"
+        "inventory-s2",
+        "X-4",
+        "Y-4"
       ],
       "room8" : [
         "roomName-Niflheim",
         "enemy-e7",
         "treasure-20",
         "weapon-nil",
-        "inventory-s2"
+        "inventory-s2",
+        "X-5",
+        "Y-5"
       ]
     }
   }

@@ -1,5 +1,6 @@
 package game;
 
+
 public class Inventory {
     private String invName;
     private int amount;
