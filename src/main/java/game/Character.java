@@ -13,10 +13,8 @@ public class Character {
     int HP, stamina, charID, treasureCurr;
     private int currentX, currentY;
     public Character(String name, String gender, int x, int y) {
-
         this.name = name;
         this.weapon = weapon;
-
         this.currentX = x;
         this.currentY = y;
         System.out.println("【System:】:The role was created successfully. Your name is " + name + "，Gender：" + gender);
@@ -88,6 +86,16 @@ public class Character {
         return treasureCurr;
     }
 
+    public int getCurrentX() {
+        return currentX;
+    }
 
+    public int getCurrentY() {
+        return currentY;
+    }
 
+    public void setCurrentPosition(int currentX, int currentY){
+        this.currentX = currentX;
+        this.currentY = currentY;
+    }
 }

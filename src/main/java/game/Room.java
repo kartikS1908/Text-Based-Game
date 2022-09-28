@@ -75,7 +75,6 @@ public class Room {
 
     @Override
     public String toString() {
-        String name = this.getName();
-        return "R" + name.charAt(name.length() - 1);
+        return this.name.substring(0, 3);
     }
 }

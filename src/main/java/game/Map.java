@@ -3,6 +3,7 @@ package game;
 import constants.Difficulty;
 
 import game.Bag.Weapon;
+import globals.HandledException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -10,7 +11,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Map {
-    private Difficulty difficulty;
     private int numOfRooms;
     private Room currentRoom;
     private Object[][] map;
@@ -18,49 +18,73 @@ public class Map {
     private int YMax = 0;
     private JSONObject settings;
 
-    private Object currentSpot;
+    private int[] prevPosition;
+    private Character player;
 
 
-    public Map(Difficulty difficulty, JSONObject settings){
+    public Map(JSONObject settings, Character player){
         this.settings = settings;
         this.numOfRooms = Integer.parseInt(settings.get("numRooms").toString());
         int xSize = Integer.parseInt(settings.get("X-size").toString()), ySize = Integer.parseInt(settings.get("Y-size").toString());
         this.XMax = xSize;
         this.YMax = ySize;
+        this.player = player;
         this.map = createMap(this.numOfRooms, xSize, ySize);
     }
 
     private Object[][] createMap(int numOfRooms, int xSizeOfGrid, int ySizeOfGrid){
         Object[][] map = new Object[xSizeOfGrid][ySizeOfGrid];
         fillMap(map);
-        map[0][0] = "**";
-        this.currentSpot = map[0][0];
+        int x = this.player.getCurrentX();
+        int y = this.player.getCurrentY();
+        map[x][y] = "(～￣▽￣)";
+        this.prevPosition = new int[]{x, y};
         for(Object[] row : map){
             System.out.println(Arrays.toString(row));
         }
         return map;
     }
+    public void printMap(){
+        map[prevPosition[0]][prevPosition[1]] = "---";
+        int x = this.player.getCurrentX();
+        int y = this.player.getCurrentY();
+        map[x][y] = "(～￣▽￣)";
+        this.prevPosition = new int[]{x, y};
+
+        for(Object[] row : this.map){
+            System.out.println(Arrays.toString(row));
+        }
+    }
+
+    public int getXMax() {
+        return XMax;
+    }
+
+    public int getYMax() {
+        return YMax;
+    }
 
     private void fillMap(Object[][] map){
 //      First fill the map by '*'
         for(int i = 0; i < map.length; i++){
-            Arrays.fill(map[i], "--");
+            Arrays.fill(map[i], "---");
         }
 //      Start putting the rooms into the grid randomly
         Random random = new Random();
 
         for(int i = 0; i < numOfRooms; i++){
-//          Find the position of a room
-            int randomX = random.nextInt(map.length);
-            int randomY = random.nextInt(map[0].length);
-//          If the current spot is a room, randomise the indices
-            while(map[randomX][randomY] instanceof Room){
-               randomX = random.nextInt(map.length);
-               randomY = random.nextInt(map[0].length);
-            }
+////          Find the position of a room
+//            int randomX = random.nextInt(map.length);
+//            int randomY = random.nextInt(map[0].length);
+////          If the current spot is a room, randomise the indices
+//            while(map[randomX][randomY] instanceof Room){
+//               randomX = random.nextInt(map.length);
+//               randomY = random.nextInt(map[0].length);
+//            }
 
             JSONArray array = (JSONArray) this.settings.get("room"+ (i + 1));
             Room room = new Room();
+            int x = 0, y = 0;
             for(Object obj : array){
                 String str = (String) obj;
 
@@ -104,11 +128,36 @@ public class Map {
                             }
                         }
                     }
+                    case 'X' -> {
+                        x = Integer.parseInt(str.substring(2));
+                        try{
+                            if(x >= this.XMax){
+                                throw new HandledException("****** X coordinate exceeds grid/map limit ******");
+                            }
+                        }catch (HandledException e){
+                            System.out.println(e.getMessage());
+                            e.printStackTrace();
+                        }
+
+                    }
+                    case 'Y' -> {
+                        y = Integer.parseInt(str.substring(2));
+                        try {
+                            if(y >= this.YMax){
+                                throw new HandledException("****** Y coordinate exceeds grid/map limit ******");
+                            }
+                        }catch (HandledException e){
+                            System.out.println(e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
 
-            map[randomX][randomY] = room;
+            map[x][y] = room;
         }
+
+
     }
 
 //    private void goNorth(){
