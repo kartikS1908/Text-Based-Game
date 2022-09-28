@@ -97,5 +97,6 @@ public class Character {
     public void setCurrentPosition(int currentX, int currentY){
         this.currentX = currentX;
         this.currentY = currentY;
+
     }
 }

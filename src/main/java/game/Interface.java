@@ -10,18 +10,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Interface {
+    private Scanner scanner;
     private JSONObject gameObj;
     public Interface(JSONObject gameObj){
         this.gameObj = gameObj;
+        this.scanner = new Scanner(System.in);
     }
     public void run(){
         /* Configure Player Information Start */
         System.out.println("(｡･∀･)ﾉﾞHi ！Welcome to the game！please create your Character (｡･∀･)ﾉ");
         System.out.print("Warrior, please enter your name：");
-        Scanner scanner = new Scanner(System.in); // Create a Scanner for Initialization
-        String inputName = scanner.next();
+
+        String inputName = this.scanner.next();
         System.out.print("Warriors, please enter your gender (Male/Female) : ");
-        String inputGender = scanner.next();
+        String inputGender = this.scanner.next();
         inputGender = inputGender.toLowerCase();
 
         if (!(inputGender.equals("male") || inputGender.equals("female"))) {
@@ -56,43 +58,7 @@ public class Interface {
                     map.printMap();
                     break;
                 case '3':
-                    System.out.println("You can move by W (up), S (down), A (left), D (right)");
-                    String direction = scanner.next();
-                    int currentX = player.getCurrentX();
-                    int currentY = player.getCurrentY();
-                    switch (direction.toLowerCase()) {
-                        case "s" -> {
-                            if (currentX + 1 >= map.getXMax()){
-                                System.out.println("Warning! You will cross the boundary");
-                            }else{
-                                currentX++;
-                            }
-                        }
-                        case "w" -> {
-                            if (currentX - 1 < 0){
-                                System.out.println("Warning! You will cross the boundary");
-                            }else{
-                                currentX--;
-                            }
-                        }
-                        case "a" -> {
-                            if (currentY - 1 < 0){
-                                System.out.println("Warning! You will cross the boundary");
-                            }else{
-                                currentY--;
-                            }
-                        }
-                        case "d" -> {
-                            if (currentY + 1 >= map.getYMax()){
-                                System.out.println("Warning! You will cross the boundary");
-                            }else{
-                                currentY++;
-                            }
-                        }
-
-                    }
-                    player.setCurrentPosition(currentX, currentY);
-                    map.printMap();
+                    movePlayer(player, map);
                     break;
                 case '4':
 
@@ -108,5 +74,21 @@ public class Interface {
 
         }
 
+    }
+
+    public void movePlayer(Character player, Map map){
+        System.out.println("You can move by W (up), S (down), A (left), D (right)");
+        String direction = this.scanner.next();
+        Movement currentMove = new Movement(player, map);
+        currentMove.move(direction);
+
+        Object currentPosition = map.getCurrentPosition();
+        if(currentPosition != null){
+            // Kartik your function goes here!
+            System.out.println("***** You have entered the room");
+            System.out.println(((Room) currentPosition).getEnemy());
+
+        }
+        map.printMap();
     }
 }

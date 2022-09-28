@@ -14,13 +14,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome!\nEnter Your Name: ");
+        System.out.print("Welcome! Enter Your Name: ");
         String name = scanner.nextLine();
+
         ConfigReader configReader = new ConfigReader();
         JSONObject jsonObject = configReader.read("./src/Configs/Engine.json");
-
         JSONObject gameObj = initialScreen(name, jsonObject);
 
         Interface dashboard = new Interface(gameObj);
