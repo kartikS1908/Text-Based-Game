@@ -18,20 +18,7 @@ public class Interface {
     }
     public void run(){
         /* Configure Player Information Start */
-        System.out.println("(｡･∀･)ﾉﾞHi ！Welcome to the game！please create your Character (｡･∀･)ﾉ");
-        System.out.print("Warrior, please enter your name：");
-
-        String inputName = this.scanner.next();
-        System.out.print("Warriors, please enter your gender (Male/Female) : ");
-        String inputGender = this.scanner.next();
-        inputGender = inputGender.toLowerCase();
-
-        if (!(inputGender.equals("male") || inputGender.equals("female"))) {
-            System.out.println("Wrong! try again!");
-            System.exit(0);
-        }
-
-        Character player = new Character(inputName, inputGender, 0, 0); // Generate a player
+        Character player = Character.createChar(this.gameObj); // Create a character
         Map map = new Map(this.gameObj, player);
 
         List<String> bag = new ArrayList<String>(); // Generate the bag of the player

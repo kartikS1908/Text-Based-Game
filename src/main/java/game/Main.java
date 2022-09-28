@@ -14,60 +14,91 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Welcome! Enter Your Name: ");
-        String name = scanner.nextLine();
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Welcome!\nEnter Your Name: ");
+        String name = scanner.nextLine();
+        // read config
         ConfigReader configReader = new ConfigReader();
         JSONObject jsonObject = configReader.read("./src/Configs/Engine.json");
+        // print initial screen
         JSONObject gameObj = initialScreen(name, jsonObject);
 
         Interface dashboard = new Interface(gameObj);
         dashboard.run();
     }
 
+    /**
+     * initial screen of game, player is able to start new game, load game or read rules of game
+     *
+     * @param name Name of Player
+     * @param jsonObject game engine
+     * @return get details of the game from new game or load game
+     */
     public static JSONObject initialScreen(String name, JSONObject jsonObject) {
         Scanner scanner = new Scanner(System.in);
+        // choose choice
         System.out.println("********************\nHi! " + name + "!");
         System.out.print("1. Start New Game \n2. Load Game \n3. Read Rules \nEnter your option: ");
-        int choice = scanner.nextInt();
+        String choice = scanner.nextLine();
         System.out.println("********************");
         JSONObject gameObj = null;
-        if (choice == 1) {
-            System.out.print("******************** \nChoose Level of Difficulty\n1. Easy \n2. Medium\n" +
-                    "3. Hard \nEnter your option: ");
-            int level = scanner.nextInt();
-            gameObj = (JSONObject) jsonObject.get("GAME");
-            switch (level){
-                case 1 -> {
-                    gameObj = (JSONObject) gameObj.get("EASY");
-                }
-                case 2 -> {
-                    gameObj = (JSONObject) gameObj.get("MEDIUM");
-                }
-                case 3 -> {
-                    gameObj = (JSONObject) gameObj.get("HARD");
-                }
-            }
 
-
-
-            System.out.println("********************");
-            Character c = new Character(name, "male", 0, 0);
-            //Map m = new Map(level);
-
-        } else if (choice == 2) {
+        // enter different choice
+        if (choice.equals("1")) {
+            gameObj = chooseLevel(jsonObject);
+        } else if (choice.equals("2")) {
             gameObj = loadGame(name);
-        } else if (choice == 3) {
+        } else if (choice.equals("3")) {
             printRules();
-            initialScreen(name, jsonObject);
+            gameObj = initialScreen(name, jsonObject);
         } else {
+            // Invalid choice, recurse the function
             System.out.println("******************** \nNo Choice, Please choose again \n********************");
-            initialScreen(name, jsonObject);
+            gameObj = initialScreen(name, jsonObject);
         }
         return gameObj;
     }
 
+    /**
+     * choose the level of game
+     *
+     * @param jsonObject game engine
+     * @return get details of the game according to chosen level
+     */
+    public static JSONObject chooseLevel(JSONObject jsonObject) {
+        Scanner scanner = new Scanner(System.in);
+        JSONObject gameObj;
+        // choose level
+        System.out.print("******************** \nChoose Level of Difficulty\n1. Easy \n2. Medium\n" +
+                "3. Hard \nEnter your option: ");
+        String level = scanner.nextLine();
+        gameObj = (JSONObject) jsonObject.get("GAME");
+        // get game details from engine
+        switch (level){
+            case "1" -> {
+                gameObj = (JSONObject) gameObj.get("EASY");
+            }
+            case "2" -> {
+                gameObj = (JSONObject) gameObj.get("MEDIUM");
+            }
+            case "3" -> {
+                gameObj = (JSONObject) gameObj.get("HARD");
+            }
+            default -> {
+                // Invalid choice, recurse the function
+                System.out.println("******************** \nNo Choice, Please choose again \n********************");
+                gameObj = chooseLevel(jsonObject);
+            }
+        }
+        System.out.println("********************");
+        return gameObj;
+    }
+
+
+    /**
+     * print rules of the game
+     */
     public static void printRules() {
         System.out.println("******************** \nRules of Game");
         System.out.println("How to Win?\n" +
