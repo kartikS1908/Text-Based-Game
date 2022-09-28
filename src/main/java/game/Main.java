@@ -23,8 +23,7 @@ public class Main {
         JSONObject jsonObject = configReader.read("./src/Configs/Engine.json");
         // print initial screen
         JSONObject gameObj = initialScreen(name, jsonObject);
-        System.out.println("in" + gameObj);
-        // enter game
+
         Interface dashboard = new Interface(gameObj);
         dashboard.run();
     }
