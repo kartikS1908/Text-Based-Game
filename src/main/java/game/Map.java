@@ -17,11 +17,9 @@ public class Map {
     private int XMax = 0;
     private int YMax = 0;
     private JSONObject settings;
-
     private int[] prevPosition;
     private Character player;
     private int playerX, playerY;
-
 
     public Map(JSONObject settings, Character player){
         this.settings = settings;
@@ -126,12 +124,7 @@ public class Map {
                         if(!(str.substring(7).equals("nil"))) {
                             String item = str.substring(10);
                             int amount = Integer.parseInt(this.settings.get(item).toString());
-                            switch (item) {
-                                case "h1" -> room.setInventory(new Inventory("small healing potion", amount));
-                                case "s1" -> room.setInventory(new Inventory("small stamina booster", amount));
-                                case "h2" -> room.setInventory(new Inventory("big healing portion", amount));
-                                case "s2" -> room.setInventory(new Inventory("big stamina booster", amount));
-                            }
+                            room.setInventory(new Inventory(item, amount));
                         }
                     }
                     case 'X' -> {

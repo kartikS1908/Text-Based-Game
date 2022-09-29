@@ -12,7 +12,7 @@ public class Movement {
     public void move(String direction){
         int currentX = this.player.getCurrentX();
         int currentY = this.player.getCurrentY();
-
+        int currentStamina = this.player.getStamina();
         switch (direction.toLowerCase()) {
             case "s" -> {
                 if (currentY + 1 >= map.getYMax()){
@@ -44,7 +44,7 @@ public class Movement {
             }
 
         }
-
+        this.player.setStamina(currentStamina - 1);
         this.player.setCurrentPosition(currentX, currentY);
     }
 }
