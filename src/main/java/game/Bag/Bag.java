@@ -1,35 +1,33 @@
 package game.Bag;
 
+import game.Inventory;
+
 public class Bag {
+
     public Bag(){
-        Weapon weapon =new Weapon("Gun",10,20,"useful");
-        Bag_List.addWeapon(weapon);
+
     }
-    game.Bag.Bag_List Bag_List =new Bag_List(10);
+    Bag_List Bag_List =new Bag_List(5);
     public void enterBag(){
         boolean isFlag =true;
         while (isFlag){
             System.out.println("--------Bag--------");
             System.out.println("1 Add item");
-            System.out.println("2 replace item");
-            System.out.println("3 delete item");
-            System.out.println("4 List of item");
-            System.out.println("5 exit");
+            System.out.println("2 delete item");
+            System.out.println("3 List of item");
+            System.out.println("4 exit");
             char menu = CMUtility.readMenuSelection();
             switch (menu){
                 case '1':
-                    addWeapon();
+                    addInventory();
                     break;
                 case '2':
-                    replaceWeapon();
+                    deleteInventory();
                     break;
                 case '3':
-                    deleteWeapon();
+                    getAll();
                     break;
                 case '4':
-                    getAllWeapon();
-                    break;
-                case '5':
                     System.out.println("(Y/N)");
                    char isExit = CMUtility.readConfirmSelection();
                   if(isExit =='Y'){
@@ -42,33 +40,24 @@ public class Bag {
         }
 
     }
-    private void addWeapon(){
-        System.out.println("-------------add item--------------");
-        System.out.println("name:");
-       String name = CMUtility.readString(10);
-        System.out.println("ID:");
-        int ID = CMUtility.readInt();
-        System.out.println("attack:");
-        int attack = CMUtility.readInt();
-        System.out.println("introduction");
-        String introduction=CMUtility.readString(200);
-        Weapon weapon =new Weapon(name,ID,attack,introduction);
-        boolean isSuccess = Bag_List.addWeapon(weapon);
-        if(isSuccess) {
 
+    private void addInventory(){
+        System.out.println("-------------add item--------------");
+        System.out.println("ID:");
+        String id = CMUtility.readString(10);
+        System.out.println("Value:");
+        int value = CMUtility.readInt();
+        Inventory inventory = new Inventory(id,value);
+        boolean isSuccess = Bag_List.addInventory(inventory);
+        if(isSuccess) {
             System.out.println("--------successfully added----------");
         }
         else {
             System.out.println("------- fail to add--------------");
         }
-
-
     }
-    private void replaceWeapon(){
-        System.out.println("replace item");
 
-    }
-    private void deleteWeapon(){
+    private void deleteInventory(){
         System.out.println(" -------Delete item--------");
         int number;
         for(;;) {
@@ -77,9 +66,9 @@ public class Bag {
             if(number == -1){
                 return;
             }
-            Weapon weapon =Bag_List.getWeapons(number-1);
-            if(weapon==null){
-                System.out.println("Can't fond!");
+            Inventory inventory =Bag_List.getInventory(number-1);
+            if(inventory==null){
+                System.out.println("NO ITEM TO DELETE");
             }else {
                 break;
             }
@@ -88,13 +77,14 @@ public class Bag {
         System.out.println("Y/N");
         char isDelete =CMUtility.readConfirmSelection();
         if(isDelete=='Y'){
-            Bag_List.deleteWeapon(number-1);
+            Bag_List.deleteInventory(number-1);
             System.out.println("-------successfully---------\n" );
         }else {
             System.out.println("------Fail--------");
         }
     }
-    private void getAllWeapon(){
+
+    private void getAll(){
         System.out.println("-----------List of item------------");
         int total = Bag_List.getTotal();
         if(total==0){
@@ -102,11 +92,11 @@ public class Bag {
 
         }
         else {
-            System.out.println("name\tID\tattack\tintroduction");
-            Weapon[] custs =Bag_List.getAllWeapons();
+            System.out.println("name\tvalue");
+            Inventory[] custs =Bag_List.getAll();
             for(int i =0;i<custs.length;i++){
-                Weapon cust = custs[i];
-                System.out.println((i+1)+"\t"+cust.getName()+"\t"+cust.getID()+"\t"+cust.getAttack()+"\t"+cust.getIntroduction());
+                Inventory cust = custs[i];
+                System.out.println((i+1)+"\t"+cust.getName()+"\t"+cust.getAmount()+"\t");
             }
         }
         System.out.println("-----------Complete----------------\n");

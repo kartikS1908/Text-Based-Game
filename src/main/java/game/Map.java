@@ -17,9 +17,11 @@ public class Map {
     private int XMax = 0;
     private int YMax = 0;
     private JSONObject settings;
+
     private int[] prevPosition;
     private Character player;
     private int playerX, playerY;
+
 
     public Map(JSONObject settings, Character player){
         this.settings = settings;
