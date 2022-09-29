@@ -12,6 +12,7 @@ public class Character {
     private boolean isAlive;
     private int maxHP;
     private String introduction;
+    private String dialogue;
     int HP, stamina, charID, treasureCurr;
     private int currentX, currentY;
 
@@ -21,9 +22,9 @@ public class Character {
      * @param name name of character
      * @param weapon weapon owned by character
      * @param charID character id
-     * @param introduction introduction
+     * @param dialogue dialogue
      */
-    public Character(String name, Weapon weapon, int charID, String introduction) {
+    public Character(String name, Weapon weapon, int charID, String dialogue) {
         this.charID = charID;
         this.name = name;
         this.weapon = weapon;
@@ -35,7 +36,11 @@ public class Character {
         this.currentX = 0;
         this.currentY = 0;
         this.treasureCurr = 0;
-        this.introduction = "Individual resume：Your name is " + name + ". " + introduction;
+
+        this.dialogue = dialogue;
+
+        this.introduction = "Individual resume：Your name is " + name + ". " + dialogue;
+
         System.out.println("MaxHP：" + maxHP + "， current HP：" + HP + "，is alive：" + isAlive + " Bag：Nothing!");
         System.out.println(this.introduction);
     }
@@ -72,7 +77,7 @@ public class Character {
             JSONArray character = (JSONArray) gameObj.get("ch" + choice);
             JSONArray weapon = (JSONArray) gameObj.get(character.get(1));
             Weapon w = new Weapon(String.valueOf(weapon.get(0)),Integer.parseInt(String.valueOf(character.get(1)).substring(1)),
-                    Integer.parseInt(String.valueOf(weapon.get(1))),"");
+                    Integer.parseInt(String.valueOf(weapon.get(1))));
             c = new Character(String.valueOf(character.get(0)),w,choice,String.valueOf(character.get(2)));
             System.out.println("********************");
         }
@@ -141,6 +146,19 @@ public class Character {
         return currentY;
     }
 
+    public String getIntroduction()
+    {return introduction;}
+
+    public void attack(Enemy enemy)
+    {
+
+        enemy.setHP(Math.max(enemy.getHP() - this.weapon.getAttack(), 0));
+
+    }
+    public String getDialogue()
+    {
+        return dialogue;
+    }
     /**
      * Update character position in map
      *

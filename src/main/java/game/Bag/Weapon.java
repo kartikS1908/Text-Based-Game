@@ -7,20 +7,19 @@ public class Weapon {
     private String name;
     private int ID;
     private int attack;
-    private String introduction;
+
 
     /**
      *
      * @param name
      * @param attack
-     * @param introduction
      */
-    public  Weapon(String name,int id, int attack, String introduction) {
+    public  Weapon(String name,int id, int attack) {
 
         this.name = name;
-        this.ID= ID;
+        this.ID= id;
         this.attack = attack;
-        this.introduction = introduction;
+
 
     }
 
@@ -49,11 +48,12 @@ public class Weapon {
         this.attack = attack;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    @Override
+    public String toString()
+    {
+        if(this.name.equals(null)) return "";
+        return "Name of the weapon is :" + name + " Weapon ID is : " + ID + " It does " + attack + " damage.";
     }
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
+
 }

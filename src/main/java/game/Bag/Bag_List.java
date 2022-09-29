@@ -1,16 +1,19 @@
 package game.Bag;
 
+import game.Inventory;
+
 public class Bag_List {
-    private Weapon[] weapons;
+    private Inventory[] inventory;
     private int total ;
 
     /**
      * Array constructor to use to initialize weapon
-     * @param totalWeapon:
+     * @param total:
      */
-    public Bag_List(int totalWeapon){
-        weapons =new Weapon[totalWeapon];
 
+    public Bag_List(int total){
+
+        this.inventory =new Inventory[total];
 
     }
 
@@ -18,69 +21,69 @@ public class Bag_List {
      * @Description:
      * @author Dehao liu
      * @date:2022
-     * @param weapon
+     * @param inv
      * @return ture
      */
-    public boolean addWeapon(Weapon weapon){
-        if(total>=weapons.length){
+    public boolean addInventory(Inventory inv){
+        if(total>=inventory.length){
             return false;
         }
-        weapons[total]=weapon;
+        inventory[total]=inv;
         total++;
         return true;
     }
 
+//    /**
+//     *
+//     * @param index
+//     *  @param cust
+//     * @return
+//     */
+//    public boolean replaceWeapon(Weapon cust ,int index){
+//
+//        if(index<0||index>total){
+//            return false;
+//        }
+//        weapons[index]=cust;
+//        return true;
+//    }
+
     /**
      *
      * @param index
-     *  @param cust
      * @return
      */
-    public boolean replaceWeapon(Weapon cust ,int index){
-
-        if(index<0||index>total){
-            return false;
-        }
-        weapons[index]=cust;
-        return true;
-    }
-
-    /**
-     *
-     * @param index
-     * @return
-     */
-    public boolean deleteWeapon(int index){
+    public boolean deleteInventory(int index){
         if(index<0||index>=total){
             return false;
         }
         for(int i =index;i<total-1;i++){
-            weapons[i]=weapons[i+1];
-
+            inventory[i]=inventory[i+1];
         }
-        weapons[total-1]=null;
+        inventory[total-1]=null;
         total--;
         return true;
-
     }
     /**
      *
      */
-    public Weapon[] getAllWeapons(){
-       Weapon[] custs =new Weapon[total];
+    public Inventory[] getAll(){
+       Inventory[] custs =new Inventory[total];
        for(int i = 0;i<total;i++){
-           custs[i] =weapons[i];
+           custs[i] =inventory[i];
 
        }
        return custs;
     }
-    public Weapon getWeapons(int index){
+
+    public Inventory getInventory(int index){
 
         if(index<0||index>=total){
             return null;
         }
-        return weapons[index];
+        return inventory[index];
     }
+
 public int getTotal(){
         return total;
 }

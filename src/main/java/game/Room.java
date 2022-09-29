@@ -16,6 +16,7 @@ public class Room {
         this.weapon = weapon;
         this.inventory = inventory;
         this.countOfTreasure = countOfTreasure;
+        this.enemy = enemy;
     }
 
     public Room(){
@@ -30,6 +31,7 @@ public class Room {
      * Set the name of a room
      * @param name name of the room
      */
+
     public void setName(String name) {
         this.name = name;
     }
@@ -66,7 +68,7 @@ public class Room {
     }
 
     public Inventory getInventory() {
-        return inventory;
+        return this.inventory;
     }
 
     public void setInventory(Inventory inventory) {
@@ -76,5 +78,22 @@ public class Room {
     @Override
     public String toString() {
         return this.name.substring(0, 3);
+    }
+
+    public String detailedToString()
+    {
+        String weaponStr,inventoryStr,enemyStr;
+        if(this.weapon==null){ weaponStr = "No weapon here";}
+        else weaponStr = weapon.toString();
+
+        if(this.enemy==null) enemyStr = "No enemy here";
+        else enemyStr = enemy.toString();
+
+        if(this.inventory==null) inventoryStr = "No inventory item here";
+        else inventoryStr = inventory.getDes();
+
+        return "Room name is " + name + "\n" + "Weapon you can find in this room is :"+ "\n" + weaponStr + "\n" +
+                "Inventory item in this room is : " + "\n" + inventoryStr + "\n" + "Enemy details are as follows: " + "\n" + enemyStr +
+                "\n" + "Treasure amount in this room is :" + countOfTreasure;
     }
 }

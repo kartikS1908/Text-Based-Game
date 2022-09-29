@@ -3,15 +3,17 @@ package game;
 import game.Bag.Weapon;
 
 public class Enemy {
-    int enemyId, HP;
-    String name;
-    Weapon weapon;
+    private int enemyId, HP;
+    private String name;
+    private Weapon weapon;
+    private String dialogue;
 
-    public Enemy(int enemyId, String name, Weapon weapon) {
+    public Enemy(int enemyId, String name, Weapon weapon,String dialogue) {
         this.enemyId = enemyId;
         this.name = name;
         this.weapon = weapon;
         this.HP = 100;
+        this.dialogue = dialogue;
     }
 
     public void setHP(int HP) {
@@ -44,6 +46,18 @@ public class Enemy {
 
     public int getEnemyId() {
         return enemyId;
+    }
+
+    public void attack(Character player)
+    {
+        player.setHP(Math.max(player.getHP() - this.weapon.getAttack(), 0));
+    }
+
+    public String getDialogue() { return dialogue;}
+    @Override
+    public String toString()
+    {
+        return "EnemyID is " + enemyId + "\n" + "Name is " + name + "\n" + "Weapon details are : " + "\n" + weapon.toString() + "\n" + "HP is " + HP + "\n" + "Enemy : " + dialogue;
     }
 
 

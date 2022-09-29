@@ -7,12 +7,14 @@ import globals.HandledException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Map {
     private int numOfRooms;
     private Room currentRoom;
+    private ArrayList<Integer> xRooms = new ArrayList<>();
+    private ArrayList<Integer> yRooms = new ArrayList<>();
     private Object[][] map;
     private int XMax = 0;
     private int YMax = 0;
@@ -34,7 +36,14 @@ public class Map {
         this.playerX = player.getCurrentY(); // !!!!
         this.playerY = player.getCurrentX(); // !!!!
         this.map = createMap(xSize, ySize);
+        for(int i = 0 ; i<numOfRooms; i++)
+        {
+            this.xRooms.add(getRooms(settings).get(i+1).get(0));
+            this.yRooms.add(getRooms(settings).get(i+1).get(1));
+        }
         printMap();
+
+
     }
 
     private Object[][] createMap(int xSizeOfGrid, int ySizeOfGrid){
@@ -82,6 +91,20 @@ public class Map {
         return null;
     }
 
+    public int getPlayerX(){
+        return this.playerX;
+    }
+
+    public int getPlayerY(){
+        return this.playerY;
+    }
+
+    public JSONObject getSettings()
+    {
+        return this.settings;
+    }
+
+
     private void fillMap(Object[][] map){
 //      First fill the map by '*'
         for(int i = 0; i < map.length; i++){
@@ -104,8 +127,8 @@ public class Map {
                             JSONArray enemyArr = (JSONArray) this.settings.get(str.substring(6));
                             JSONArray weaponArr = (JSONArray) this.settings.get(enemyArr.get(1));
 
-                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()), "");
-                            Enemy enemy = new Enemy(i+1, enemyArr.get(0).toString(), weapon);
+                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()));
+                            Enemy enemy = new Enemy(i+1, enemyArr.get(0).toString(), weapon,(String) enemyArr.get(2));
 
                             room.setEnemy(enemy);
                         }
@@ -118,7 +141,7 @@ public class Map {
                     case 'w' -> {
                         if(!(str.substring(7).equals("nil"))){
                             JSONArray weaponArr = (JSONArray) this.settings.get(str.substring(7));
-                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()), "");
+                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()));
                             room.setWeapon(weapon);
                         }
                     }
@@ -127,13 +150,14 @@ public class Map {
                             String item = str.substring(10);
                             int amount = Integer.parseInt(this.settings.get(item).toString());
                             switch (item) {
-                                case "h1" -> room.setInventory(new Inventory("small healing potion", amount));
-                                case "s1" -> room.setInventory(new Inventory("small stamina booster", amount));
-                                case "h2" -> room.setInventory(new Inventory("big healing portion", amount));
-                                case "s2" -> room.setInventory(new Inventory("big stamina booster", amount));
+                                case "h1" -> room.setInventory(new Inventory("h1", amount));
+                                case "s1" -> room.setInventory(new Inventory("s1", amount));
+                                case "h2" -> room.setInventory(new Inventory("h2", amount));
+                                case "s2" -> room.setInventory(new Inventory("s2", amount));
                             }
                         }
                     }
+
                     case 'X' -> {
                         x = Integer.parseInt(str.substring(2));
                         try{
@@ -166,8 +190,36 @@ public class Map {
 
     }
 
+    public HashMap<Integer ,ArrayList<Integer> > getRooms(JSONObject obj) {
+
+        HashMap<Integer ,ArrayList<Integer>> ret = new HashMap<>();
+        for(int i = 0 ; i<numOfRooms ; i++)
+        {
+            JSONArray roomArr = (JSONArray) obj.get("room" + (i+1));
+            String xStr = (String)roomArr.get(5);
+            int xVal = Integer.parseInt(xStr.substring(2));
+            String yStr = (String)roomArr.get(6);
+            int yVal = Integer.parseInt(yStr.substring(2));
+            ArrayList<Integer> myXandY = new ArrayList<>();
+            myXandY.add(xVal);
+            myXandY.add(yVal);
+            ret.put(i+1,myXandY);
+        }
+        return ret;
+    }
+
 
     public Object[][] getMap(){
         return this.map;
+    }
+
+    public int getRoomID(int x, int y) {
+
+        for(int i = 0; i< numOfRooms ; i++)
+        {
+            if(xRooms.get(i)==x&&yRooms.get(i)==y)
+                return i+1;
+        }
+        return -1;
     }
 }
