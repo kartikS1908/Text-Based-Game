@@ -1,14 +1,9 @@
 package game;
 
-import constants.Difficulty;
-import game.Bag.Bag;
+import game.Bag.BagList;
 import game.Bag.CMUtility;
-import game.Bag.Weapon;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Interface {
@@ -36,12 +31,11 @@ public class Interface {
             System.out.println("1 Open bag");
             System.out.println("2 View map");
             System.out.println("3 Move player");
-            System.out.println("4 Use healing potion");
-            System.out.println("5 Exit");
+            System.out.println("4 Exit");
             char menu = CMUtility.readMenuSelection();
             switch (menu) {
                 case '1':
-//                    Bag.main(args);
+                    interactWithBag(player);
                     break;
                 case '2':
                     map.printMap();
@@ -50,9 +44,6 @@ public class Interface {
                     movePlayer(player, map);
                     break;
                 case '4':
-
-                    break;
-                case '5':
                     System.out.println("(Y/N)");
                     char isExit = CMUtility.readConfirmSelection();
                     if (isExit == 'Y') {
@@ -73,34 +64,26 @@ public class Interface {
 
         Object currentPosition = map.getCurrentPosition();
         if (currentPosition != null) {
-            // Kartik your function goes here!
-            System.out.println("***** You have entered the room ");
-            int roomID = map.getRoomID(map.getPlayerX(), map.getPlayerY());
-            System.out.println(roomID);
-//            Room room = createRoom(roomID, map.getSettings());
+            map.setNumOfRooms(map.getNumOfRooms() - 1);
             interact((Room) currentPosition, player);
-//            System.out.println(((Room) currentPosition).getEnemy());
-//            System.out.println(createRoom(roomID, map.getSettings()));
         }
         map.printMap();
     }
 
 
     public void interact(Room room, Character player) {
-
         System.out.println("Welcome to " + room.getName());
 
         if (room.getInventory() != null) {
+            Inventory inventory = room.getInventory();
             System.out.println("Inventory item in this room is : ");
-            System.out.println(room.getInventory().getDes());
-            System.out.println("Press 1 to use press any other key to ignore.");
-            int getInventory = scanner.nextInt();
-            if (getInventory == 1) {
-                System.out.println(room.getInventory().getName());
-                Inventory.useInv(player, room.getInventory());
-                System.out.println("Now your HP is " + player.getHP() + " and your stamina is " + player.getStamina());
+            System.out.println(inventory.getDes());
+            System.out.println("Press 1 to put this inventory into your bag OR any other key to ignore.");
+            int choice = scanner.nextInt();
+            if (choice == 1) {
+                System.out.println(inventory.getName());
+                player.getBag().addInventory(inventory);
             }
-
         }
         if (room.getWeapon() != null) {
             System.out.println(room.getWeapon().toString());
@@ -165,6 +148,43 @@ public class Interface {
             System.out.println("You have conquered this map try a harder difficulty. If already done with the hard level then you have mastered this game.");
             Main.myRun();
         }
+
+    }
+    public void  interactWithBag(Character player)  {
+        BagList bagList = player.getBag();
+        System.out.println(bagList.toString());
+        if(bagList.getInventories().size() != 0){
+            System.out.println("Do you want to use (1) or drop (2) an item in the bag?");
+            int choice = scanner.nextInt();
+            while(choice != 1 && choice != 2){
+                System.out.println("Wrong choice, please try again!");
+                choice = scanner.nextInt();
+            }
+            if(choice == 1){
+                System.out.println("Enter the number to use an item");
+                int choiceOfIndex = scanner.nextInt();
+                while (!bagList.checkIsIndexValid(choiceOfIndex)){
+                    System.out.println("Wrong number, please again");
+                    System.out.println("Enter the number to use an item");
+                    choiceOfIndex = scanner.nextInt();
+                }
+
+                player.useInventory(choiceOfIndex);
+                System.out.println("Your Hp is " + player.getHP()
+                        + " Your stamina is " + player.getStamina());
+            } else {
+                System.out.println("Enter the number to drop an item");
+                int choiceOfIndex = scanner.nextInt();
+                while (!bagList.checkIsIndexValid(choiceOfIndex)){
+                    System.out.println("Wrong number, please again!");
+                    System.out.println("Enter the number to drop an item");
+                    choiceOfIndex = scanner.nextInt();
+                }
+
+                bagList.dropInventory(choiceOfIndex);
+            }
+        }
+
 
     }
 }

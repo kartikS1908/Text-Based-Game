@@ -1,5 +1,6 @@
 package game;
 
+import game.Bag.BagList;
 import game.Bag.Weapon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,6 +16,7 @@ public class Character {
     private String dialogue;
     int HP, stamina, charID, treasureCurr;
     private int currentX, currentY;
+    private BagList bag;
 
     /**
      * create character
@@ -36,11 +38,9 @@ public class Character {
         this.currentX = 0;
         this.currentY = 0;
         this.treasureCurr = 0;
-
         this.dialogue = dialogue;
-
+        this.bag = new BagList(5);
         this.introduction = "Individual resume：Your name is " + name + ". " + dialogue;
-
         System.out.println("MaxHP：" + maxHP + "， current HP：" + HP + "，is alive：" + isAlive + " Bag：Nothing!");
         System.out.println(this.introduction);
     }
@@ -169,5 +169,28 @@ public class Character {
         this.currentX = currentX;
         this.currentY = currentY;
 
+    }
+
+    /**
+     * Use inventory in its bag to add HP (h1/h2) or Stamina(s1/s2)
+     *
+     *
+     * @param index the index of the inventory that is used by character
+     */
+    public void useInventory(int index) {
+        BagList bagList = this.bag;
+        Inventory inventory = bagList.getInventories().get(index - 1);
+
+        if (inventory.getInvID().equals("h1") || inventory.getInvID().equals("h2")) {
+            this.HP += inventory.getAmount();
+        } else {
+            this.stamina += inventory.getAmount();
+        }
+        bagList.dropInventory(index);
+
+    }
+
+    public BagList getBag() {
+        return bag;
     }
 }

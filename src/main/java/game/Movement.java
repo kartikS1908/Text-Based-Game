@@ -44,6 +44,7 @@ public class Movement {
             }
 
         }
+
         this.player.setStamina(currentStamina - 1);
         this.player.setCurrentPosition(currentX, currentY);
     }
