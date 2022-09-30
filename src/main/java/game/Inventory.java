@@ -6,13 +6,16 @@ public class Inventory {
     private String invName;
     private int amount;
     /**
-     * TODO: what this function do.
+     * create new inventory
+     *
      * @author Jiayuan Zhu
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     *
+     * @param invID id of inventory
+     * @param amount amount of inventory
+     * @return inventory created
      */
     public Inventory(String invID, int amount) {
-
         this.invID = invID;
         if(invID.equals("h1"))
         {this.invName = "Small Healing Potion";}
@@ -26,6 +29,14 @@ public class Inventory {
     }
 
     /**
+     * Set the amount of Inventory
+     * @author Jiayuan Zhu
+     */
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    /**
      * Get the amount of Inventory
      * @author Jiayuan Zhu
      * @return the amount
@@ -35,17 +46,25 @@ public class Inventory {
     }
 
     /**
-     * Get tha name of Inventory
+     * Set the name of Inventory
+     * @author Jiayuan Zhu
+     */
+    public void setInvName(String invName) {
+        this.invName = invName;
+    }
+
+    /**
+     * Get the name of Inventory
      * @author Jiayuan Zhu
      * @return the name
      */
     public String getName() {
         return invName;
     }
+
     /**
-     * TODO: what this function do.
+     * Get the id of Inventory
      * @author Jiayuan Zhu
-     * TODO: This is a example, param and return goes here.
      */
     public String getInvID(){
         return invID;

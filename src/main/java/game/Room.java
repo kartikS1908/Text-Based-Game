@@ -10,17 +10,16 @@ public class Room {
     private int countOfTreasure;
 
     /**
-     * TODO: what this function do.
+     * Room constructor to initiate a Room object
      * @author Harry Li
-     * TODO: This is a example, param and return goes here.
      */
     public Room(){
 
     }
     /**
-     * TODO: what this function do.
+     * Return the name of a room
      * @author Harry Li
-     * TODO: This is a example, param and return goes here.
+     * @return String the name of a room
      */
     public String getName() {
         return name;
@@ -29,120 +28,82 @@ public class Room {
     /**
      * Set the name of a room
      * @author Harry Li
-     * @param name name of the room
+     * @param name the current name of a room
      */
-
     public void setName(String name) {
         this.name = name;
     }
     /**
-     * TODO: what this function do.
+     * Return the enemy in a room
      * @author Harry Li
-     * TODO: This is a example, param and return goes here.
-     */
-    public String getDescription() {
-        return description;
-    }
-    /**
-     * TODO: what this function do.
-     * @author Harry Li
-     * TODO: This is a example, param and return goes here.
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    /**
-     * TODO: what this function do.
-     * @author Harry Li
-     * TODO: This is a example, param and return goes here.
+     * @return Enemy the enemy in a room
      */
     public Enemy getEnemy() {
         return enemy;
     }
     /**
-     * TODO: what this function do.
+     * Set a new enemy in a room
      * @author Harry Li
-     * TODO: This is a example, param and return goes here.
+     * @return Enemy the enemy to be set in a room
      */
     public void setEnemy(Enemy enemy) {
         this.enemy = enemy;
     }
     /**
-     * TODO: what this function do.
+     * Return the count of treasures in a room
      * @author Harry Li
-     * TODO: This is a example, param and return goes here.
+     * @return int the count of treasures in a room
      */
     public int getCountOfTreasure() {
         return countOfTreasure;
     }
     /**
-     * TODO: what this function do.
+     * Set the current count of treasures in a room
      * @author Harry Li
-     * TODO: This is a example, param and return goes here.
+     * @param countOfTreasure the current count of treasures in a room
      */
     public void setCountOfTreasure(int countOfTreasure) {
         this.countOfTreasure = countOfTreasure;
     }
     /**
-     * TODO: what this function do.
+     * Return the weapon in a room
      * @author Harry Li
-     * TODO: This is a example, param and return goes here.
+     * @return Weapon the weapon in a room
      */
     public Weapon getWeapon() {
         return weapon;
     }
     /**
-     * TODO: what this function do.
+     * Set the weapon in a room
      * @author Harry Li
-     * TODO: This is a example, param and return goes here.
+     * @param weapon the new weapon
      */
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
     /**
-     * TODO: what this function do.
+     * Return the inventory in a room
      * @author Harry Li
-     * TODO: This is a example, param and return goes here.
+     * @return Inventory the inventory in a room
      */
     public Inventory getInventory() {
         return this.inventory;
     }
     /**
-     * TODO: what this function do.
+     * Set the inventory in a room
      * @author Harry Li
-     * TODO: This is a example, param and return goes here.
+     * @param inventory the new inventory in a room
      */
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
     /**
-     * TODO: what this function do.
+     * Override toString method so that it returns the first three letters of a room's name
      * @author Harry Li
-     * TODO: This is a example, param and return goes here.
+     * @return String the first three letters of a room's name
      */
     @Override
     public String toString() {
         return this.name.substring(0, 3);
-    }
-    /**
-     * TODO: what this function do.
-     * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
-     */
-    public String detailedToString()
-    {
-        String weaponStr,inventoryStr,enemyStr;
-        if(this.weapon==null){ weaponStr = "No weapon here";}
-        else weaponStr = weapon.toString();
-
-        if(this.enemy==null) enemyStr = "No enemy here";
-        else enemyStr = enemy.toString();
-
-        if(this.inventory==null) inventoryStr = "No inventory item here";
-        else inventoryStr = inventory.getDes();
-
-        return "Room name is " + name + "\n" + "Weapon you can find in this room is :"+ "\n" + weaponStr + "\n" +
-                "Inventory item in this room is : " + "\n" + inventoryStr + "\n" + "Enemy details are as follows: " + "\n" + enemyStr +
-                "\n" + "Treasure amount in this room is :" + countOfTreasure;
     }
 }

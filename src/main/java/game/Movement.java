@@ -5,20 +5,21 @@ public class Movement {
     private Character player;
 
     /**
-     * TODO: what this function do.
+     * Movement constructor to initiate a Movement object for moving a player within the map
      * @author Harry Li
      * @author Xilai Wang
-     * TODO: This is a example, param and return goes here.
+     * @param player the current player
+     * @param map the current map
      */
     public Movement(Character player, Map map){
         this.player = player;
         this.map = map;
     }
     /**
-     * TODO: what this function do.
+     * Move the player according to specified direction
      * @author Harry Li
      * @author Xilai Wang
-     * TODO: This is a example, param and return goes here.
+     * @param direction the direction to move the player
      */
     public void move(String direction){
         int currentX = this.player.getCurrentX();

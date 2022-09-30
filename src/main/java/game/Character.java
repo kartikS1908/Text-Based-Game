@@ -1,6 +1,6 @@
 package game;
 
-import game.Bag.BagList;
+import game.Bag.Bag;
 import game.Bag.Weapon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,7 +16,7 @@ public class Character {
     private String dialogue;
     int HP, stamina, charID, treasureCurr;
     private int currentX, currentY;
-    private BagList bag;
+    private Bag bag;
 
     /**
      * create character
@@ -40,7 +40,7 @@ public class Character {
         this.currentY = 0;
         this.treasureCurr = 0;
         this.dialogue = dialogue;
-        this.bag = new BagList(5);
+        this.bag = new Bag(5);
         this.introduction = "Individual resume：Your name is " + name + ". " + dialogue;
         System.out.println("MaxHP：" + maxHP + "， current HP：" + HP + "，is alive：" + isAlive + " Bag：Nothing!");
         System.out.println(this.introduction);
@@ -187,17 +187,17 @@ public class Character {
         return treasureCurr;
     }
     /**
-     * TODO: what this function do.
-     * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * Return the current x position of a player
+     * @author Harry Li
+     * @return int current x position of a player
      */
     public int getCurrentX() {
         return currentX;
     }
     /**
-     * TODO: what this function do.
-     * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * Return the current y position of a player
+     * @author Harry Li
+     * @return int current y position of a player
      */
     public int getCurrentY() {
         return currentY;
@@ -254,8 +254,8 @@ public class Character {
      * @param index the index of the inventory that is used by character
      */
     public void useInventory(int index) {
-        BagList bagList = this.bag;
-        Inventory inventory = bagList.getInventories().get(index - 1);
+        Bag bag = this.bag;
+        Inventory inventory = bag.getInventories().get(index - 1);
         int currentHP = this.HP;
 
         if (inventory.getInvID().equals("h1") || inventory.getInvID().equals("h2")) {
@@ -269,15 +269,15 @@ public class Character {
         } else {
             this.stamina += inventory.getAmount();
         }
-        bagList.dropInventory(index);
+        bag.dropInventory(index);
 
     }
     /**
-     * TODO: what this function do.
-     * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * Return a player's bag
+     * @author Harry Li
+     * @return Bag the player's bag
      */
-    public BagList getBag() {
+    public Bag getBag() {
         return bag;
     }
     /**
@@ -285,7 +285,7 @@ public class Character {
      * @author Xilai Wang
      * @param bag A BagList
      */
-    public void setBag(BagList bag) {
+    public void setBag(Bag bag) {
         this.bag = bag;
     }
 }
