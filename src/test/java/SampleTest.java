@@ -116,9 +116,13 @@ public class SampleTest {
         Weapon test_weapon2 = new Weapon("test2 weapon", 1, 500);
         Character player = new Character("abc", test_weapon1, 0, null, 100);
         Enemy enemy = new Enemy(0, "cba", test_weapon2, null);
+        enemy.setHP(100);
+        player.setHP(100);
         enemy.attack(player);
         assertEquals(0, player.getHP());
 
+        enemy.setHP(100);
+        player.setHP(100);
         player.attack(enemy);
         assertEquals(0, enemy.getHP());
     }
