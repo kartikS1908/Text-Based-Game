@@ -91,7 +91,9 @@ public class Enemy {
      */
     public void attack(Character player)
     {
-        player.setHP(Math.max(player.getHP() - this.weapon.getAttack(), 0));
+        if (this.HP != 0) {
+            player.setHP(Math.max(player.getHP() - this.weapon.getAttack(), 0));
+        }
     }
     /**
      * TODO: what this function do.

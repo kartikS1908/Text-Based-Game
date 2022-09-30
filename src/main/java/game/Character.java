@@ -29,12 +29,12 @@ public class Character {
      * @param charID character id
      * @param dialogue dialogue
      */
-    public Character(String name, Weapon weapon, int charID, String dialogue) {
+    public Character(String name, Weapon weapon, int charID, String dialogue, int MaxHP) {
         this.charID = charID;
         this.name = name;
         this.weapon = weapon;
         System.out.println("【System:】:The role was created successfully. Your name is " + name);
-        this.maxHP = 100;
+        this.maxHP = MaxHP;
         this.HP = maxHP;
         this.stamina = 10;
         this.isAlive = true;
@@ -80,9 +80,10 @@ public class Character {
         if (choice <= index && choice > 0) {
             JSONArray character = (JSONArray) gameObj.get("ch" + choice);
             JSONArray weapon = (JSONArray) gameObj.get(character.get(1));
+            int MaxHP = Integer.parseInt(gameObj.get("Max_HP").toString());
             Weapon w = new Weapon(String.valueOf(weapon.get(0)),Integer.parseInt(String.valueOf(character.get(1)).substring(1)),
                     Integer.parseInt(String.valueOf(weapon.get(1))));
-            c = new Character(String.valueOf(character.get(0)),w,choice,String.valueOf(character.get(2)));
+            c = new Character(String.valueOf(character.get(0)),w,choice,String.valueOf(character.get(2)), MaxHP);
             System.out.println("********************");
         }
         else {
@@ -219,9 +220,9 @@ public class Character {
      */
     public void attack(Enemy enemy)
     {
-
-        enemy.setHP(Math.max(enemy.getHP() - this.weapon.getAttack(), 0));
-
+        if (this.HP != 0) {
+            enemy.setHP(Math.max(enemy.getHP() - this.weapon.getAttack(), 0));
+        }
     }
     /**
      * TODO: what this function do.

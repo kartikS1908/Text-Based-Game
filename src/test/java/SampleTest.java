@@ -29,7 +29,7 @@ public class SampleTest {
 
     @Test
     public void testMap1() {
-        Character player = new Character("abc", null, 0, null);
+        Character player = new Character("abc", null, 0, null, 100);
         // TODO: Harry
         // room overlapping
     }
@@ -38,7 +38,7 @@ public class SampleTest {
     public void testRoom1() {
         // Test if getCurrentPosition can return the Room or null after a move
         gameObj = (JSONObject) gameObj.get("EASY");
-        Character player = new Character("abc", null, 0, null);
+        Character player = new Character("abc", null, 0, null, 100);
         Map map = new Map(gameObj, player);
     
         player.setCurrentPosition(2, 0); // There is a room in map (2,0)
@@ -52,7 +52,7 @@ public class SampleTest {
     public void testMovement1() {
         // Test if the player can move out of the map
         gameObj = (JSONObject) gameObj.get("EASY");
-        Character player = new Character("abc", null, 0, null);
+        Character player = new Character("abc", null, 0, null, 100);
         Map map = new Map(gameObj, player);
 
         player.setCurrentPosition(0, 0);
@@ -68,7 +68,7 @@ public class SampleTest {
     @Test
     public void testMovement2() {
         gameObj = (JSONObject) gameObj.get("EASY");
-        Character player = new Character("abc", null, 0, null);
+        Character player = new Character("abc", null, 0, null, 100);
         Map map = new Map(gameObj, player);
         // TODO: Harry
         // Stamina + -
@@ -76,20 +76,20 @@ public class SampleTest {
 
     @Test
     public void testInventory1() {
-        Character player = new Character("abc", null, 0, null);
+        Character player = new Character("abc", null, 0, null, 100);
         // TODO: Jiayuan
         // Size logic
     }
 
     @Test
     public void testCharacter1() {
-        Character player = new Character("abc", null, 0, null);
+        Character player = new Character("abc", null, 0, null, 100);
         // TODO: Jiayuan
     }
 
     @Test
     public void testBag1() {
-        Character player = new Character("abc", null, 0, null);
+        Character player = new Character("abc", null, 0, null, 100);
         // TODO: Dehao
         // Size logic
     }
@@ -99,7 +99,7 @@ public class SampleTest {
         // Test if attack function works when the attack in Correct value range
         Weapon test_weapon1 = new Weapon("test1 weapon", 0, 10);
         Weapon test_weapon2 = new Weapon("test2 weapon", 1, 30);
-        Character player = new Character("abc", test_weapon1, 0, null);
+        Character player = new Character("abc", test_weapon1, 0, null,100);
         Enemy enemy = new Enemy(0, "cba", test_weapon2, null);
         enemy.attack(player);
         assertEquals(70, player.getHP());
@@ -114,7 +114,7 @@ public class SampleTest {
         // Design: When player or enemy HP is lower than 100, it will still be 0 HP
         Weapon test_weapon1 = new Weapon("test1 weapon", 0, 500);
         Weapon test_weapon2 = new Weapon("test2 weapon", 1, 500);
-        Character player = new Character("abc", test_weapon1, 0, null);
+        Character player = new Character("abc", test_weapon1, 0, null, 100);
         Enemy enemy = new Enemy(0, "cba", test_weapon2, null);
         enemy.attack(player);
         assertEquals(0, player.getHP());
@@ -129,7 +129,7 @@ public class SampleTest {
         // Design: Player and enemy attack only depend on weapon ATK
         Weapon test_weapon1 = new Weapon("test1 weapon", 0, 0);
         Weapon test_weapon2 = new Weapon("test2 weapon", 1, 0);
-        Character player = new Character("abc", test_weapon1, 0, null);
+        Character player = new Character("abc", test_weapon1, 0, null, 100);
         Enemy enemy = new Enemy(0, "cba", test_weapon2, null);
         enemy.attack(player);
         assertEquals(100, player.getHP());
@@ -139,9 +139,28 @@ public class SampleTest {
     }
 
     @Test
+    public void testFight4() {
+        // Test if attack function works when player or enemy HP is 0
+        // Design: Player and enemy can not attack when their HP reach to 0
+        Weapon test_weapon1 = new Weapon("test1 weapon", 0, 500);
+        Weapon test_weapon2 = new Weapon("test2 weapon", 1, 500);
+        Character player = new Character("abc", test_weapon1, 0, null, 100);
+        Enemy enemy = new Enemy(0, "cba", test_weapon2, null);
+        player.setHP(100);
+        enemy.setHP(0);
+        enemy.attack(player);
+        assertEquals(100, player.getHP());
+
+        enemy.setHP(100);
+        player.setHP(0);
+        player.attack(enemy);
+        assertEquals(100, enemy.getHP());
+    }
+
+    @Test
     public void testPotion1() {
         // Test if useInventory function works when the potion amount in Correct value range
-        Character player = new Character("abc", null, 0, null);
+        Character player = new Character("abc", null, 0, null, 100);
 
         player.setHP(10);
         player.setStamina(1);
@@ -178,7 +197,7 @@ public class SampleTest {
     @ Test
     public void testPotion2() {
         // Test if useInventory function works when the potion amount is zero
-        Character player = new Character("abc", null, 0, null);
+        Character player = new Character("abc", null, 0, null, 100);
 
         player.setHP(10);
         player.setStamina(1);
@@ -215,7 +234,7 @@ public class SampleTest {
     @ Test
     public void testPotion3() {
         // Test if useInventory function works when the potion amount is out of bound(MaxHP)
-        Character player = new Character("abc", null, 0, null);
+        Character player = new Character("abc", null, 0, null, 100);
 
         player.setHP(10);
         player.setStamina(1);
