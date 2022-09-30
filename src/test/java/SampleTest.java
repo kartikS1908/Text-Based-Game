@@ -1,3 +1,4 @@
+import org.json.simple.JSONArray;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -75,16 +76,66 @@ public class SampleTest {
     }
 
     @Test
-    public void testInventory1() {
-        Character player = new Character("abc", null, 0, null, 100);
-        // TODO: Jiayuan
-        // Size logic
+    public void testInventoryDes() {
+        // Tests for get inventory description
+        Inventory inv1 = new Inventory("h1", 10);
+        Inventory inv2 = new Inventory("h2", 20);
+        Inventory inv3 = new Inventory("s1", 5);
+        Inventory inv4 = new Inventory("s2", 10);
+        assertEquals("Small Healing Potion: Add 10 HP", inv1.getDes());
+        assertEquals("Big Healing Potion: Add 20 HP", inv2.getDes());
+        assertEquals("Small Stamina Booster: Add 5 Stamina", inv3.getDes());
+        assertEquals("Big Stamina Booster: Add 10 Stamina", inv4.getDes());
     }
 
     @Test
+    public void testNullInventoryDes() {
+        // Tests for get description for incorrect inventory
+        Inventory inv1 = new Inventory("h3",10);
+        assertEquals("", inv1.getDes());
+    }
+
+
+    @Test
     public void testCharacter1() {
-        Character player = new Character("abc", null, 0, null, 100);
-        // TODO: Jiayuan
+        // Tests for create a character
+        Character character = new Character("abc",null,1,"Hello", 10);
+        assertEquals(1, character.getCharID());
+        assertEquals("abc", character.getName());
+        assertEquals(null, character.getWeapon());
+        assertEquals(10,character.getHP());
+        assertEquals(10,character.getStamina());
+        assertEquals(0,character.getCurrentX());
+        assertEquals(0,character.getCurrentY());
+        assertEquals(0,character.getTreasureCurr());
+        assertEquals("Hello",character.getDialogue());
+        assertEquals(0,character.getBag().getInventories().size());
+        assertEquals("Individual resume：Your name is abc. Hello",character.getIntroduction());
+    }
+
+    @Test
+    public void testCharacter2() {
+        // Tests for create a character from game engine
+        gameObj = (JSONObject) gameObj.get("EASY");
+        JSONArray character = (JSONArray) gameObj.get("ch1");
+        JSONArray weapon = (JSONArray) gameObj.get(character.get(1));
+        int MaxHP = Integer.parseInt(gameObj.get("Max_HP").toString());
+        Weapon w = new Weapon(String.valueOf(weapon.get(0)),Integer.parseInt(String.valueOf(character.get(1)).substring(1)),
+                Integer.parseInt(String.valueOf(weapon.get(1))));
+        Character chara = new Character(String.valueOf(character.get(0)),w,1,String.valueOf(character.get(2)), MaxHP);
+        assertEquals(1, chara.getCharID());
+        assertEquals("Rafael", chara.getName());
+        assertEquals("BladesOfFury", chara.getWeapon().getName());
+        assertEquals(20, chara.getWeapon().getAttack());
+        assertEquals(1, chara.getWeapon().getID());
+        assertEquals(100,chara.getHP());
+        assertEquals(10,chara.getStamina());
+        assertEquals(0,chara.getCurrentX());
+        assertEquals(0,chara.getCurrentY());
+        assertEquals(0,chara.getTreasureCurr());
+        assertEquals("I will kill you, you Monster!!!",chara.getDialogue());
+        assertEquals(0,chara.getBag().getInventories().size());
+        assertEquals("Individual resume：Your name is Rafael. I will kill you, you Monster!!!",chara.getIntroduction());
     }
 
     @Test
