@@ -56,6 +56,11 @@ public class Interface {
         Movement currentMove = new Movement(player, map);
         currentMove.move(direction);
 
+        if (player.getStamina() <= 0) {
+            System.out.println("You run out of stamina please try a new game!!!!");
+            Main.myRun();
+        }
+
         Object currentPosition = map.getCurrentPosition();
         if (currentPosition != null) {
             map.setNumOfRooms(map.getNumOfRooms() - 1);
