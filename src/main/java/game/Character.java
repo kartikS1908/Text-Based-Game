@@ -53,9 +53,8 @@ public class Character {
      * @return character details
      */
     public static Character createChar(JSONObject gameObj) {
-        System.out.println("char" + gameObj);
         Character c = null;
-        System.out.println("******************** \n(｡･∀･)ﾉﾞHi ！Welcome to the game！please select your Character (｡･∀･)ﾉ \n");
+        System.out.println("******************** \nHi ！Welcome to the game！please select your Character \n");
         // choose character
         JSONArray charList = (JSONArray) gameObj.get("listCharIDs");
         int index = 1;
@@ -180,9 +179,16 @@ public class Character {
     public void useInventory(int index) {
         BagList bagList = this.bag;
         Inventory inventory = bagList.getInventories().get(index - 1);
+        int currentHP = this.HP;
 
         if (inventory.getInvID().equals("h1") || inventory.getInvID().equals("h2")) {
-            this.HP += inventory.getAmount();
+            currentHP += inventory.getAmount();
+            if (currentHP > this.maxHP) {
+                System.out.println("You are already in Max HP, the extra heal will vanished");
+                this.HP = this.maxHP;
+            } else {
+                this.HP = currentHP;
+            }
         } else {
             this.stamina += inventory.getAmount();
         }

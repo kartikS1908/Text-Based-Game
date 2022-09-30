@@ -19,6 +19,8 @@ public class Movement {
                     System.out.println("Warning! You will cross the boundary");
                 }else{
                     currentY++;
+                    this.player.setStamina(currentStamina - 1);
+                    System.out.println("The current stamina is: " + this.player.stamina);
                 }
             }
             case "w" -> {
@@ -26,6 +28,8 @@ public class Movement {
                     System.out.println("Warning! You will cross the boundary");
                 }else{
                     currentY--;
+                    this.player.setStamina(currentStamina - 1);
+                    System.out.println("The current stamina is: " + this.player.stamina);
                 }
             }
             case "a" -> {
@@ -33,6 +37,8 @@ public class Movement {
                     System.out.println("Warning! You will cross the boundary");
                 }else{
                     currentX--;
+                    this.player.setStamina(currentStamina - 1);
+                    System.out.println("The current stamina is: " + this.player.stamina);
                 }
             }
             case "d" -> {
@@ -40,12 +46,12 @@ public class Movement {
                     System.out.println("Warning! You will cross the boundary");
                 }else{
                     currentX++;
+                    this.player.setStamina(currentStamina - 1);
+                    System.out.println("The current stamina is: " + this.player.stamina);
                 }
             }
 
         }
-
-        this.player.setStamina(currentStamina - 1);
         this.player.setCurrentPosition(currentX, currentY);
     }
 }
