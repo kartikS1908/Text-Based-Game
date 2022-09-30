@@ -1,6 +1,6 @@
 package game;
 
-import game.Bag.BagList;
+import game.Bag.Bag;
 import game.Bag.Weapon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,11 +16,12 @@ public class Character {
     private String dialogue;
     int HP, stamina, charID, treasureCurr;
     private int currentX, currentY;
-    private BagList bag;
+    private Bag bag;
 
     /**
      * create character
-     *
+     * @author Kartik Sharma
+     * @author Jiayuan Zhu
      * @param name name of character
      * @param weapon weapon owned by character
      * @param charID character id
@@ -39,7 +40,7 @@ public class Character {
         this.currentY = 0;
         this.treasureCurr = 0;
         this.dialogue = dialogue;
-        this.bag = new BagList(5);
+        this.bag = new Bag(5);
         this.introduction = "Individual resume：Your name is " + name + ". " + dialogue;
         System.out.println("MaxHP：" + maxHP + "， current HP：" + HP + "，is alive：" + isAlive + " Bag：Nothing!");
         System.out.println(this.introduction);
@@ -47,8 +48,8 @@ public class Character {
 
 
     /**
-     * choose character by player and create character
-     *
+     * player chooses character and create character
+     * @author Jiayuan Zhu
      * @param gameObj game engine that contains details of the game
      * @return character details
      */
@@ -88,79 +89,149 @@ public class Character {
         return c;
     }
 
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public void setName(String name) {
         this.name = name;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public void setHP(int HP) {
         this.HP = HP;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public void setCharID(int charID) {
         this.charID = charID;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public void setStamina(int stamina) {
         this.stamina = stamina;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public void setTreasureCurr(int treasureCurr) {
         this.treasureCurr = treasureCurr;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public String getName() {
         return name;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public int getHP() {
         return HP;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public Weapon getWeapon() {
         return weapon;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public int getCharID() {
         return charID;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public int getStamina() {
         return stamina;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public int getTreasureCurr() {
         return treasureCurr;
     }
-
+    /**
+     * Return the current x position of a player
+     * @author Harry Li
+     * @return int current x position of a player
+     */
     public int getCurrentX() {
         return currentX;
     }
-
+    /**
+     * Return the current y position of a player
+     * @author Harry Li
+     * @return int current y position of a player
+     */
     public int getCurrentY() {
         return currentY;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public String getIntroduction()
     {return introduction;}
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public void attack(Enemy enemy)
     {
 
         enemy.setHP(Math.max(enemy.getHP() - this.weapon.getAttack(), 0));
 
     }
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public String getDialogue()
     {
         return dialogue;
     }
     /**
      * Update character position in map
-     *
+     * @author Harry Li
+     * @author Xilai Wang
      * @param currentX updated x position
      * @param currentY updated y position
      */
@@ -173,12 +244,17 @@ public class Character {
     /**
      * Use inventory in its bag to add HP (h1/h2) or Stamina(s1/s2)
      *
+     * @author Harry Li
+     * @author Kartik Sharma
+     * @author Jiayuan Zhu
+     * @author Dehao Liu
+     * @author Xilai Wang
      *
      * @param index the index of the inventory that is used by character
      */
     public void useInventory(int index) {
-        BagList bagList = this.bag;
-        Inventory inventory = bagList.getInventories().get(index - 1);
+        Bag bag = this.bag;
+        Inventory inventory = bag.getInventories().get(index - 1);
         int currentHP = this.HP;
 
         if (inventory.getInvID().equals("h1") || inventory.getInvID().equals("h2")) {
@@ -192,11 +268,15 @@ public class Character {
         } else {
             this.stamina += inventory.getAmount();
         }
-        bagList.dropInventory(index);
+        bag.dropInventory(index);
 
     }
-
-    public BagList getBag() {
+    /**
+     * Return a player's bag
+     * @author Harry Li
+     * @return Bag the player's bag
+     */
+    public Bag getBag() {
         return bag;
     }
 }

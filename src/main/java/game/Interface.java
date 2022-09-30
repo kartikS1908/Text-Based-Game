@@ -1,23 +1,35 @@
 package game;
 
-import game.Bag.BagList;
+import game.Bag.Bag;
 import game.Bag.CMUtility;
 import org.json.simple.JSONObject;
-import org.json.simple.*;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.List;
+
 import java.util.Scanner;
 
 public class Interface {
     private Scanner scanner;
     private JSONObject gameObj;
 
+    /**
+     * TODO: what this function do.
+     * @author Dehao Liu
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public Interface(JSONObject gameObj) {
         this.gameObj = gameObj;
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * TODO: what this function do.
+     * @author Dehao Liu
+     * @author Harry Li
+     * @author Xilai Wang
+     * @author Jiayuan Zhu
+     * TODO: This is a example, param and return goes here.
+     */
     public void run() {
         /* Configure Player Information Start */
         Character player = Character.createChar(this.gameObj); // Create a character
@@ -34,30 +46,37 @@ public class Interface {
             System.out.println("1 Open bag");
             System.out.println("2 View map");
             System.out.println("3 Move player");
-            System.out.println("4 to Save and Quit");
-            System.out.println("5 Exit");
+            System.out.println("4 Exit");
             char menu = CMUtility.readMenuSelection();
             switch (menu) {
-                case '1' -> interactWithBag(player);
-                case '2' -> map.printMap();
-                case '3' -> movePlayer(player, map);
-                case '4' -> {
-                    saveGame(player,map);
-                    Main.myRun();
-                }
-                case '5' -> {
+                case '1':
+                    interactWithBag(player);
+                    break;
+                case '2':
+                    map.printMap();
+                    break;
+                case '3':
+                    movePlayer(player, map);
+                    break;
+                case '4':
                     System.out.println("(Y/N)");
                     char isExit = CMUtility.readConfirmSelection();
                     if (isExit == 'Y') {
                         isFlag = false;
                     }
-                }
+                    break;
             }
 
         }
 
     }
 
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public void movePlayer(Character player, Map map) {
         System.out.println("You can move by W (up), S (down), A (left), D (right)");
         String direction = this.scanner.next();
@@ -77,7 +96,11 @@ public class Interface {
         map.printMap();
     }
 
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public void interact(Room room, Character player) {
         System.out.println("Welcome to " + room.getName());
 
@@ -134,7 +157,7 @@ public class Interface {
 
             if (enemy.getHP() == 0) {
                 System.out.println("You were victorious in this battle collect treasure and move to next battle");
-                System.out.println("Press one to collect treasure (if treasure in this room is 0 press any key.)");
+                System.out.println("Press 1 to collect treasure (if treasure in this room is 0 press any key.)");
                 int option = scanner.nextInt();
                 if (option == 1)
                     player.setTreasureCurr(player.getTreasureCurr() + room.getCountOfTreasure());
@@ -144,7 +167,6 @@ public class Interface {
 
             if (player.getHP() == 0) {
                 System.out.println("You have died please try a new game!!!!");
-                System.out.println("-----------------------------------------------------------------------");
                 Main.myRun();
             }
         }
@@ -154,16 +176,23 @@ public class Interface {
         if (player.getTreasureCurr() == 100) {
 
             System.out.println("You have conquered this map try a harder difficulty. If already done with the hard level then you have mastered this game.");
-            System.out.println("-------------------------------------------------------------------------------------------------------");
             Main.myRun();
         }
 
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Dehao Liu
+     * @author Kartik Sharma
+     * @author Xilai Wang
+     * @author Jiayuan Zhu
+     * TODO: This is a example, param and return goes here.
+     */
     public void  interactWithBag(Character player)  {
-        BagList bagList = player.getBag();
-        System.out.println(bagList.toString());
-        if(bagList.getInventories().size() != 0){
+        Bag bag = player.getBag();
+        System.out.println(bag.toString());
+        if(bag.getInventories().size() != 0){
             System.out.println("Do you want to use (1) or drop (2) an item in the bag?");
             int choice = scanner.nextInt();
             while(choice != 1 && choice != 2){
@@ -173,7 +202,7 @@ public class Interface {
             if(choice == 1){
                 System.out.println("Enter the number to use an item");
                 int choiceOfIndex = scanner.nextInt();
-                while (!bagList.checkIsIndexValid(choiceOfIndex)){
+                while (!bag.checkIsIndexValid(choiceOfIndex)){
                     System.out.println("Wrong number, please again");
                     System.out.println("Enter the number to use an item");
                     choiceOfIndex = scanner.nextInt();
@@ -185,35 +214,16 @@ public class Interface {
             } else {
                 System.out.println("Enter the number to drop an item");
                 int choiceOfIndex = scanner.nextInt();
-                while (!bagList.checkIsIndexValid(choiceOfIndex)){
+                while (!bag.checkIsIndexValid(choiceOfIndex)){
                     System.out.println("Wrong number, please again!");
                     System.out.println("Enter the number to drop an item");
                     choiceOfIndex = scanner.nextInt();
                 }
 
-                bagList.dropInventory(choiceOfIndex);
+                bag.dropInventory(choiceOfIndex);
             }
         }
 
-
-    }
-
-    public static void saveGame(Character player,Map map) {
-        String path = "./src/Configs/saveFile.json";
-        JSONObject json = new JSONObject();
-        json.put("ID",player.getCharID());
-        json.put("Weapon",player.getWeapon().getID());
-        json.put("HP",player.getHP());
-        json.put("Stamina",player.getStamina());
-        json.put("Y",player.getCurrentX());
-        json.put("X",player.getCurrentY());
-        json.put("Treasure",player.getTreasureCurr());
-        json.put("Bag",player.getBag().getIDs());
-        try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
-            out.write(json.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 }
