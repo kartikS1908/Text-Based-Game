@@ -22,7 +22,13 @@ public class Map {
     private Character player;
     private int playerX, playerY;
 
-
+    /**
+     * A map constructor to initiate a map object
+     * @author Harry Li
+     * @author Xilai Wang
+     * @param settings a json object read from the game engine
+     * @param player a current player object
+     */
     public Map(JSONObject settings, Character player){
         this.settings = settings;
         this.numOfRooms = Integer.parseInt(settings.get("numRooms").toString());
@@ -31,12 +37,26 @@ public class Map {
         this.XMax = xSize;
         this.YMax = ySize;
         this.player = player;
-        this.playerX = player.getCurrentY(); // !!!!
-        this.playerY = player.getCurrentX(); // !!!!
+        /*
+        * Due to difference in the array indexing convention and our perception with Cartesian coordinate system,
+        * we assign the player's X coordinate to playerY variable and the player's Y coordinate to playerX variable
+        * in the Map class so that the code is more intuitive when dealing with change of position or movement which
+        * also assists in future maintenance.
+         * */
+        this.playerX = player.getCurrentY();
+        this.playerY = player.getCurrentX();
         this.map = createMap(xSize, ySize);
         printMap();
     }
 
+    /**
+     * Create a two-dimension array to represent the map
+     * @author Harry Li
+     * @author Xilai Wang
+     * @param xSizeOfGrid height of the map
+     * @param ySizeOfGrid width of the map
+     * @return Object[][] the 2d array for the map
+     */
     private Object[][] createMap(int xSizeOfGrid, int ySizeOfGrid){
         Object[][] map = new Object[xSizeOfGrid][ySizeOfGrid];
         fillMap(map);
@@ -46,33 +66,61 @@ public class Map {
         this.prevPosition = new int[]{x, y};
         return map;
     }
+    /**
+     * Print the map
+     * @author Harry Li
+     * @author Xilai Wang
+     */
     public void printMap(){
         updateMap();
         for(Object[] row : this.map){
             System.out.println(Arrays.toString(row));
         }
     }
-
+    /**
+     * Update the map
+     * @author Harry Li
+     * @author Xilai Wang
+     */
     private void updateMap(){
         updatePlayerPosition();
         this.map[this.prevPosition[0]][this.prevPosition[1]] = "---";
         this.map[this.playerX][this.playerY] = "￣▽￣";
         this.prevPosition = new int[]{this.playerX, this.playerY};
     }
-
+    /**
+     * Return the height of the map
+     * @author Harry Li
+     * @author Xilai Wang
+     * @return int the height of the map
+     */
     public int getXMax() {
         return XMax;
     }
-
+    /**
+     * Return the length of the map
+     * @author Harry Li
+     * @author Xilai Wang
+     * @return int the length of the map
+     */
     public int getYMax() {
         return YMax;
     }
-
+    /**
+     * Update the player position in the map
+     * @author Harry Li
+     * @author Xilai Wang
+     */
     private void updatePlayerPosition(){
         this.playerX = player.getCurrentY();
         this.playerY = player.getCurrentX();
     }
-
+    /**
+     * Get the current position in the map
+     * @author Harry Li
+     * @author Xilai Wang
+     * @return Object the current position
+     */
     public Object getCurrentPosition(){
         updatePlayerPosition();
         Object currentPosition = this.map[this.playerX][this.playerY];
@@ -81,9 +129,13 @@ public class Map {
         }
         return null;
     }
-
+    /**
+     * Fill the map with "---" and Room for the empty map created before
+     * @author Harry Li
+     * @author Xilai Wang
+     * @param map the empty map created before
+     */
     private void fillMap(Object[][] map){
-//      First fill the map by '*'
         for(int i = 0; i < map.length; i++){
             Arrays.fill(map[i], "---");
         }
@@ -160,15 +212,30 @@ public class Map {
 
 
     }
-
+    /**
+     * Return the total number of rooms in the map
+     * @author Harry Li
+     * @author Xilai Wang
+     * @return int the number of rooms
+     */
     public int getNumOfRooms() {
         return numOfRooms;
     }
-
+    /**
+     * Set the total number of rooms
+     * @author Harry Li
+     * @author Xilai Wang
+     * @param numOfRooms the current total number of rooms
+     */
     public void setNumOfRooms(int numOfRooms) {
         this.numOfRooms = numOfRooms;
     }
-
+    /**
+     * Return the two-dimension array for the map
+     * @author Harry Li
+     * @author Xilai Wang
+     * @return Object[][] the two-dimension array for the map
+     */
     public Object[][] getMap(){
         return this.map;
     }

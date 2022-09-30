@@ -9,91 +9,102 @@ public class Room {
     private Enemy enemy;
     private int countOfTreasure;
 
-
-    public Room(String name, String description, Weapon weapon, Inventory inventory, Enemy enemy, int countOfTreasure){
-        this.name = name;
-        this.description = description;
-        this.weapon = weapon;
-        this.inventory = inventory;
-        this.countOfTreasure = countOfTreasure;
-        this.enemy = enemy;
-    }
-
+    /**
+     * Room constructor to initiate a Room object
+     * @author Harry Li
+     */
     public Room(){
 
     }
-
+    /**
+     * Return the name of a room
+     * @author Harry Li
+     * @return String the name of a room
+     */
     public String getName() {
         return name;
     }
 
     /**
      * Set the name of a room
-     * @param name name of the room
+     * @author Harry Li
+     * @param name the current name of a room
      */
-
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
+    /**
+     * Return the enemy in a room
+     * @author Harry Li
+     * @return Enemy the enemy in a room
+     */
     public Enemy getEnemy() {
         return enemy;
     }
-
+    /**
+     * Set a new enemy in a room
+     * @author Harry Li
+     * @return Enemy the enemy to be set in a room
+     */
     public void setEnemy(Enemy enemy) {
         this.enemy = enemy;
     }
-
+    /**
+     * Return the count of treasures in a room
+     * @author Harry Li
+     * @return int the count of treasures in a room
+     */
     public int getCountOfTreasure() {
         return countOfTreasure;
     }
-
+    /**
+     * Set the current count of treasures in a room
+     * @author Harry Li
+     * @param countOfTreasure the current count of treasures in a room
+     */
     public void setCountOfTreasure(int countOfTreasure) {
         this.countOfTreasure = countOfTreasure;
     }
+    /**
+     * Return the weapon in a room
+     * @author Harry Li
+     * @return Weapon the weapon in a room
+     */
     public Weapon getWeapon() {
         return weapon;
     }
+    /**
+     * Set the weapon in a room
+     * @author Harry Li
+     * @param weapon the new weapon
+     */
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
-
+    /**
+     * Return the inventory in a room
+     * @author Harry Li
+     * @return Inventory the inventory in a room
+     */
     public Inventory getInventory() {
         return this.inventory;
     }
-
+    /**
+     * Set the inventory in a room
+     * @author Harry Li
+     * @param inventory the new inventory in a room
+     */
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
-
+    /**
+     * Override toString method so that it returns the first three letters of a room's name
+     * @author Harry Li
+     * @return String the first three letters of a room's name
+     */
     @Override
     public String toString() {
         return this.name.substring(0, 3);
     }
 
-    public String detailedToString()
-    {
-        String weaponStr,inventoryStr,enemyStr;
-        if(this.weapon==null){ weaponStr = "No weapon here";}
-        else weaponStr = weapon.toString();
-
-        if(this.enemy==null) enemyStr = "No enemy here";
-        else enemyStr = enemy.toString();
-
-        if(this.inventory==null) inventoryStr = "No inventory item here";
-        else inventoryStr = inventory.getDes();
-
-        return "Room name is " + name + "\n" + "Weapon you can find in this room is :"+ "\n" + weaponStr + "\n" +
-                "Inventory item in this room is : " + "\n" + inventoryStr + "\n" + "Enemy details are as follows: " + "\n" + enemyStr +
-                "\n" + "Treasure amount in this room is :" + countOfTreasure;
-    }
 }

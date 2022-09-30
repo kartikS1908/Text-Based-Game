@@ -1,6 +1,6 @@
 package game;
 
-import game.Bag.BagList;
+import game.Bag.Bag;
 import game.Bag.CMUtility;
 import org.json.simple.JSONObject;
 
@@ -10,11 +10,26 @@ public class Interface {
     private Scanner scanner;
     private JSONObject gameObj;
 
+    /**
+     * TODO: what this function do.
+     * @author Dehao Liu
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public Interface(JSONObject gameObj) {
         this.gameObj = gameObj;
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * TODO: what this function do.
+     * @author Dehao Liu
+     * @author Harry Li
+     * @author Xilai Wang
+     * @author Jiayuan Zhu
+     * TODO: This is a example, param and return goes here.
+     */
     public void run() {
         /* Configure Player Information Start */
         Character player = Character.createChar(this.gameObj); // Create a character
@@ -56,6 +71,12 @@ public class Interface {
 
     }
 
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public void movePlayer(Character player, Map map) {
         System.out.println("You can move by W (up), S (down), A (left), D (right)");
         String direction = this.scanner.next();
@@ -75,7 +96,11 @@ public class Interface {
         map.printMap();
     }
 
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public void interact(Room room, Character player) {
         System.out.println("Welcome to " + room.getName());
 
@@ -132,7 +157,7 @@ public class Interface {
 
             if (enemy.getHP() == 0) {
                 System.out.println("You were victorious in this battle collect treasure and move to next battle");
-                System.out.println("Press one to collect treasure (if treasure in this room is 0 press any key.)");
+                System.out.println("Press 1 to collect treasure (if treasure in this room is 0 press any key.)");
                 int option = scanner.nextInt();
                 if (option == 1)
                     player.setTreasureCurr(player.getTreasureCurr() + room.getCountOfTreasure());
@@ -155,10 +180,19 @@ public class Interface {
         }
 
     }
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Dehao Liu
+     * @author Kartik Sharma
+     * @author Xilai Wang
+     * @author Jiayuan Zhu
+     * TODO: This is a example, param and return goes here.
+     */
     public void  interactWithBag(Character player)  {
-        BagList bagList = player.getBag();
-        System.out.println(bagList.toString());
-        if(bagList.getInventories().size() != 0){
+        Bag bag = player.getBag();
+        System.out.println(bag.toString());
+        if(bag.getInventories().size() != 0){
             System.out.println("Do you want to use (1) or drop (2) an item in the bag?");
             int choice = scanner.nextInt();
             while(choice != 1 && choice != 2){
@@ -168,7 +202,7 @@ public class Interface {
             if(choice == 1){
                 System.out.println("Enter the number to use an item");
                 int choiceOfIndex = scanner.nextInt();
-                while (!bagList.checkIsIndexValid(choiceOfIndex)){
+                while (!bag.checkIsIndexValid(choiceOfIndex)){
                     System.out.println("Wrong number, please again");
                     System.out.println("Enter the number to use an item");
                     choiceOfIndex = scanner.nextInt();
@@ -180,13 +214,13 @@ public class Interface {
             } else {
                 System.out.println("Enter the number to drop an item");
                 int choiceOfIndex = scanner.nextInt();
-                while (!bagList.checkIsIndexValid(choiceOfIndex)){
+                while (!bag.checkIsIndexValid(choiceOfIndex)){
                     System.out.println("Wrong number, please again!");
                     System.out.println("Enter the number to drop an item");
                     choiceOfIndex = scanner.nextInt();
                 }
 
-                bagList.dropInventory(choiceOfIndex);
+                bag.dropInventory(choiceOfIndex);
             }
         }
 
