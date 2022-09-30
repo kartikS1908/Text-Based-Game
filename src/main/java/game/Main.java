@@ -17,10 +17,10 @@ public class Main {
         myRun();
     }
     /**
-     * TODO: what this function do.
+     * read game engine to get all game information, run initial screen to get difficulty and run main menu in Interface
+     *
      * @author Jiayuan Zhu
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
      */
     public static void myRun(){
         Scanner scanner = new Scanner(System.in);
@@ -38,9 +38,11 @@ public class Main {
 
     /**
      * initial screen of game, player is able to start new game, load game or read rules of game
+     *
      * @author Jiayuan Zhu
      * @author Xilai Wang
      * @author Harry Li
+     *
      * @param name Name of Player
      * @param jsonObject game engine
      * @return get details of the game from new game or load game
@@ -78,9 +80,11 @@ public class Main {
 
     /**
      * choose the level of game
+     *
      * @author Jiayuan Zhu
      * @author Xilai Wang
      * @author Harry Li
+     *
      * @param jsonObject game engine
      * @return get details of the game according to chosen level
      */
@@ -195,8 +199,8 @@ public class Main {
 
     /**
      * print rules of the game
+     *
      * @author Jiayuan Zhu
-     * TODO: This is a example, param and return goes here.
      */
     public static void printRules() {
         System.out.println("******************** \nRules of Game");
@@ -213,9 +217,12 @@ public class Main {
                 "You are Dead if your HP decrease to 0. You can use Healing Potion (Inventory) to increase HP.\n");
         System.out.println("Bag\n" +
                 "Inventory are store in bag. You can choose to drop them if it is useless.\n" +
-                "The maximum size of Bag is 4.");
+                "Remember to use healing potion and stamina booster before you enter a room!\n" +
+                "The maximum size of Bag is 5.");
         System.out.println("********************");
     }
+
+
     /**
      * TODO: what this function do.
      * @author Kartik Sharma

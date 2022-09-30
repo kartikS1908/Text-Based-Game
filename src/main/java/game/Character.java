@@ -20,8 +20,10 @@ public class Character {
 
     /**
      * create character
+     *
      * @author Kartik Sharma
      * @author Jiayuan Zhu
+     *
      * @param name name of character
      * @param weapon weapon owned by character
      * @param charID character id
@@ -48,8 +50,10 @@ public class Character {
 
 
     /**
-     * choose character by player and create character
+     * player chooses character and create character
+     *
      * @author Jiayuan Zhu
+     *
      * @param gameObj game engine that contains details of the game
      * @return character details
      */
@@ -243,11 +247,13 @@ public class Character {
 
     /**
      * Use inventory in its bag to add HP (h1/h2) or Stamina(s1/s2)
+     *
      * @author Harry Li
      * @author Kartik Sharma
      * @author Jiayuan Zhu
      * @author Dehao Liu
      * @author Xilai Wang
+     *
      * @param index the index of the inventory that is used by character
      */
     public void useInventory(int index) {
