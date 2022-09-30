@@ -34,22 +34,16 @@ public class Interface {
             System.out.println("4 Exit");
             char menu = CMUtility.readMenuSelection();
             switch (menu) {
-                case '1':
-                    interactWithBag(player);
-                    break;
-                case '2':
-                    map.printMap();
-                    break;
-                case '3':
-                    movePlayer(player, map);
-                    break;
-                case '4':
+                case '1' -> interactWithBag(player);
+                case '2' -> map.printMap();
+                case '3' -> movePlayer(player, map);
+                case '4' -> {
                     System.out.println("(Y/N)");
                     char isExit = CMUtility.readConfirmSelection();
                     if (isExit == 'Y') {
                         isFlag = false;
                     }
-                    break;
+                }
             }
 
         }
@@ -137,6 +131,7 @@ public class Interface {
 
             if (player.getHP() == 0) {
                 System.out.println("You have died please try a new game!!!!");
+                System.out.println("-----------------------------------------------------------------------");
                 Main.myRun();
             }
         }
@@ -146,10 +141,12 @@ public class Interface {
         if (player.getTreasureCurr() == 100) {
 
             System.out.println("You have conquered this map try a harder difficulty. If already done with the hard level then you have mastered this game.");
+            System.out.println("-------------------------------------------------------------------------------------------------------");
             Main.myRun();
         }
 
     }
+
     public void  interactWithBag(Character player)  {
         BagList bagList = player.getBag();
         System.out.println(bagList.toString());

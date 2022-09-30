@@ -1,16 +1,11 @@
 package game;
-
-
 import constants.Difficulty;
 import org.json.simple.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.Scanner;
-
 
 public class Main {
     public static void main(String[] args) {
@@ -205,6 +200,7 @@ public class Main {
     public static JSONObject loadGame(String name) {
         return null;
     }
+
 
 
 }

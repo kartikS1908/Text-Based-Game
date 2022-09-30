@@ -123,7 +123,7 @@ public class Map {
                         }
                     }
                     case 'i' -> {
-                        if(!(str.substring(7).equals("nil"))) {
+                        if(!(str.substring(10).equals("nil"))) {
                             String item = str.substring(10);
                             int amount = Integer.parseInt(this.settings.get(item).toString());
                             room.setInventory(new Inventory(item, amount));
