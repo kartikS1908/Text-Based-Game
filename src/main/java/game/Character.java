@@ -283,4 +283,12 @@ public class Character {
     public BagList getBag() {
         return bag;
     }
+    /**
+     * Set the value of bag
+     * @author Xilai Wang
+     * @param bag A BagList
+     */
+    public void setBag(BagList bag) {
+        this.bag = bag;
+    }
 }
