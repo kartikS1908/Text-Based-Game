@@ -7,7 +7,9 @@ import globals.HandledException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Map {
@@ -21,6 +23,7 @@ public class Map {
     private int[] prevPosition;
     private Character player;
     private int playerX, playerY;
+    private  HashMap<String,ArrayList<Integer>> roomAndCoordinates;
 
     /**
      * A map constructor to initiate a map object
@@ -46,6 +49,7 @@ public class Map {
         this.playerX = player.getCurrentY();
         this.playerY = player.getCurrentX();
         this.map = createMap(xSize, ySize);
+        this.roomAndCoordinates = getRoomPos();
         printMap();
     }
 
@@ -238,5 +242,34 @@ public class Map {
      */
     public Object[][] getMap(){
         return this.map;
+    }
+
+
+    public HashMap<String,ArrayList<Integer>> getRoomAndCoordinates()
+    {
+        return this.roomAndCoordinates;
+    }
+
+    public void setRoomAndCoordinates(HashMap<String, ArrayList<Integer>> roomAndCoordinates) {
+        this.roomAndCoordinates = roomAndCoordinates;
+    }
+
+    public HashMap<String,ArrayList<Integer>> getRoomPos()
+    {
+        HashMap<String,ArrayList<Integer>> myData = new HashMap<>();
+
+        for(int i = 0 ; i<numOfRooms ; i++)
+        {
+            JSONArray roomArray = (JSONArray) settings.get("room"+(i+1));
+            Integer X = Integer.parseInt(((String)roomArray.get(5)).substring(2));
+            Integer Y = Integer.parseInt(((String)roomArray.get(6)).substring(2));
+            String roomName = ((String)roomArray.get(0)).substring(9);
+            ArrayList<Integer> coordinates = new ArrayList<>();
+            coordinates.add(X);
+            coordinates.add(Y);
+            myData.put(roomName,coordinates);
+        }
+        System.out.println(myData);
+        return myData;
     }
 }

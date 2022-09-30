@@ -78,6 +78,16 @@ public class Bag {
         }
         return true;
     }
+
+
+    public ArrayList<String> getIDs(){
+        ArrayList<String> ids = new ArrayList<>();
+        for(Inventory elem : inventories)
+        {
+            ids.add(elem.getInvID());
+        }
+        return ids;
+    }
     /**
      * Override toString method so that it can provide meaningful information of inventories in a bag
      * @author Harry Li

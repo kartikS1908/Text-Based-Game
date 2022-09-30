@@ -4,6 +4,10 @@ import game.Bag.Bag;
 import game.Bag.CMUtility;
 import org.json.simple.JSONObject;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Interface {
@@ -46,6 +50,7 @@ public class Interface {
             System.out.println("1 Open bag");
             System.out.println("2 View map");
             System.out.println("3 Move player");
+            System.out.println("4 Save & Quit");
             System.out.println("4 Exit");
             char menu = CMUtility.readMenuSelection();
             switch (menu) {
@@ -58,7 +63,11 @@ public class Interface {
                 case '3':
                     movePlayer(player, map);
                     break;
-                case '4':
+                case '4':{
+                    saveGame(player,map);
+                    Main.myRun();
+                }
+                case '5':
                     System.out.println("(Y/N)");
                     char isExit = CMUtility.readConfirmSelection();
                     if (isExit == 'Y') {
@@ -77,6 +86,7 @@ public class Interface {
      * @author Xilai Wang
      * TODO: This is a example, param and return goes here.
      */
+
     public void movePlayer(Character player, Map map) {
         System.out.println("You can move by W (up), S (down), A (left), D (right)");
         String direction = this.scanner.next();
@@ -91,7 +101,11 @@ public class Interface {
         Object currentPosition = map.getCurrentPosition();
         if (currentPosition != null) {
             map.setNumOfRooms(map.getNumOfRooms() - 1);
-            interact((Room) currentPosition, player);
+            Room currentRoom = (Room) currentPosition;
+            map.getRoomAndCoordinates().remove(currentRoom.getName());
+            map.setRoomAndCoordinates(map.getRoomAndCoordinates());
+            interact(currentRoom, player);
+            System.out.println(map.getRoomAndCoordinates());
         }
         map.printMap();
     }
@@ -224,6 +238,27 @@ public class Interface {
             }
         }
 
+
+    }
+
+    public static void saveGame(Character player,Map map) {
+        String path = "./src/Configs/saveFile.json";
+        JSONObject json = new JSONObject();
+        json.put("ID",player.getCharID());
+        json.put("Weapon",player.getWeapon().getID());
+        json.put("HP",player.getHP());
+        json.put("Stamina",player.getStamina());
+        json.put("Y",player.getCurrentX());
+        json.put("X",player.getCurrentY());
+        json.put("Treasure",player.getTreasureCurr());
+        json.put("Bag",player.getBag().getIDs());
+        json.put("numRooms",map.getNumOfRooms());
+        json.put("rooms",map.getRoomAndCoordinates());
+        try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
+            out.write(json.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

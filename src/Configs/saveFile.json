@@ -1,1 +1,1 @@
-{"Treasure":30,"HP":90,"X":1,"Y":3,"Bag":["s2","h2"],"ID":4,"Weapon":1,"Stamina":4}
+{"Treasure":30,"numRooms":2,"rooms":{"Asgard":[2,4],"Helheim":[5,5]},"HP":90,"X":1,"Y":3,"Bag":["s2","h2"],"ID":2,"Weapon":1,"Stamina":6}
