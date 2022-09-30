@@ -104,8 +104,8 @@ public class Map {
                             JSONArray enemyArr = (JSONArray) this.settings.get(str.substring(6));
                             JSONArray weaponArr = (JSONArray) this.settings.get(enemyArr.get(1));
 
-                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()), "");
-                            Enemy enemy = new Enemy(i+1, enemyArr.get(0).toString(), weapon);
+                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()));
+                            Enemy enemy = new Enemy(i+1, enemyArr.get(0).toString(), weapon, enemyArr.get(2).toString());
 
                             room.setEnemy(enemy);
                         }
@@ -118,7 +118,7 @@ public class Map {
                     case 'w' -> {
                         if(!(str.substring(7).equals("nil"))){
                             JSONArray weaponArr = (JSONArray) this.settings.get(str.substring(7));
-                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()), "");
+                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()));
                             room.setWeapon(weapon);
                         }
                     }
@@ -126,12 +126,7 @@ public class Map {
                         if(!(str.substring(7).equals("nil"))) {
                             String item = str.substring(10);
                             int amount = Integer.parseInt(this.settings.get(item).toString());
-                            switch (item) {
-                                case "h1" -> room.setInventory(new Inventory("small healing potion", amount));
-                                case "s1" -> room.setInventory(new Inventory("small stamina booster", amount));
-                                case "h2" -> room.setInventory(new Inventory("big healing portion", amount));
-                                case "s2" -> room.setInventory(new Inventory("big stamina booster", amount));
-                            }
+                            room.setInventory(new Inventory(item, amount));
                         }
                     }
                     case 'X' -> {
@@ -166,6 +161,13 @@ public class Map {
 
     }
 
+    public int getNumOfRooms() {
+        return numOfRooms;
+    }
+
+    public void setNumOfRooms(int numOfRooms) {
+        this.numOfRooms = numOfRooms;
+    }
 
     public Object[][] getMap(){
         return this.map;

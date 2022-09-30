@@ -26,7 +26,8 @@
       "listWeaponIDs": [
         "w1",
         "w2",
-        "w3"
+        "w3",
+        "w4"
       ],
       "listEnemyIDs": [
         "e1",
@@ -65,6 +66,10 @@
         "LeviathanAxe",
         40
       ],
+      "w4": [
+        "AxeOfFury",
+        50
+      ],
       "e1": [
         "Zeus",
         "w3",
@@ -88,7 +93,7 @@
         "roomName-Jotunheim",
         "enemy-nil",
         "treasure-10",
-        "weapon-nil",
+        "weapon-w4",
         "inventory-h1",
         "X-0",
         "Y-2"

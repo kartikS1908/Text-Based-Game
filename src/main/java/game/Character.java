@@ -1,5 +1,6 @@
 package game;
 
+import game.Bag.BagList;
 import game.Bag.Weapon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,8 +13,10 @@ public class Character {
     private boolean isAlive;
     private int maxHP;
     private String introduction;
+    private String dialogue;
     int HP, stamina, charID, treasureCurr;
     private int currentX, currentY;
+    private BagList bag;
 
     /**
      * create character
@@ -21,9 +24,9 @@ public class Character {
      * @param name name of character
      * @param weapon weapon owned by character
      * @param charID character id
-     * @param introduction introduction
+     * @param dialogue dialogue
      */
-    public Character(String name, Weapon weapon, int charID, String introduction) {
+    public Character(String name, Weapon weapon, int charID, String dialogue) {
         this.charID = charID;
         this.name = name;
         this.weapon = weapon;
@@ -35,7 +38,9 @@ public class Character {
         this.currentX = 0;
         this.currentY = 0;
         this.treasureCurr = 0;
-        this.introduction = "Individual resume：Your name is " + name + ". " + introduction;
+        this.dialogue = dialogue;
+        this.bag = new BagList(5);
+        this.introduction = "Individual resume：Your name is " + name + ". " + dialogue;
         System.out.println("MaxHP：" + maxHP + "， current HP：" + HP + "，is alive：" + isAlive + " Bag：Nothing!");
         System.out.println(this.introduction);
     }
@@ -48,9 +53,8 @@ public class Character {
      * @return character details
      */
     public static Character createChar(JSONObject gameObj) {
-        System.out.println("char" + gameObj);
         Character c = null;
-        System.out.println("******************** \n(｡･∀･)ﾉﾞHi ！Welcome to the game！please select your Character (｡･∀･)ﾉ \n");
+        System.out.println("******************** \nHi ！Welcome to the game！please select your Character \n");
         // choose character
         JSONArray charList = (JSONArray) gameObj.get("listCharIDs");
         int index = 1;
@@ -72,7 +76,7 @@ public class Character {
             JSONArray character = (JSONArray) gameObj.get("ch" + choice);
             JSONArray weapon = (JSONArray) gameObj.get(character.get(1));
             Weapon w = new Weapon(String.valueOf(weapon.get(0)),Integer.parseInt(String.valueOf(character.get(1)).substring(1)),
-                    Integer.parseInt(String.valueOf(weapon.get(1))),"");
+                    Integer.parseInt(String.valueOf(weapon.get(1))));
             c = new Character(String.valueOf(character.get(0)),w,choice,String.valueOf(character.get(2)));
             System.out.println("********************");
         }
@@ -141,6 +145,19 @@ public class Character {
         return currentY;
     }
 
+    public String getIntroduction()
+    {return introduction;}
+
+    public void attack(Enemy enemy)
+    {
+
+        enemy.setHP(Math.max(enemy.getHP() - this.weapon.getAttack(), 0));
+
+    }
+    public String getDialogue()
+    {
+        return dialogue;
+    }
     /**
      * Update character position in map
      *
@@ -151,5 +168,35 @@ public class Character {
         this.currentX = currentX;
         this.currentY = currentY;
 
+    }
+
+    /**
+     * Use inventory in its bag to add HP (h1/h2) or Stamina(s1/s2)
+     *
+     *
+     * @param index the index of the inventory that is used by character
+     */
+    public void useInventory(int index) {
+        BagList bagList = this.bag;
+        Inventory inventory = bagList.getInventories().get(index - 1);
+        int currentHP = this.HP;
+
+        if (inventory.getInvID().equals("h1") || inventory.getInvID().equals("h2")) {
+            currentHP += inventory.getAmount();
+            if (currentHP > this.maxHP) {
+                System.out.println("You are already in Max HP, the extra heal will vanished");
+                this.HP = this.maxHP;
+            } else {
+                this.HP = currentHP;
+            }
+        } else {
+            this.stamina += inventory.getAmount();
+        }
+        bagList.dropInventory(index);
+
+    }
+
+    public BagList getBag() {
+        return bag;
     }
 }
