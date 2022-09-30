@@ -5,7 +5,12 @@ public class Inventory {
     private String invID;
     private String invName;
     private int amount;
-
+    /**
+     * TODO: what this function do.
+     * @author Jiayuan Zhu
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public Inventory(String invID, int amount) {
 
         this.invID = invID;
@@ -22,7 +27,7 @@ public class Inventory {
 
     /**
      * Get the amount of Inventory
-     *
+     * @author Jiayuan Zhu
      * @return the amount
      */
     public int getAmount() {
@@ -31,19 +36,23 @@ public class Inventory {
 
     /**
      * Get tha name of Inventory
-     *
+     * @author Jiayuan Zhu
      * @return the name
      */
     public String getName() {
         return invName;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Jiayuan Zhu
+     * TODO: This is a example, param and return goes here.
+     */
     public String getInvID(){
         return invID;
     }
     /**
      * Get the name and usage of Inventory
-     *
+     * @author Jiayuan Zhu
      * @return the name and usage
      */
     public String getDes() {

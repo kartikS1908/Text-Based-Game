@@ -16,7 +16,12 @@ public class Main {
     public static void main(String[] args) {
         myRun();
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Jiayuan Zhu
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public static void myRun(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Welcome!\nEnter Your Name: ");
@@ -33,7 +38,9 @@ public class Main {
 
     /**
      * initial screen of game, player is able to start new game, load game or read rules of game
-     *
+     * @author Jiayuan Zhu
+     * @author Xilai Wang
+     * @author Harry Li
      * @param name Name of Player
      * @param jsonObject game engine
      * @return get details of the game from new game or load game
@@ -71,7 +78,9 @@ public class Main {
 
     /**
      * choose the level of game
-     *
+     * @author Jiayuan Zhu
+     * @author Xilai Wang
+     * @author Harry Li
      * @param jsonObject game engine
      * @return get details of the game according to chosen level
      */
@@ -103,7 +112,11 @@ public class Main {
         System.out.println("********************");
         return gameObj;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
      public static void getLevelInfo(JSONObject jsonObject)
      {
          System.out.println("Grid Dimensions are " + jsonObject.get("X-size") + " x " + jsonObject.get("Y-size") );
@@ -182,6 +195,8 @@ public class Main {
 
     /**
      * print rules of the game
+     * @author Jiayuan Zhu
+     * TODO: This is a example, param and return goes here.
      */
     public static void printRules() {
         System.out.println("******************** \nRules of Game");
@@ -201,7 +216,11 @@ public class Main {
                 "The maximum size of Bag is 4.");
         System.out.println("********************");
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public static JSONObject loadGame(String name) {
         return null;
     }

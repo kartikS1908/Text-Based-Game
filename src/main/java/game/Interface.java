@@ -10,11 +10,26 @@ public class Interface {
     private Scanner scanner;
     private JSONObject gameObj;
 
+    /**
+     * TODO: what this function do.
+     * @author Dehao Liu
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public Interface(JSONObject gameObj) {
         this.gameObj = gameObj;
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * TODO: what this function do.
+     * @author Dehao Liu
+     * @author Harry Li
+     * @author Xilai Wang
+     * @author Jiayuan Zhu
+     * TODO: This is a example, param and return goes here.
+     */
     public void run() {
         /* Configure Player Information Start */
         Character player = Character.createChar(this.gameObj); // Create a character
@@ -56,6 +71,12 @@ public class Interface {
 
     }
 
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public void movePlayer(Character player, Map map) {
         System.out.println("You can move by W (up), S (down), A (left), D (right)");
         String direction = this.scanner.next();
@@ -75,7 +96,11 @@ public class Interface {
         map.printMap();
     }
 
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public void interact(Room room, Character player) {
         System.out.println("Welcome to " + room.getName());
 
@@ -155,6 +180,15 @@ public class Interface {
         }
 
     }
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Dehao Liu
+     * @author Kartik Sharma
+     * @author Xilai Wang
+     * @author Jiayuan Zhu
+     * TODO: This is a example, param and return goes here.
+     */
     public void  interactWithBag(Character player)  {
         BagList bagList = player.getBag();
         System.out.println(bagList.toString());

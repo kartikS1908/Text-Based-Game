@@ -4,11 +4,22 @@ public class Movement {
     private Map map;
     private Character player;
 
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public Movement(Character player, Map map){
         this.player = player;
         this.map = map;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public void move(String direction){
         int currentX = this.player.getCurrentX();
         int currentY = this.player.getCurrentY();
