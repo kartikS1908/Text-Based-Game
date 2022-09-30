@@ -28,6 +28,14 @@ public class BagList {
         this.inventories.remove(index - 1);
     }
 
+    public ArrayList<String> getIDs(){
+        ArrayList<String> itemIDs = new ArrayList<>();
+        for(Inventory elem : inventories)
+        {
+            itemIDs.add(elem.getInvID());
+        }
+        return itemIDs;
+    }
     public ArrayList<Inventory> getInventories() {
         return inventories;
     }
