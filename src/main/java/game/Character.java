@@ -27,12 +27,12 @@ public class Character {
      * @param charID character id
      * @param dialogue dialogue
      */
-    public Character(String name, Weapon weapon, int charID, String dialogue) {
+    public Character(String name, Weapon weapon, int charID, String dialogue, int MaxHP) {
         this.charID = charID;
         this.name = name;
         this.weapon = weapon;
         System.out.println("【System:】:The role was created successfully. Your name is " + name);
-        this.maxHP = 100;
+        this.maxHP = MaxHP;
         this.HP = maxHP;
         this.stamina = 10;
         this.isAlive = true;
@@ -48,7 +48,7 @@ public class Character {
 
 
     /**
-     * choose character by player and create character
+     * player chooses character and create character
      * @author Jiayuan Zhu
      * @param gameObj game engine that contains details of the game
      * @return character details
@@ -76,9 +76,10 @@ public class Character {
         if (choice <= index && choice > 0) {
             JSONArray character = (JSONArray) gameObj.get("ch" + choice);
             JSONArray weapon = (JSONArray) gameObj.get(character.get(1));
+            int MaxHP = Integer.parseInt(gameObj.get("Max_HP").toString());
             Weapon w = new Weapon(String.valueOf(weapon.get(0)),Integer.parseInt(String.valueOf(character.get(1)).substring(1)),
                     Integer.parseInt(String.valueOf(weapon.get(1))));
-            c = new Character(String.valueOf(character.get(0)),w,choice,String.valueOf(character.get(2)));
+            c = new Character(String.valueOf(character.get(0)),w,choice,String.valueOf(character.get(2)), MaxHP);
             System.out.println("********************");
         }
         else {
@@ -215,9 +216,9 @@ public class Character {
      */
     public void attack(Enemy enemy)
     {
-
-        enemy.setHP(Math.max(enemy.getHP() - this.weapon.getAttack(), 0));
-
+        if (this.HP != 0) {
+            enemy.setHP(Math.max(enemy.getHP() - this.weapon.getAttack(), 0));
+        }
     }
     /**
      * TODO: what this function do.
@@ -243,11 +244,13 @@ public class Character {
 
     /**
      * Use inventory in its bag to add HP (h1/h2) or Stamina(s1/s2)
+     *
      * @author Harry Li
      * @author Kartik Sharma
      * @author Jiayuan Zhu
      * @author Dehao Liu
      * @author Xilai Wang
+     *
      * @param index the index of the inventory that is used by character
      */
     public void useInventory(int index) {
@@ -276,5 +279,13 @@ public class Character {
      */
     public BagList getBag() {
         return bag;
+    }
+    /**
+     * Set the value of bag
+     * @author Xilai Wang
+     * @param bag A BagList
+     */
+    public void setBag(BagList bag) {
+        this.bag = bag;
     }
 }
