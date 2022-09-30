@@ -22,7 +22,12 @@ public class Map {
     private Character player;
     private int playerX, playerY;
 
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public Map(JSONObject settings, Character player){
         this.settings = settings;
         this.numOfRooms = Integer.parseInt(settings.get("numRooms").toString());
@@ -37,6 +42,12 @@ public class Map {
         printMap();
     }
 
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     private Object[][] createMap(int xSizeOfGrid, int ySizeOfGrid){
         Object[][] map = new Object[xSizeOfGrid][ySizeOfGrid];
         fillMap(map);
@@ -46,33 +57,64 @@ public class Map {
         this.prevPosition = new int[]{x, y};
         return map;
     }
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public void printMap(){
         updateMap();
         for(Object[] row : this.map){
             System.out.println(Arrays.toString(row));
         }
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     private void updateMap(){
         updatePlayerPosition();
         this.map[this.prevPosition[0]][this.prevPosition[1]] = "---";
         this.map[this.playerX][this.playerY] = "￣▽￣";
         this.prevPosition = new int[]{this.playerX, this.playerY};
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public int getXMax() {
         return XMax;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public int getYMax() {
         return YMax;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     private void updatePlayerPosition(){
         this.playerX = player.getCurrentY();
         this.playerY = player.getCurrentX();
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public Object getCurrentPosition(){
         updatePlayerPosition();
         Object currentPosition = this.map[this.playerX][this.playerY];
@@ -81,9 +123,13 @@ public class Map {
         }
         return null;
     }
-
+    /**
+     * First fill the map by '*'
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     private void fillMap(Object[][] map){
-//      First fill the map by '*'
         for(int i = 0; i < map.length; i++){
             Arrays.fill(map[i], "---");
         }
@@ -160,15 +206,30 @@ public class Map {
 
 
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public int getNumOfRooms() {
         return numOfRooms;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public void setNumOfRooms(int numOfRooms) {
         this.numOfRooms = numOfRooms;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author Xilai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public Object[][] getMap(){
         return this.map;
     }

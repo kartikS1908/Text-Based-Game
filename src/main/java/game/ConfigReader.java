@@ -7,6 +7,12 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class ConfigReader {
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * @author XIlai Wang
+     * TODO: This is a example, param and return goes here.
+     */
     public ConfigReader(){
 
     }

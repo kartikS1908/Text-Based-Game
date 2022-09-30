@@ -9,77 +9,126 @@ public class Room {
     private Enemy enemy;
     private int countOfTreasure;
 
-
-    public Room(String name, String description, Weapon weapon, Inventory inventory, Enemy enemy, int countOfTreasure){
-        this.name = name;
-        this.description = description;
-        this.weapon = weapon;
-        this.inventory = inventory;
-        this.countOfTreasure = countOfTreasure;
-        this.enemy = enemy;
-    }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public Room(){
 
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public String getName() {
         return name;
     }
 
     /**
      * Set the name of a room
+     * @author Harry Li
      * @param name name of the room
      */
 
     public void setName(String name) {
         this.name = name;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public String getDescription() {
         return description;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public void setDescription(String description) {
         this.description = description;
     }
-
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public Enemy getEnemy() {
         return enemy;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public void setEnemy(Enemy enemy) {
         this.enemy = enemy;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public int getCountOfTreasure() {
         return countOfTreasure;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public void setCountOfTreasure(int countOfTreasure) {
         this.countOfTreasure = countOfTreasure;
     }
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public Weapon getWeapon() {
         return weapon;
     }
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public Inventory getInventory() {
         return this.inventory;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Harry Li
+     * TODO: This is a example, param and return goes here.
+     */
     @Override
     public String toString() {
         return this.name.substring(0, 3);
     }
-
+    /**
+     * TODO: what this function do.
+     * @author Kartik Sharma
+     * TODO: This is a example, param and return goes here.
+     */
     public String detailedToString()
     {
         String weaponStr,inventoryStr,enemyStr;

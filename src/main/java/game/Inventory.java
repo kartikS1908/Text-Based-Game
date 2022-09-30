@@ -5,9 +5,17 @@ public class Inventory {
     private String invID;
     private String invName;
     private int amount;
-
+    /**
+     * create new inventory
+     *
+     * @author Jiayuan Zhu
+     * @author Kartik Sharma
+     *
+     * @param invID id of inventory
+     * @param amount amount of inventory
+     * @return inventory created
+     */
     public Inventory(String invID, int amount) {
-
         this.invID = invID;
         if(invID.equals("h1"))
         {this.invName = "Small Healing Potion";}
@@ -21,8 +29,16 @@ public class Inventory {
     }
 
     /**
+     * Set the amount of Inventory
+     * @author Jiayuan Zhu
+     */
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    /**
      * Get the amount of Inventory
-     *
+     * @author Jiayuan Zhu
      * @return the amount
      */
     public int getAmount() {
@@ -30,20 +46,32 @@ public class Inventory {
     }
 
     /**
-     * Get tha name of Inventory
-     *
+     * Set the name of Inventory
+     * @author Jiayuan Zhu
+     */
+    public void setInvName(String invName) {
+        this.invName = invName;
+    }
+
+    /**
+     * Get the name of Inventory
+     * @author Jiayuan Zhu
      * @return the name
      */
     public String getName() {
         return invName;
     }
 
+    /**
+     * Get the id of Inventory
+     * @author Jiayuan Zhu
+     */
     public String getInvID(){
         return invID;
     }
     /**
      * Get the name and usage of Inventory
-     *
+     * @author Jiayuan Zhu
      * @return the name and usage
      */
     public String getDes() {
