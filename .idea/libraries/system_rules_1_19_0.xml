@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="system-rules-1.19.0">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../system-rules-1.19.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/test/resources/system-rules-1.19.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
