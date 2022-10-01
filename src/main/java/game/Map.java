@@ -258,7 +258,7 @@ public class Map {
     /**
      * room and the coordinates associated it.
      *
-     * @return HashMap<String, ArrayList < Integer>> roomAndCoordinates : Hashmap with room names as keys and their coordinates as objects associated to each key.
+     * @return HashMap<String, ArrayList <Integer>> roomAndCoordinates : Hashmap with room names as keys and their coordinates as objects associated to each key.
      * @author Kartik
      */
     public HashMap<String, ArrayList<Integer>> getRoomAndCoordinates() {
@@ -278,7 +278,7 @@ public class Map {
     /**
      * Get the position of each room on the map.
      *
-     * @return HashMap<String, ArrayList < Integer>> : All the rooms and their coordinates.
+     * @return HashMap<String, ArrayList <Integer>> : All the rooms and their coordinates.
      * @author Kartik Sharma
      */
     public HashMap<String, ArrayList<Integer>> getRoomPos()  //initializer for the rooms on the map.

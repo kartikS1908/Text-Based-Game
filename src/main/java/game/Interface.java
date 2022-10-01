@@ -151,7 +151,6 @@ public class Interface {
             map.getRoomAndCoordinates().remove(currentRoom.getName());
             map.setRoomAndCoordinates(map.getRoomAndCoordinates());
             interact(currentRoom, player);
-            System.out.println(map.getRoomAndCoordinates());
         }
         map.printMap();
     }
