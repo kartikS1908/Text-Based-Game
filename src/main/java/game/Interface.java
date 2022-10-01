@@ -356,6 +356,7 @@ public class Interface {
         int stamina = Math.toIntExact((long) object.get("Stamina"));
         int x = Math.toIntExact((long) object.get("X"));
         int y = Math.toIntExact((long) object.get("Y"));
+        int maxHP = Integer.parseInt((String) object.get("Max_HP"));
         int playerID = Math.toIntExact((long) object.get("ID"));
         String weaponID = "w" + Math.toIntExact((long) object.get("Weapon"));
         String playerName = (String) ((JSONArray) object.get("ch" + playerID)).get(0);
@@ -369,7 +370,7 @@ public class Interface {
             int val = Math.toIntExact(value);
             bag.addInventory(new Inventory(elem.toString(), val));
         }
-        player = new Character(playerName, weapon, playerID, playerDialogue);
+        player = new Character(playerName, weapon, playerID, playerDialogue,maxHP);
         player.setHP(HP);
         player.setTreasureCurr(treasure);
         player.setStamina(stamina);
