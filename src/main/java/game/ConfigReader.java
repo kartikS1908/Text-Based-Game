@@ -8,14 +8,19 @@ import java.io.IOException;
 
 public class ConfigReader {
     /**
-     * TODO: what this function do.
+     * Empty constructor
      * @author Harry Li
      * @author XIlai Wang
-     * TODO: This is a example, param and return goes here.
      */
     public ConfigReader(){
 
     }
+    /**
+     * Read the config json file in path and return a JSONObject
+     * @author Harry Li
+     * @author XIlai Wang
+     * @return jsonObjectTop
+     */
     public JSONObject read(String path) {
         JSONParser parser = new JSONParser();
         JSONObject jsonObjectTop = null;
