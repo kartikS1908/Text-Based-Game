@@ -24,57 +24,57 @@ public class Weapon {
     }
 
     /**
-     * TODO: what this function do.
+     * get method weapon ID
      * @author Dehao Liu
-     * TODO: This is a example, param and return goes here.
+     *
      */
     public int getID() {
         return ID;
     }
     /**
-     * TODO: what this function do.
+     * setter method weapon ID
      * @author Dehao Liu
-     * TODO: This is a example, param and return goes here.
+     *
      */
     public void setID(int ID) {
         this.ID = ID;
     }
     /**
-     * TODO: what this function do.
+     * get method weapon ID
      * @author Dehao Liu
-     * TODO: This is a example, param and return goes here.
+     *
      */
     public String getName() {
         return name;
     }
     /**
-     * TODO: what this function do.
+     * get method weapon name
      * @author Dehao Liu
-     * TODO: This is a example, param and return goes here.
+     *
      */
     public void setName(String name) {
         this.name = name;
     }
     /**
-     * TODO: what this function do.
+     * get attack
      * @author Dehao Liu
-     * TODO: This is a example, param and return goes here.
+     *
      */
     public int getAttack() {
         return attack;
     }
     /**
-     * TODO: what this function do.
+     * set attack
      * @author Dehao Liu
-     * TODO: This is a example, param and return goes here.
+     *
      */
     public void setAttack(int attack) {
         this.attack = attack;
     }
     /**
-     * TODO: what this function do.
+     *
      * @author Dehao Liu
-     * TODO: This is a example, param and return goes here.
+     * @paramreturn  weapon information
      */
     @Override
     public String toString()

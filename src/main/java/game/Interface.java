@@ -20,12 +20,12 @@ public class Interface {
     int loadFlag = 0; //Set if current game has been loaded from the load file.
 
     /**
-     * TODO: what this function do.
+     * get game OBJ
      *
      * @author Dehao Liu
      * @author Harry Li
      * @author Xilai Wang
-     * TODO: This is a example, param and return goes here.
+     *
      */
     public Interface(JSONObject gameObj) {
         this.gameObj = gameObj;
@@ -61,14 +61,14 @@ public class Interface {
     }
 
     /**
-     * TODO: what this function do.
+     * Character interface
      *
      * @author Dehao Liu
      * @author Harry Li
      * @author Xilai Wang
      * @author Jiayuan Zhu
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     *
      */
     public void run() {
         /* Configure Player Information Start */
