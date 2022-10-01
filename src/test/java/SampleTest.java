@@ -7,7 +7,7 @@ import game.Enemy;
 import game.Inventory;
 import game.Main;
 import game.Room;
-import game.Bag.BagList;
+import game.Bag.Bag;
 import game.Bag.Weapon;
 import game.Character;
 import game.Map;
@@ -103,14 +103,13 @@ public class SampleTest {
         assertEquals(1, character.getCharID());
         assertEquals("abc", character.getName());
         assertEquals(null, character.getWeapon());
-        assertEquals(10,character.getHP());
+        assertEquals(100,character.getHP());
         assertEquals(10,character.getStamina());
         assertEquals(0,character.getCurrentX());
         assertEquals(0,character.getCurrentY());
         assertEquals(0,character.getTreasureCurr());
         assertEquals("Hello",character.getDialogue());
         assertEquals(0,character.getBag().getInventories().size());
-        assertEquals("Individual resume：Your name is abc. Hello",character.getIntroduction());
     }
 
     @Test
@@ -126,7 +125,7 @@ public class SampleTest {
         assertEquals(1, chara.getCharID());
         assertEquals("Rafael", chara.getName());
         assertEquals("BladesOfFury", chara.getWeapon().getName());
-        assertEquals(20, chara.getWeapon().getAttack());
+        assertEquals(5, chara.getWeapon().getAttack());
         assertEquals(1, chara.getWeapon().getID());
         assertEquals(100,chara.getHP());
         assertEquals(10,chara.getStamina());
@@ -135,7 +134,6 @@ public class SampleTest {
         assertEquals(0,chara.getTreasureCurr());
         assertEquals("I will kill you, you Monster!!!",chara.getDialogue());
         assertEquals(0,chara.getBag().getInventories().size());
-        assertEquals("Individual resume：Your name is Rafael. I will kill you, you Monster!!!",chara.getIntroduction());
     }
 
     @Test
@@ -143,7 +141,7 @@ public class SampleTest {
         // Test if when bag is full will not add anything into the bag
         Character player = new Character("abc", null, 0, null, 100);
 
-        BagList bag = new BagList(3);
+        Bag bag = new Bag(3);
         Inventory inv1 = new Inventory("h1", 10);
         Inventory inv2 = new Inventory("h2", 20);
         Inventory inv3 = new Inventory("s1", 10);
@@ -231,7 +229,7 @@ public class SampleTest {
         player.setHP(10);
         player.setStamina(1);
 
-        BagList bag = new BagList(5);
+        Bag bag = new Bag(5);
         Inventory inv1 = new Inventory("h1", 10);
         Inventory inv2 = new Inventory("h2", 20);
         Inventory inv3 = new Inventory("s1", 10);
@@ -268,7 +266,7 @@ public class SampleTest {
         player.setHP(10);
         player.setStamina(1);
 
-        BagList bag = new BagList(5);
+        Bag bag = new Bag(5);
         Inventory inv1 = new Inventory("h1", 0);
         Inventory inv2 = new Inventory("h2", 0);
         Inventory inv3 = new Inventory("s1", 0);
@@ -305,7 +303,7 @@ public class SampleTest {
         player.setHP(10);
         player.setStamina(1);
 
-        BagList bag = new BagList(5);
+        Bag bag = new Bag(5);
         Inventory inv1 = new Inventory("h1", 500);
         Inventory inv2 = new Inventory("h2", 500);
         bag.addInventory(inv1);

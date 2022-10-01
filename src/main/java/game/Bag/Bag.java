@@ -4,30 +4,30 @@ import game.Inventory;
 
 import java.util.ArrayList;
 
-public class BagList {
+public class Bag {
     private ArrayList<Inventory> inventories;
     private int size;
     /**
-     * TODO: what this function do.
+     * Bag Constructor to initiate a Bag object
      * @author Harry Li
      * @author Kartik Sharma
      * @author Jiayuan Zhu
      * @author Dehao Liu
      * @author Xilai Wang
-     * TODO: This is a example, param and return goes here.
+     * @param size the max size of a bag
      */
-    public BagList(int size) {
+    public Bag(int size) {
         this.size = size;
         this.inventories = new ArrayList<Inventory>();
     }
     /**
-     * TODO: what this function do.
+     * Put an inventory into the bag
      * @author Harry Li
      * @author Kartik Sharma
      * @author Jiayuan Zhu
      * @author Dehao Liu
      * @author Xilai Wang
-     * TODO: This is a example, param and return goes here.
+     * @param inventory an inventory to be added
      */
     public void addInventory(Inventory inventory){
         if (this.inventories.size() >= this.size){
@@ -37,13 +37,13 @@ public class BagList {
         this.inventories.add(inventory);
     }
     /**
-     * TODO: what this function do.
+     * Drop an inventory from the bag
      * @author Harry Li
      * @author Kartik Sharma
      * @author Jiayuan Zhu
      * @author Dehao Liu
      * @author Xilai Wang
-     * TODO: This is a example, param and return goes here.
+     * @param index the index of the inventory to be dropped
      */
     public void dropInventory(int index){
         if(index < 1 || index > this.size){
@@ -52,25 +52,25 @@ public class BagList {
         this.inventories.remove(index - 1);
     }
     /**
-     * TODO: what this function do.
+     * Return all the inventories in a bag
      * @author Harry Li
      * @author Kartik Sharma
      * @author Jiayuan Zhu
      * @author Dehao Liu
      * @author Xilai Wang
-     * TODO: This is a example, param and return goes here.
+     * @return ArrayList<Inventory> all the inventories in the bag
      */
     public ArrayList<Inventory> getInventories() {
         return inventories;
     }
     /**
-     * TODO: what this function do.
+     * Check if the index of an inventory to be operated is valid or not
      * @author Harry Li
      * @author Kartik Sharma
      * @author Jiayuan Zhu
      * @author Dehao Liu
      * @author Xilai Wang
-     * TODO: This is a example, param and return goes here.
+     * @param index the index of an inventory to be operated
      */
     public boolean checkIsIndexValid (int index){
         if(index < 1 || index > inventories.size()){
@@ -78,14 +78,24 @@ public class BagList {
         }
         return true;
     }
+
+
+    public ArrayList<String> getIDs(){
+        ArrayList<String> ids = new ArrayList<>();
+        for(Inventory elem : inventories)
+        {
+            ids.add(elem.getInvID());
+        }
+        return ids;
+    }
     /**
-     * TODO: what this function do.
+     * Override toString method so that it can provide meaningful information of inventories in a bag
      * @author Harry Li
      * @author Kartik Sharma
      * @author Jiayuan Zhu
      * @author Dehao Liu
      * @author Xilai Wang
-     * TODO: This is a example, param and return goes here.
+     * @return String information of inventories in a bag
      */
     @Override
     public String toString() {

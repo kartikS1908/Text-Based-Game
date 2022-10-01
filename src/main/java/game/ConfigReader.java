@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class ConfigReader {
     /**
-     * Empty constructor
+     * Initiate a ConfigReader object to read the game engine settings
      * @author Harry Li
      * @author XIlai Wang
      */
@@ -16,10 +16,11 @@ public class ConfigReader {
 
     }
     /**
-     * Read the config json file in path and return a JSONObject
+     * Read the json file with specified path
      * @author Harry Li
-     * @author XIlai Wang
-     * @return jsonObjectTop
+     * @author Xilai Wang
+     * @param path the path to the json file
+     * @return JSONObject the settings read from the json file as a json object
      */
     public JSONObject read(String path) {
         JSONParser parser = new JSONParser();
