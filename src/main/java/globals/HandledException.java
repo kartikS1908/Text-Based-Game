@@ -2,6 +2,9 @@ package globals;
 
 public class HandledException extends Exception{
     private String message;
+    public HandledException(){
+
+    }
     public HandledException(String message) {
         super(message);
         this.message = message;

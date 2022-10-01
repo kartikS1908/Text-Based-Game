@@ -191,25 +191,16 @@ public class Map {
                         }
                         case 'X' -> {
                             x = Integer.parseInt(str.substring(2));
-                            try {
-                                if (x >= this.XMax) {
-                                    throw new HandledException("****** X coordinate exceeds grid/map limit ******");
-                                }
-                            } catch (HandledException e) {
-                                System.out.println(e.getMessage());
-                                e.printStackTrace();
-                            }
 
+                            if (x >= this.XMax) {
+                                throw new HandledException("****** X coordinate exceeds grid/map limit ******");
+                            }
                         }
                         case 'Y' -> {
                             y = Integer.parseInt(str.substring(2));
-                            try {
-                                if (y >= this.YMax) {
-                                    throw new HandledException("****** Y coordinate exceeds grid/map limit ******");
-                                }
-                            } catch (HandledException e) {
-                                System.out.println(e.getMessage());
-                                e.printStackTrace();
+
+                            if (y >= this.YMax) {
+                                throw new HandledException("****** Y coordinate exceeds grid/map limit ******");
                             }
                         }
                     }

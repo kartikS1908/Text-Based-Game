@@ -124,8 +124,6 @@ public class Interface {
 
 
     /**
-     * TODO: what this function do.
-     *
      * Move the player in interaction
      * @author Harry Li
      * @author Xilai Wang
@@ -247,14 +245,13 @@ public class Interface {
     }
 
     /**
-     * TODO: what this function do.
-     *
+     * Interaction with the bag system
      * @author Harry Li
      * @author Dehao Liu
      * @author Kartik Sharma
      * @author Xilai Wang
      * @author Jiayuan Zhu
-     * TODO: This is a example, param and return goes here.
+     * @param player the current player
      */
     public void interactWithBag(Character player) {
         Bag bag = player.getBag();

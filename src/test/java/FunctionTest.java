@@ -1,43 +1,58 @@
 import org.json.simple.JSONArray;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import game.ConfigReader;
 import game.Enemy;
 import game.Inventory;
-import game.Main;
-import game.Room;
 import game.Bag.Bag;
 import game.Bag.Weapon;
 import game.Character;
 import game.Map;
 import game.Movement;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.json.simple.JSONObject;
+import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
-public class SampleTest {
+import static org.junit.Assert.*;
+
+public class FunctionTest {
     ConfigReader configReader = new ConfigReader();
     JSONObject jsonObject = configReader.read("./src/Configs/Engine.json");
     JSONObject gameObj = (JSONObject) jsonObject.get("GAME");
 
-    @Test
-    public void testSimple2() {
-        assertEquals("This is a sample test case it does not do anything",1 ,1);
-    }
-
+    /**
+     * Test if there are overlapping rooms in the settings
+     * @author Harry Li
+     */
+    @Rule
+    public final ExpectedSystemExit exit = ExpectedSystemExit.none();
     @Test
     public void testMap1() {
-        Character player = new Character("abc", null, 0, null, 100);
-        // TODO: Harry
-        // room overlapping
-    }
+        gameObj = (JSONObject) gameObj.get("EASY");
+        gameObj.remove("room2");
 
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.add("roomName-Midgard");
+        jsonArray.add("enemy-e3");
+        jsonArray.add("weapon-w2");
+        jsonArray.add("inventory-h2");
+        // Set the same position as Room Jotunheim
+        jsonArray.add("X-0");
+        jsonArray.add("Y-2");
+
+        gameObj.put("room2", jsonArray);
+        exit.expectSystemExitWithStatus(0);
+        Character player = new Character("abc", null, 0, null, 100);
+        Map map = new Map(gameObj, player);
+    }
+    /**
+     * Test if getCurrentPosition can return the Room or null after a move
+     * @author Xilai Wang
+     */
     @Test
     public void testRoom1() {
-        // Test if getCurrentPosition can return the Room or null after a move
+
         gameObj = (JSONObject) gameObj.get("EASY");
         Character player = new Character("abc", null, 0, null, 100);
         Map map = new Map(gameObj, player);
@@ -47,11 +62,17 @@ public class SampleTest {
 
         player.setCurrentPosition(3, 0); // There is no room in map (3,0)
         assertTrue(map.getCurrentPosition() == null);
-    }
 
+
+    }
+    /**
+     * Test if the player can move out of the map
+     * @author Xilai Wang
+     * @author Harry Li
+     */
     @Test
     public void testMovement1() {
-        // Test if the player can move out of the map
+        //
         gameObj = (JSONObject) gameObj.get("EASY");
         Character player = new Character("abc", null, 0, null, 100);
         Map map = new Map(gameObj, player);
@@ -63,21 +84,45 @@ public class SampleTest {
         assertEquals(0, player.getCurrentY());
 
         movement.move("A");
-        assertEquals(0, player.getCurrentX());
+        assertEquals(0, player.getCurrentY());
+
+        player.setCurrentPosition(map.getXMax() - 1, map.getYMax() - 1);
+
+        movement.move("D");
+        assertEquals(map.getXMax() - 1, player.getCurrentX());
+
+        movement.move("S");
+        assertEquals(map.getYMax() - 1, player.getCurrentY());
     }
 
+    /**
+     * Test if the player will run out of its stamina
+     * @author Xilai Wang
+     * @author Harry Li
+     */
     @Test
     public void testMovement2() {
         gameObj = (JSONObject) gameObj.get("EASY");
         Character player = new Character("abc", null, 0, null, 100);
         Map map = new Map(gameObj, player);
-        // TODO: Harry
-        // Stamina + -
+        Movement movement = new Movement(player, map);
+
+        for(int i = 0; i < 5; i++){
+            movement.move("s");
+        }
+        movement.move("d");
+        for(int i = 0; i < 4; i++){
+            movement.move("w");
+        }
+        assertEquals(0, player.getStamina());
     }
 
+    /**
+     * Test for getting inventory description
+     * @author Jiayuan Zhu
+     */
     @Test
     public void testInventoryDes() {
-        // Tests for get inventory description
         Inventory inv1 = new Inventory("h1", 10);
         Inventory inv2 = new Inventory("h2", 20);
         Inventory inv3 = new Inventory("s1", 5);
@@ -88,17 +133,22 @@ public class SampleTest {
         assertEquals("Big Stamina Booster: Add 10 Stamina", inv4.getDes());
     }
 
+    /**
+     * Test for get description for incorrect inventory
+     * @author Jiayuan Zhu
+     */
     @Test
     public void testNullInventoryDes() {
-        // Tests for get description for incorrect inventory
         Inventory inv1 = new Inventory("h3",10);
         assertEquals("", inv1.getDes());
     }
 
-
+    /**
+     * Test for create a character
+     * @author Jiayuan Zhu
+     */
     @Test
     public void testCharacter1() {
-        // Tests for create a character
         Character character = new Character("abc",null,1,"Hello", 10);
         assertEquals(1, character.getCharID());
         assertEquals("abc", character.getName());
@@ -112,9 +162,12 @@ public class SampleTest {
         assertEquals(0,character.getBag().getInventories().size());
     }
 
+    /**
+     * Test for create a character from game engine
+     * @author Jiayuan Zhu
+     */
     @Test
     public void testCharacter2() {
-        // Tests for create a character from game engine
         gameObj = (JSONObject) gameObj.get("EASY");
         JSONArray character = (JSONArray) gameObj.get("ch1");
         JSONArray weapon = (JSONArray) gameObj.get(character.get(1));
@@ -136,9 +189,12 @@ public class SampleTest {
         assertEquals(0,chara.getBag().getInventories().size());
     }
 
+    /**
+     * Test if when bag is full will not add anything into the bag
+     * @author Xilai wang
+     */
     @Test
     public void testBag1() {
-        // Test if when bag is full will not add anything into the bag
         Character player = new Character("abc", null, 0, null, 100);
 
         Bag bag = new Bag(3);
@@ -153,10 +209,13 @@ public class SampleTest {
 
         assertEquals(3,bag.getInventories().size());
     }
-
+    /**
+     * Test if attack function works when the attack in Correct value range
+     * @author Xilai wang
+     */
     @Test
     public void testFight1() {
-        // Test if attack function works when the attack in Correct value range
+
         Weapon test_weapon1 = new Weapon("test1 weapon", 0, 10);
         Weapon test_weapon2 = new Weapon("test2 weapon", 1, 30);
         Character player = new Character("abc", test_weapon1, 0, null,100);
@@ -167,10 +226,12 @@ public class SampleTest {
         player.attack(enemy);
         assertEquals(90, enemy.getHP());
     }
-
+    /**
+     * Test if attack function works when the attack in Incorrect value range: Greater than player and enemy Max HP
+     * @author Xilai wang
+     */
     @Test
     public void testFight2() {
-        // Test if attack function works when the attack in Incorrect value range: Greater than player and enemy Max HP
         // Design: When player or enemy HP is lower than 100, it will still be 0 HP
         Weapon test_weapon1 = new Weapon("test1 weapon", 0, 500);
         Weapon test_weapon2 = new Weapon("test2 weapon", 1, 500);
@@ -186,10 +247,12 @@ public class SampleTest {
         player.attack(enemy);
         assertEquals(0, enemy.getHP());
     }
-
+    /**
+     * Test if attack function works when the attack 0
+     * @author Xilai wang
+     */
     @Test
     public void testFight3() {
-        // Test if attack function works when the attack 0
         // Design: Player and enemy attack only depend on weapon ATK
         Weapon test_weapon1 = new Weapon("test1 weapon", 0, 0);
         Weapon test_weapon2 = new Weapon("test2 weapon", 1, 0);
@@ -201,10 +264,12 @@ public class SampleTest {
         player.attack(enemy);
         assertEquals(100, enemy.getHP());
     }
-
+    /**
+     * Test if attack function works when player or enemy HP is 0
+     * @author Xilai wang
+     */
     @Test
     public void testFight4() {
-        // Test if attack function works when player or enemy HP is 0
         // Design: Player and enemy can not attack when their HP reach to 0
         Weapon test_weapon1 = new Weapon("test1 weapon", 0, 500);
         Weapon test_weapon2 = new Weapon("test2 weapon", 1, 500);
@@ -220,10 +285,12 @@ public class SampleTest {
         player.attack(enemy);
         assertEquals(100, enemy.getHP());
     }
-
+    /**
+     * Test if useInventory function works when the potion amount in Correct value range
+     * @author Xilai wang
+     */
     @Test
     public void testPotion1() {
-        // Test if useInventory function works when the potion amount in Correct value range
         Character player = new Character("abc", null, 0, null, 100);
 
         player.setHP(10);
@@ -257,10 +324,12 @@ public class SampleTest {
         player.useInventory(1);
         assertEquals(31, player.getStamina());
     }
-
+    /**
+     * Test if useInventory function works when the potion amount is zero
+     * @author Xilai wang
+     */
     @ Test
     public void testPotion2() {
-        // Test if useInventory function works when the potion amount is zero
         Character player = new Character("abc", null, 0, null, 100);
 
         player.setHP(10);
@@ -294,10 +363,12 @@ public class SampleTest {
         player.useInventory(1);
         assertEquals(1, player.getStamina());
     }
-
+    /**
+     * Test if useInventory function works when the potion amount is out of bound(MaxHP)
+     * @author Xilai wang
+     */
     @ Test
     public void testPotion3() {
-        // Test if useInventory function works when the potion amount is out of bound(MaxHP)
         Character player = new Character("abc", null, 0, null, 100);
 
         player.setHP(10);
