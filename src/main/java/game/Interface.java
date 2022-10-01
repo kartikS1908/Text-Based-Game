@@ -72,10 +72,11 @@ public class Interface {
     }
 
     /**
-     * TODO: what this function do.
+     * Move the player in interaction
      * @author Harry Li
      * @author Xilai Wang
-     * TODO: This is a example, param and return goes here.
+     * @param player the current player
+     * @param map the current map
      */
     public void movePlayer(Character player, Map map) {
         System.out.println("You can move by W (up), S (down), A (left), D (right)");

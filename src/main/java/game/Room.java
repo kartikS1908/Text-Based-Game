@@ -102,6 +102,7 @@ public class Room {
      * @author Harry Li
      * @return String the first three letters of a room's name
      */
+
     @Override
     public String toString() {
         return this.name.substring(0, 3);

@@ -123,7 +123,7 @@ public class Map {
      */
     public Object getCurrentPosition(){
         updatePlayerPosition();
-        Object currentPosition = this.map[this.playerX][this.playerY];
+        Object currentPosition = map[this.playerX][this.playerY];
         if(currentPosition instanceof Room){
             return currentPosition;
         }
@@ -140,78 +140,90 @@ public class Map {
             Arrays.fill(map[i], "---");
         }
 
-        for(int i = 0; i < this.numOfRooms; i++){
-            JSONArray array = (JSONArray) this.settings.get("room"+ (i + 1));
+        for(int i = 0; i < this.numOfRooms; i++) {
+            JSONArray array = (JSONArray) settings.get("room" + (i + 1));
             Room room = new Room();
             int x = 0, y = 0;
-            for(Object obj : array){
-                String str = (String) obj;
+            try{
+                for (Object obj : array) {
+                    String str = (String) obj;
 
-                switch (str.charAt(0)){
-                    case 'r' -> room.setName(str.substring(9));
-                    case 'e' -> {
-                        if(str.substring(6).equals("nil")) {
-                            room.setEnemy(null);
-                        } else {
-                            JSONArray enemyArr = (JSONArray) this.settings.get(str.substring(6));
-                            JSONArray weaponArr = (JSONArray) this.settings.get(enemyArr.get(1));
 
-                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()));
-                            Enemy enemy = new Enemy(i+1, enemyArr.get(0).toString(), weapon, enemyArr.get(2).toString());
+                       switch (str.charAt(0)) {
+                           case 'r' -> room.setName(str.substring(9));
+                           case 'e' -> {
+                               if (str.substring(6).equals("nil")) {
+                                   room.setEnemy(null);
+                               } else {
+                                   JSONArray enemyArr = (JSONArray) settings.get(str.substring(6));
+                                   JSONArray weaponArr = (JSONArray) settings.get(enemyArr.get(1));
 
-                            room.setEnemy(enemy);
-                        }
-                    }
-                    case 't' -> {
-                        if(!(str.substring(9).equals("nil"))){
-                               room.setCountOfTreasure(Integer.parseInt(str.substring(9)));
-                        }
-                    }
-                    case 'w' -> {
-                        if(!(str.substring(7).equals("nil"))){
-                            JSONArray weaponArr = (JSONArray) this.settings.get(str.substring(7));
-                            Weapon weapon = new Weapon(weaponArr.get(0).toString(), i+1, Integer.parseInt(weaponArr.get(1).toString()));
-                            room.setWeapon(weapon);
-                        }
-                    }
-                    case 'i' -> {
-                        if(!(str.substring(7).equals("nil"))) {
-                            String item = str.substring(10);
-                            int amount = Integer.parseInt(this.settings.get(item).toString());
-                            room.setInventory(new Inventory(item, amount));
-                        }
-                    }
-                    case 'X' -> {
-                        x = Integer.parseInt(str.substring(2));
-                        try{
-                            if(x >= this.XMax){
-                                throw new HandledException("****** X coordinate exceeds grid/map limit ******");
-                            }
-                        }catch (HandledException e){
-                            System.out.println(e.getMessage());
-                            e.printStackTrace();
-                        }
+                                   Weapon weapon = new Weapon(weaponArr.get(0).toString(), i + 1, Integer.parseInt(weaponArr.get(1).toString()));
+                                   Enemy enemy = new Enemy(i + 1, enemyArr.get(0).toString(), weapon, enemyArr.get(2).toString());
 
-                    }
-                    case 'Y' -> {
-                        y = Integer.parseInt(str.substring(2));
-                        try {
-                            if(y >= this.YMax){
-                                throw new HandledException("****** Y coordinate exceeds grid/map limit ******");
-                            }
-                        }catch (HandledException e){
-                            System.out.println(e.getMessage());
-                            e.printStackTrace();
-                        }
-                    }
+                                   room.setEnemy(enemy);
+                               }
+                           }
+                           case 't' -> {
+                               if (!(str.substring(9).equals("nil"))) {
+                                   room.setCountOfTreasure(Integer.parseInt(str.substring(9)));
+                               }
+                           }
+                           case 'w' -> {
+                               if (!(str.substring(7).equals("nil"))) {
+                                   JSONArray weaponArr = (JSONArray) settings.get(str.substring(7));
+                                   Weapon weapon = new Weapon(weaponArr.get(0).toString(), i + 1, Integer.parseInt(weaponArr.get(1).toString()));
+                                   room.setWeapon(weapon);
+                               }
+                           }
+                           case 'i' -> {
+                               if (!(str.substring(7).equals("nil"))) {
+                                   String item = str.substring(10);
+                                   int amount = Integer.parseInt(settings.get(item).toString());
+                                   room.setInventory(new Inventory(item, amount));
+                               }
+                           }
+                           case 'X' -> {
+                               x = Integer.parseInt(str.substring(2));
+
+                               if (x >= XMax) {
+                                   throw new HandledException("****** X coordinate exceeds grid/map limit ******");
+
+                               }
+                           }
+                           case 'Y' -> {
+                               y = Integer.parseInt(str.substring(2));
+
+                               if (y >= YMax) {
+                                       throw new HandledException("****** Y coordinate exceeds grid/map limit ******");
+                               }
+
+                           }
+                       }
+
+
+
+
                 }
-            }
+                if (map[x][y] instanceof Room) {
+                    throw new HandledException("Some rooms are set in the SAME position!");
+                }
+                map[x][y] = room;
+            }catch (HandledException error){
+                String message = error.getMessage();
 
-            map[x][y] = room;
+                if (message.contains("rooms")){
+                    System.out.println(error.getMessage() + " Room " + ((Room)map[x][y]).getName() + " and Room " + room.getName());
+                } else {
+                    System.out.println(error.getMessage());
+                }
+                error.printStackTrace();
+                System.exit(0);
+            }
         }
 
-
     }
+
     /**
      * Return the total number of rooms in the map
      * @author Harry Li
@@ -237,6 +249,6 @@ public class Map {
      * @return Object[][] the two-dimension array for the map
      */
     public Object[][] getMap(){
-        return this.map;
+        return map;
     }
 }
