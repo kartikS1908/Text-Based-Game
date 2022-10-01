@@ -13,6 +13,7 @@ public class Room {
      * Room constructor to initiate a Room object
      * @author Harry Li
      */
+
     public Room(){
 
     }
