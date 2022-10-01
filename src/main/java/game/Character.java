@@ -31,7 +31,6 @@ public class Character {
         this.charID = charID;
         this.name = name;
         this.weapon = weapon;
-        System.out.println("【System:】:The role was created successfully. Your name is " + name);
         this.maxHP = 100;
         this.HP = maxHP;
         this.stamina = 10;
@@ -42,8 +41,6 @@ public class Character {
         this.dialogue = dialogue;
         this.bag = new Bag(5);
         this.introduction = "Individual resume：Your name is " + name + ". " + dialogue;
-        System.out.println("MaxHP：" + maxHP + "， current HP：" + HP + "，is alive：" + isAlive + " Bag：Nothing!");
-        System.out.println(this.introduction);
     }
 
 
@@ -90,101 +87,113 @@ public class Character {
     }
 
     /**
-     * TODO: what this function do.
+     * Setter method for name of character.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @param name : new name of character.
      */
     public void setName(String name) {
         this.name = name;
     }
+
     /**
-     * TODO: what this function do.
+     * Setter method for the character's weapon.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @param weapon : new weapon for the character
      */
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
+
     /**
-     * TODO: what this function do.
+     * Setter method for HP.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @param HP : new HP of character.
      */
     public void setHP(int HP) {
         this.HP = HP;
     }
+
     /**
-     * TODO: what this function do.
+     * setter method for charID.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @param charID : new charID.
      */
     public void setCharID(int charID) {
         this.charID = charID;
     }
+
     /**
-     * TODO: what this function do.
+     * setter method for stamina.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @param stamina : new stamina for the character.
      */
     public void setStamina(int stamina) {
         this.stamina = stamina;
     }
+
     /**
-     * TODO: what this function do.
+     * setter method for treasure.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @param treasureCurr : new treasure amount.
      */
     public void setTreasureCurr(int treasureCurr) {
         this.treasureCurr = treasureCurr;
     }
+
     /**
-     * TODO: what this function do.
+     * getter method for name of the character.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @return String name : name of the character.
      */
     public String getName() {
         return name;
     }
+
     /**
-     * TODO: what this function do.
+     * getter method for the character's HP.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @return int HP : The HP of the character.
      */
     public int getHP() {
         return HP;
     }
+
     /**
-     * TODO: what this function do.
+     * getter method for the character's weapon.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @return Weapon weapon : The character's weapon.
      */
     public Weapon getWeapon() {
         return weapon;
     }
+
     /**
-     * TODO: what this function do.
+     * getter method for the character's ID.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @return int charID : The character's ID.
      */
     public int getCharID() {
         return charID;
     }
+
     /**
-     * TODO: what this function do.
+     * getter method for the character's stamina.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @return int stamina : The character's stamina.
      */
     public int getStamina() {
         return stamina;
     }
+
     /**
-     * TODO: what this function do.
+     * getter method for the character's current treasure.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @return int treasureCurr : The character's current treasure.
      */
     public int getTreasureCurr() {
         return treasureCurr;
     }
+
     /**
      * Return the current x position of a player
      * @author Harry Li
@@ -201,17 +210,11 @@ public class Character {
     public int getCurrentY() {
         return currentY;
     }
+
     /**
-     * TODO: what this function do.
+     * set enemy's new HP after an attack.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
-     */
-    public String getIntroduction()
-    {return introduction;}
-    /**
-     * TODO: what this function do.
-     * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @param enemy : The enemy being attacked..
      */
     public void attack(Enemy enemy)
     {
@@ -219,10 +222,11 @@ public class Character {
         enemy.setHP(Math.max(enemy.getHP() - this.weapon.getAttack(), 0));
 
     }
+
     /**
-     * TODO: what this function do.
+     * getter method for the character's dialogue.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @return String dialogue : The character's dialogue.
      */
     public String getDialogue()
     {
@@ -278,5 +282,9 @@ public class Character {
      */
     public Bag getBag() {
         return bag;
+    }
+
+    public void setBag(Bag bag) {
+        this.bag = bag;
     }
 }

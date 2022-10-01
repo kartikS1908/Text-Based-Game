@@ -65,6 +65,5 @@ public class Movement {
 
         }
         this.player.setCurrentPosition(currentX, currentY);
-        System.out.println("Current Stamina is " + currentStamina + ", Current HP is " + this.player.getHP());
     }
 }
