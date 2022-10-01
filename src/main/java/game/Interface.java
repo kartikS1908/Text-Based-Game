@@ -367,6 +367,10 @@ public class Interface {
             names.add(str);
         }
         names.remove("Engine");
+        if(names.size()==0){
+            System.out.println("NO FILES TO CHOOSE FROM");
+            Main.myRun();
+        }
         System.out.println("List of save you can choose from");
         for(String elem : names)
             System.out.println(elem);
@@ -374,6 +378,10 @@ public class Interface {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter name of the file you want to read from(please enter a name from the file list)");
         String nameOfFile = scanner.nextLine();
+        if(!names.contains(nameOfFile)){
+            System.out.println("WRONG FILE NAME, MAKE SURE YOU ARE ENTERING CORRECT NAME");
+            loadGame();
+        }
         String path = "./src/Configs/"+nameOfFile+".json";
         ConfigReader configReader = new ConfigReader();
         JSONObject object = configReader.read(path);
