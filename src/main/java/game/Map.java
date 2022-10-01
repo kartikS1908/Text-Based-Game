@@ -151,6 +151,7 @@ public class Map {
             Room room = new Room();
             int x = 0, y = 0;
             try {
+                // fill a room based on the settings
                 for (Object obj : array) {
                     String str = (String) obj;
 
@@ -215,8 +216,9 @@ public class Map {
                     if (map[x][y] instanceof Room) {
                         throw new HandledException("Some rooms are set in the SAME position!");
                     }
-                    map[x][y] = room;
                 }
+                // put the room into the map
+                map[x][y] = room;
             } catch (HandledException error){
                 String message = error.getMessage();
 
