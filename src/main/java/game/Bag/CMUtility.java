@@ -3,10 +3,10 @@ import java.util.*;
 public class CMUtility {
     private static Scanner scanner = new Scanner(System.in);
     /**
-     * TODO: what this function do.
+     * limit of input
      * @author Dehao Liu
-     * TODO: Lisence
-     * TODO: This is a example, param and return goes here.
+     * Lisence from  java CMUtility
+     *
      */
     public static char readMenuSelection() {
         char c;
@@ -22,51 +22,26 @@ public class CMUtility {
 
     }
     String str = readKeyBoard(1, false);
-    /**
-     * TODO: what this function do.
-     * @author Dehao Liu
-     * TODO: Lisence
-     * TODO: This is a example, param and return goes here.
-     */
+
     public static char readChar() {
         String str = readKeyBoard(1, false);
         return str.charAt(0);
     }
-    /**
-     * TODO: what this function do.
-     * @author Dehao Liu
-     * TODO: Lisence
-     * TODO: This is a example, param and return goes here.
-     */
+
     public static char readChar(char defaultValue) {
         String str = readKeyBoard(1, true);
         return (str.length() == 0) ? defaultValue : str.charAt(0);
     }
-    /**
-     * TODO: what this function do.
-     * @author Dehao Liu
-     * TODO: Lisence
-     * TODO: This is a example, param and return goes here.
-     */
+
     public static String readString(int limit) {
         return readKeyBoard(limit, false);
     }
-    /**
-     * TODO: what this function do.
-     * @author Dehao Liu
-     * TODO: Lisence
-     * TODO: This is a example, param and return goes here.
-     */
+
     public static String readString(int limit, String defaultValue) {
         String str = readKeyBoard(limit, true);
         return str.equals("")? defaultValue : str;
     }
-    /**
-     * TODO: what this function do.
-     * @author Dehao Liu
-     * TODO: Lisence
-     * TODO: This is a example, param and return goes here.
-     */
+
     public static int readInt() {
         int n;
         for (; ; ) {
@@ -80,12 +55,7 @@ public class CMUtility {
         }
         return n;
     }
-    /**
-     * TODO: what this function do.
-     * @author Dehao Liu
-     * TODO: Lisence
-     * TODO: This is a example, param and return goes here.
-     */
+
     public static char readConfirmSelection() {
         char c;
         for (; ; ) {
@@ -99,12 +69,7 @@ public class CMUtility {
         }
         return c;
     }
-    /**
-     * TODO: what this function do.
-     * @author Dehao Liu
-     * TODO: Lisence
-     * TODO: This is a example, param and return goes here.
-     */
+
     public static int readInt(int defaultValue) {
         int n;
         for (; ; ) {
@@ -122,12 +87,7 @@ public class CMUtility {
         }
         return n;
     }
-    /**
-     * TODO: what this function do.
-     * @author Dehao Liu
-     * TODO: Lisence
-     * TODO: This is a example, param and return goes here.
-     */
+
     private static String readKeyBoard(int limit, boolean blankReturn) {
         String line = "";
 
