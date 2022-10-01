@@ -107,5 +107,4 @@ public class Room {
     public String toString() {
         return this.name.substring(0, 3);
     }
-
 }

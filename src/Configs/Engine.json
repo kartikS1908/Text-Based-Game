@@ -14,6 +14,7 @@
   },
   "GAME": {
     "EASY": {
+      "Max_HP": "100",
       "X-size": "6",
       "Y-size": "6",
       "numRooms": "4",
@@ -127,6 +128,7 @@
       ]
     },
     "MEDIUM": {
+      "Max_HP": "100",
       "X-size": "6",
       "Y-size": "6",
       "numRooms": "6",
@@ -281,6 +283,7 @@
       ]
     },
     "HARD" : {
+      "Max_HP": "100",
       "X-size": "6",
       "Y-size": "6",
       "numRooms": "8",
