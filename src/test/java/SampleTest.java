@@ -140,9 +140,20 @@ public class SampleTest {
 
     @Test
     public void testBag1() {
+        // Test if when bag is full will not add anything into the bag
         Character player = new Character("abc", null, 0, null, 100);
-        // TODO: Dehao
-        // Size logic
+
+        BagList bag = new BagList(3);
+        Inventory inv1 = new Inventory("h1", 10);
+        Inventory inv2 = new Inventory("h2", 20);
+        Inventory inv3 = new Inventory("s1", 10);
+        Inventory inv4 = new Inventory("s2", 20);
+        bag.addInventory(inv1);
+        bag.addInventory(inv2);
+        bag.addInventory(inv3);
+        bag.addInventory(inv4);
+
+        assertEquals(3,bag.getInventories().size());
     }
 
     @Test
