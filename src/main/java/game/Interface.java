@@ -6,9 +6,12 @@ import game.Bag.Weapon;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -70,7 +73,7 @@ public class Interface {
      * @author Kartik Sharma
      * TODO: This is a example, param and return goes here.
      */
-    public void run() {
+    public void run() throws IOException {
         /* Configure Player Information Start */
         if (loadFlag == 0) {
             setPlayer();
@@ -128,7 +131,7 @@ public class Interface {
      * TODO: This is a example, param and return goes here.
      */
 
-    public void movePlayer(Character player, Map map) {
+    public void movePlayer(Character player, Map map) throws IOException {
         System.out.println("You can move by W (up), S (down), A (left), D (right)");
         String direction = this.scanner.next();
         Movement currentMove = new Movement(player, map);
@@ -158,7 +161,7 @@ public class Interface {
      * @param player : current character.
      * @author Kartik Sharma
      */
-    public void interact(Room room, Character player) {
+    public void interact(Room room, Character player) throws IOException {
         System.out.println("Welcome to " + room.getName());
 
         if (room.getInventory() != null) {
@@ -297,8 +300,12 @@ public class Interface {
      * @param map    : Current map.
      * @author Kartik Sharma
      */
-    public void saveGame(Character player, Map map) {
-        String path = "./src/Configs/saveFile.json";
+    public void saveGame(Character player, Map map) throws IOException {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter name of the file you want to save to");
+        String nameOfFile = scanner.nextLine();
+        String path = "./src/Configs/"+nameOfFile+".json";
         JSONObject json = new JSONObject();
         json = this.gameObj;
         json.put("ID", player.getCharID());
@@ -311,6 +318,9 @@ public class Interface {
         json.put("Bag", player.getBag().getIDs());
         ArrayList<String> roomRequiredDelete = new ArrayList<>(); //rooms that have already been visited.
         ArrayList<String> roomRequiredKeep = new ArrayList<>(); //rooms that are still on the map.
+
+        File file=new File(path);
+        file.createNewFile();
 
         for (int i = 0; i < Integer.parseInt(String.valueOf(json.get("numRooms"))); i++) {
             JSONArray roomArr = (JSONArray) json.get("room" + (i + 1));
@@ -346,8 +356,25 @@ public class Interface {
      * @author Kartik Sharma
      */
 
-    public void loadGame() {
-        String path = "./src/Configs/saveFile.json";
+    public void loadGame() throws IOException {
+        String directory = "./src/Configs";
+        File file = new File(directory);
+        String[] fileNameList = file.list();
+        ArrayList<String> names = new ArrayList<>();
+        for(String elem : fileNameList)
+        {
+            String str = elem.substring(0,elem.length()-5);
+            names.add(str);
+        }
+        names.remove("Engine");
+        System.out.println("List of save you can choose from");
+        for(String elem : names)
+            System.out.println(elem);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter name of the file you want to read from(please enter a name from the file list)");
+        String nameOfFile = scanner.nextLine();
+        String path = "./src/Configs/"+nameOfFile+".json";
         ConfigReader configReader = new ConfigReader();
         JSONObject object = configReader.read(path);
         this.gameObj = object;
