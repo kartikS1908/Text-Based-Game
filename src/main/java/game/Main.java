@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         myRun();
     }
     /**
@@ -22,7 +22,7 @@ public class Main {
      * @author Jiayuan Zhu
      * @author Kartik Sharma
      */
-    public static void myRun(){
+    public static void myRun() throws IOException {
         Scanner scanner = new Scanner(System.in);
 //        System.out.print("Welcome!\nEnter Your Name: ");
 //        String name = scanner.nextLine();
@@ -48,7 +48,7 @@ public class Main {
      * @return get details of the game from new game or load game
      */
 
-    public static JSONObject initialScreen( JSONObject jsonObject) {
+    public static JSONObject initialScreen( JSONObject jsonObject) throws IOException {
         Scanner scanner = new Scanner(System.in);
         // choose choice
         System.out.print("1. Start New Game \n2. Load Game \n3. Read Rules \n4. Find out all you need to know about each difficulty level \nEnter your option: ");
