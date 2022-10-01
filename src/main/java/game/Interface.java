@@ -126,9 +126,11 @@ public class Interface {
     /**
      * TODO: what this function do.
      *
+     * Move the player in interaction
      * @author Harry Li
      * @author Xilai Wang
-     * TODO: This is a example, param and return goes here.
+     * @param player the current player
+     * @param map the current map
      */
 
     public void movePlayer(Character player, Map map) throws IOException {
@@ -149,7 +151,6 @@ public class Interface {
             map.getRoomAndCoordinates().remove(currentRoom.getName());
             map.setRoomAndCoordinates(map.getRoomAndCoordinates());
             interact(currentRoom, player);
-            System.out.println(map.getRoomAndCoordinates());
         }
         map.printMap();
     }

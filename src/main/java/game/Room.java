@@ -13,7 +13,6 @@ public class Room {
      * Room constructor to initiate a Room object
      * @author Harry Li
      */
-
     public Room(){
 
     }
@@ -103,8 +102,10 @@ public class Room {
      * @author Harry Li
      * @return String the first three letters of a room's name
      */
+
     @Override
     public String toString() {
         return this.name.substring(0, 3);
     }
+
 }
