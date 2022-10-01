@@ -214,19 +214,12 @@ public class Map {
                         }
                     }
                     if (map[x][y] instanceof Room) {
-                        throw new HandledException("Some rooms are set in the SAME position!");
+                        throw new HandledException("Some rooms are set in the SAME position! Room " + ((Room)map[x][y]).getName() + " and Room " + room.getName());
                     }
                 }
                 // put the room into the map
                 map[x][y] = room;
             } catch (HandledException error){
-                String message = error.getMessage();
-
-                if (message.contains("rooms")){
-                    System.out.println(error.getMessage() + " Room " + ((Room)map[x][y]).getName() + " and Room " + room.getName());
-                } else {
-                    System.out.println(error.getMessage());
-                }
                 error.printStackTrace();
                 System.exit(0);
             }
