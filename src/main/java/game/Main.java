@@ -24,13 +24,13 @@ public class Main {
      */
     public static void myRun(){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Welcome!\nEnter Your Name: ");
-        String name = scanner.nextLine();
+//        System.out.print("Welcome!\nEnter Your Name: ");
+//        String name = scanner.nextLine();
         // read config
         ConfigReader configReader = new ConfigReader();
         JSONObject jsonObject = configReader.read("./src/Configs/Engine.json");
         // print initial screen
-        JSONObject gameObj = initialScreen(name, jsonObject);
+        JSONObject gameObj = initialScreen( jsonObject);
 
         Interface dashboard = new Interface(gameObj);
         dashboard.run();
@@ -43,15 +43,14 @@ public class Main {
      * @author Xilai Wang
      * @author Harry Li
      *
-     * @param name Name of Player
+
      * @param jsonObject game engine
      * @return get details of the game from new game or load game
      */
 
-    public static JSONObject initialScreen(String name, JSONObject jsonObject) {
+    public static JSONObject initialScreen( JSONObject jsonObject) {
         Scanner scanner = new Scanner(System.in);
         // choose choice
-        System.out.println("********************\nHi! " + name + "!");
         System.out.print("1. Start New Game \n2. Load Game \n3. Read Rules \n4. Find out all you need to know about each difficulty level \nEnter your option: ");
         String choice = scanner.nextLine();
         System.out.println("********************");
@@ -61,19 +60,20 @@ public class Main {
         if (choice.equals("1")) {
             gameObj = chooseLevel(jsonObject);
         } else if (choice.equals("2")) {
-            gameObj = loadGame(name);
+            Interface inter = new Interface();
+            inter.loadGame();
         } else if (choice.equals("3")) {
             printRules();
-            gameObj = initialScreen(name, jsonObject);
+            gameObj = initialScreen( jsonObject);
         }
         else if(choice.equals("4")){
             getLevelInfo(chooseLevel(jsonObject));
-            gameObj = initialScreen(name,jsonObject);
+            gameObj = initialScreen(jsonObject);
         }
         else {
             // Invalid choice, recurse the function
             System.out.println("******************** \nNo Choice, Please choose again \n********************");
-            gameObj = initialScreen(name, jsonObject);
+            gameObj = initialScreen( jsonObject);
         }
         return gameObj;
     }
@@ -100,12 +100,15 @@ public class Main {
         switch (level){
             case "1" -> {
                 gameObj = (JSONObject) gameObj.get("EASY");
+                gameObj.put("Level","EASY");
             }
             case "2" -> {
                 gameObj = (JSONObject) gameObj.get("MEDIUM");
+                gameObj.put("Level","EASY");
             }
             case "3" -> {
                 gameObj = (JSONObject) gameObj.get("HARD");
+                gameObj.put("Level","EASY");
             }
             default -> {
                 // Invalid choice, recurse the function
@@ -117,9 +120,9 @@ public class Main {
         return gameObj;
     }
     /**
-     * TODO: what this function do.
+     * Get all the info about all 3 levels of the game.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @param jsonObject : The game object.
      */
     public static void getLevelInfo(JSONObject jsonObject)
     {
@@ -220,16 +223,6 @@ public class Main {
                 "Remember to use healing potion and stamina booster before you enter a room!\n" +
                 "The maximum size of Bag is 5.");
         System.out.println("********************");
-    }
-
-
-    /**
-     * TODO: what this function do.
-     * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
-     */
-    public static JSONObject loadGame(String name) {
-        return null;
     }
 
 

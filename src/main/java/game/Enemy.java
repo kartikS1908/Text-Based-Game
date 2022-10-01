@@ -9,9 +9,12 @@ public class Enemy {
     private String dialogue;
 
     /**
-     * TODO: what this function do.
+     * Constructor for Enemy type
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @param enemyId : enemy ID
+     * @param name: name for the enemy
+     * @param weapon : enemy's weapon
+     * @param dialogue : enemy's dialogue string.
      */
     public Enemy(int enemyId, String name, Weapon weapon,String dialogue) {
         this.enemyId = enemyId;
@@ -21,88 +24,53 @@ public class Enemy {
         this.dialogue = dialogue;
     }
     /**
-     * TODO: what this function do.
+     * setter method for HP.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @param HP : new HP value.
      */
     public void setHP(int HP) {
         this.HP = HP;
     }
+
     /**
-     * TODO: what this function do.
+     * getter method for enemy's HP.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-    /**
-     * TODO: what this function do.
-     * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
-     */
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
-    /**
-     * TODO: what this function do.
-     * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
-     */
-    public void setEnemyId(int enemyId) {
-        this.enemyId = enemyId;
-    }
-    /**
-     * TODO: what this function do.
-     * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
-     */
-    public Weapon getWeapon() {
-        return weapon;
-    }
-    /**
-     * TODO: what this function do.
-     * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @return int HP : current HP value for enemy.
      */
     public int getHP() {
         return HP;
     }
+
     /**
-     * TODO: what this function do.
+     * getter method for enemy's name.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @return String name : enemy name.
      */
     public String getName() {
         return name;
     }
+
     /**
-     * TODO: what this function do.
+     * attack function for enemy.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
-     */
-    public int getEnemyId() {
-        return enemyId;
-    }
-    /**
-     * TODO: what this function do.
-     * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @param player: Player that the enemy attacks.
      */
     public void attack(Character player)
     {
         player.setHP(Math.max(player.getHP() - this.weapon.getAttack(), 0));
     }
+
     /**
-     * TODO: what this function do.
+     * getter method for enemy's dialogue.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @return String dialogue : The enemy's dialogue string.
      */
     public String getDialogue() { return dialogue;}
+
     /**
-     * TODO: what this function do.
+     * toString method for an enemy.
      * @author Kartik Sharma
-     * TODO: This is a example, param and return goes here.
+     * @return String : String representation of Enemy.
      */
     @Override
     public String toString()

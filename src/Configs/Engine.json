@@ -14,6 +14,7 @@
   },
   "GAME": {
     "EASY": {
+      "Max_HP": "100",
       "X-size": "6",
       "Y-size": "6",
       "numRooms": "4",
@@ -56,15 +57,15 @@
       ],
       "w1": [
         "BladesOfFury",
-        20
+        5
       ],
       "w2": [
         "BladesOfChaos",
-        30
+        7
       ],
       "w3": [
         "LeviathanAxe",
-        40
+        10
       ],
       "w4": [
         "AxeOfFury",
@@ -94,7 +95,7 @@
         "enemy-nil",
         "treasure-10",
         "weapon-w4",
-        "inventory-h1",
+        "inventory-s2",
         "X-0",
         "Y-2"
       ],
@@ -103,7 +104,7 @@
         "enemy-e3",
         "treasure-20",
         "weapon-w2",
-        "inventory-s1",
+        "inventory-h2",
         "X-1",
         "Y-3"
       ],
@@ -121,12 +122,13 @@
         "enemy-e1",
         "treasure-40",
         "weapon-nil",
-        "inventory-h1",
+        "inventory-nil",
         "X-5",
         "Y-5"
       ]
     },
     "MEDIUM": {
+      "Max_HP": "100",
       "X-size": "6",
       "Y-size": "6",
       "numRooms": "6",
@@ -229,7 +231,7 @@
         "roomName-Jotunheim",
         "enemy-nil",
         "treasure-10",
-        "weapon-nil",
+        "weapon-w4",
         "inventory-s1",
         "X-0",
         "Y-2"
@@ -281,6 +283,7 @@
       ]
     },
     "HARD" : {
+      "Max_HP": "100",
       "X-size": "6",
       "Y-size": "6",
       "numRooms": "8",
