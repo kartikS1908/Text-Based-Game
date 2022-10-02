@@ -20,10 +20,8 @@ public class Character {
 
     /**
      * create character
-     *
      * @author Kartik Sharma
      * @author Jiayuan Zhu
-     *
      * @param name name of character
      * @param weapon weapon owned by character
      * @param charID character id
@@ -49,7 +47,6 @@ public class Character {
     /**
      * player chooses character and create character
      * @author Jiayuan Zhu
-     *
      * @param gameObj game engine that contains details of the game
      * @return character details
      */

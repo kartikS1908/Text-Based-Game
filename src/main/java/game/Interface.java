@@ -167,7 +167,7 @@ public class Interface {
             Inventory inventory = room.getInventory();
             System.out.println("Inventory item in this room is : ");
             System.out.println(inventory.getDes());
-            System.out.println("Press 1 to put this inventory into your bag OR any other key to ignore.");
+            System.out.println("Press 1 to put this inventory into your bag OR any other integer key to ignore.");
             int choice = scanner.nextInt();
             if (choice == 1) {
                 System.out.println(inventory.getName());
@@ -179,7 +179,7 @@ public class Interface {
             System.out.println(player.getWeapon().toString());
             System.out.println("You can swap your current weapon for:");
             System.out.println(room.getWeapon().toString());
-            System.out.println("Press 1 to swap press any other key to ignore.");
+            System.out.println("Press 1 to swap press any other integer key to ignore.");
             int getWeapon = scanner.nextInt();
             if (getWeapon == 1) {
                 player.setWeapon(room.getWeapon());
@@ -200,7 +200,7 @@ public class Interface {
 
             while (player.getHP() != 0 && enemy.getHP() != 0) {
 
-                System.out.println("Press 1 to attack if you press any other key your enemy will attack again.");
+                System.out.println("Press 1 to attack if you press any other integer key your enemy will attack again.");
                 int option = scanner.nextInt();
                 if (option == 1) {
                     if (player.getHP() != 0) {

@@ -24,8 +24,7 @@ public class Main {
      */
     public static void myRun() throws IOException {
         Scanner scanner = new Scanner(System.in);
-//        System.out.print("Welcome!\nEnter Your Name: ");
-//        String name = scanner.nextLine();
+
         // read config
         ConfigReader configReader = new ConfigReader();
         JSONObject jsonObject = configReader.read("./src/Configs/Engine.json");
@@ -79,11 +78,9 @@ public class Main {
 
     /**
      * choose the level of game
-     *
      * @author Jiayuan Zhu
      * @author Xilai Wang
      * @author Harry Li
-     *
      * @param jsonObject game engine
      * @return get details of the game according to chosen level
      */

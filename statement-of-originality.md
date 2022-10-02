@@ -9,19 +9,22 @@ declaration: >-
 # sign *your* group names and uids here (delete and add entries as necessary). By signing you also AGREE you have read the Submission Checklist - https://comp.anu.edu.au/courses/comp2120/assignments/group-assignment2/#submission-checklist
 member_declaration:
   -
-    name: 
-    uid:
+    name: Xilai Wang
+    uid: u6165827
   -
-    name: 
-    uid:
+    name: Jiayuan Zhu
+    uid: u7391461
   -
-    name: 
-    uid:
+    name: Kartik Sharma
+    uid: u7275858
   -
-    name: 
-    uid:
+    name: Harry Li
+    uid: u7076185
+  -
+    name: Dehao Liu
+    uid: u7376181
 
 # list numbered references below (replace the example with your own references) 
 ---
 # References
-- [1] Example Author. 2022. p5.js example code video. Retrieved from https://example.com/video
+-
