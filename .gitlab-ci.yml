@@ -4,7 +4,7 @@ stages:
 
 Build:
   tags:
-    - comp2100
+    - comp2300
   stage: build
   script:
     - echo "Build the Project"
